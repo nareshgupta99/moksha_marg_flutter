@@ -8,9 +8,12 @@ void main() {
 }
 
 class MokshaMarg extends StatelessWidget {
+  const MokshaMarg({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: RoutesHelper.getHome(),
       getPages: RoutesHelper.routes,
       home: Home(),
