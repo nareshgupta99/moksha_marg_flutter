@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moksha_marg/util/dimensions.dart';
 
 class OtpFields extends StatelessWidget {
   final void Function(String) onChanged;
@@ -53,10 +52,10 @@ class OtpField extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimensions.padding6),
+      padding: EdgeInsets.symmetric(horizontal: 8),
       child: SizedBox(
-        width: (size.width - 144) / 6,
-        height: (size.width - 144) / 6,
+        width: (size.width - 128) / 6,
+        height: (size.width - 128) / 6,
         child: TextField(
           maxLength: 1,
           focusNode: focusNode,
