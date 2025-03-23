@@ -27,7 +27,9 @@ Widget customTextField(
         maxLines: maxLine ?? 1,
         decoration: InputDecoration(
             hintText: hintText ?? "",
-            hintStyle: TextStyle(fontFamily: TypographyResources.roboto, color: ColorsResources.textGreyColor),
+            hintStyle: TextStyle(
+                fontFamily: TypographyResources.roboto,
+                color: ColorsResources.textGreyColor),
             prefixIcon: prefix,
             contentPadding: const EdgeInsets.only(bottom: 3, left: 7),
             fillColor: ColorsResources.textFillColor,
@@ -69,7 +71,9 @@ Widget customObsecureTextField(
         obscureText: isObsecure,
         decoration: InputDecoration(
             hintText: hintText ?? "",
-            hintStyle: TextStyle(fontFamily: TypographyResources.roboto,color: ColorsResources.textGreyColor ),
+            hintStyle: TextStyle(
+                fontFamily: TypographyResources.roboto,
+                color: ColorsResources.textGreyColor),
             suffixIcon: GestureDetector(
                 onTap: onTap,
                 child: Icon(isObsecure
@@ -135,5 +139,23 @@ Widget customDropDown(
         ),
       )
     ],
+  );
+}
+
+Widget searchBar({required String text}) {
+  return TextField(
+    decoration: InputDecoration(
+        prefixIcon: Icon(Icons.search),
+        suffixIcon: Text("") ?? Icon(Icons.close_outlined),
+        iconColor: ColorsResources.textFieldBorderColor,
+        hintText: text,
+        fillColor: ColorsResources.textFillColor,
+        filled: true,
+        border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: ColorsResources.textFieldBorderColor,
+              width: 3,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(8)))),
   );
 }

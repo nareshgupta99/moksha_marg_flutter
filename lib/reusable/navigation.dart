@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-PreferredSizeWidget topNavigaton() {
+PreferredSizeWidget topNavigaton({String? text}) {
   return AppBar(
     
     leading: Icon(Icons.arrow_back),
     automaticallyImplyLeading: false,
-    title: Text("MpkshaMarg", style: TextStyle(
+    title: Text(text??"MpkshaMarg", style: TextStyle(
       fontFamily: TypographyResources.pacifico,
       fontWeight: FontWeight.w900
     ),),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moksha_marg/component/authentication/reset_password/reset_password_view.dart';
+import 'package:moksha_marg/component/guides/guides_view.dart';
 
 void main() {
   runApp(MokshaMarg());
@@ -15,7 +15,7 @@ class MokshaMarg extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: RoutesHelper.getHome(),
       // getPages: RoutesHelper.routes,
-      home: ResetPasswordView(),
+      home: GuidesView(),
     );
   }
 }

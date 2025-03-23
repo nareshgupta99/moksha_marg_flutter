@@ -7,7 +7,7 @@ Widget heading({required String text, double? fontSize}) {
     text,
     style: TextStyle(
         fontFamily: TypographyResources.roboto,
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.bold,
         fontSize: fontSize ?? 24),
   );
 }
