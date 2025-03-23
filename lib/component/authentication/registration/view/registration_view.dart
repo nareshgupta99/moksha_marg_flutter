@@ -8,8 +8,8 @@ import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 
-class Registration extends StatelessWidget {
-  Registration({super.key});
+class RegistrationView extends StatelessWidget {
+  RegistrationView({super.key});
   TextEditingController nameController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
   List<String> items = [
@@ -24,7 +24,7 @@ class Registration extends StatelessWidget {
     return Scaffold(
       appBar: topNavigaton(),
       backgroundColor: ColorsResources.backgroundColor,
-      body: SingleChildScrollView(child: _body()),
+      body: Center(child: SingleChildScrollView(child: _body())),
     );
   }
 

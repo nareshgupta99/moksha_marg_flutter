@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moksha_marg/component/authentication/registration/view/registration.dart';
+import 'package:moksha_marg/component/authentication/login/login.dart';
 
 
 void main() {
@@ -16,7 +16,7 @@ class MokshaMarg extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: RoutesHelper.getHome(),
       // getPages: RoutesHelper.routes,
-      home: Registration(),
+      home: LoginView(),
     );
   }
 }

@@ -8,8 +8,8 @@ import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class HomeView extends StatelessWidget {
+  HomeView({super.key});
 
   List<String> images = [
     Images.temple1,
