@@ -25,7 +25,7 @@ class Home extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: topNavigaton(),
-        backgroundColor: const Color.fromARGB(255, 165, 173, 173),
+        backgroundColor: ColorsResources.backgroundColor,
         bottomNavigationBar: bottomNavigaton(0),
         body: SingleChildScrollView(
             child: Column(
@@ -290,8 +290,11 @@ class Home extends StatelessWidget {
                     ),
                   ],
                 ),
-                
-                CustomButton(  onPressed: () {}, text: "View Details",   horizontal: 20,   verticle: 12)
+                customButton(
+                    onPressed: () {},
+                    text: "View Details",
+                    width: 20,
+                    height: 12)
               ],
             ),
           )
@@ -356,8 +359,7 @@ class Home extends StatelessWidget {
                 )
               ],
             ),
-           
-            CustomButton(onPressed: (){}, text: "Order")
+            customButton(onPressed: () {}, text: "Order")
           ],
         ),
       ),

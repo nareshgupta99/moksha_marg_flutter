@@ -5,6 +5,9 @@ import 'package:moksha_marg/util/typography_resources.dart';
 
 PreferredSizeWidget topNavigaton() {
   return AppBar(
+    
+    leading: Icon(Icons.arrow_back),
+    automaticallyImplyLeading: false,
     title: Text("MpkshaMarg", style: TextStyle(
       fontFamily: TypographyResources.pacifico,
       fontWeight: FontWeight.w900

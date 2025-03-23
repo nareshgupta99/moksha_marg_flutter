@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:moksha_marg/component/authentication/registration.dart/view/registration.dart';
+import 'package:moksha_marg/component/authentication/registration/view/registration.dart';
 import 'package:moksha_marg/component/home/view/home.dart';
 
 class RoutesHelper {
