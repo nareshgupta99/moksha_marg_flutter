@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
@@ -145,17 +144,24 @@ Widget customDropDown(
 Widget searchBar({required String text}) {
   return TextField(
     decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
-        suffixIcon: Text("") ?? Icon(Icons.close_outlined),
-        iconColor: ColorsResources.textFieldBorderColor,
-        hintText: text,
-        fillColor: ColorsResources.textFillColor,
-        filled: true,
-        border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorsResources.textFieldBorderColor,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(8)))),
+      prefixIcon: Icon(Icons.search),
+      suffixIcon: Text("") ?? Icon(Icons.close_outlined),
+      iconColor: ColorsResources.textFieldBorderColor,
+      hintText: text,
+      fillColor: ColorsResources.textFillColor,
+      filled: true,
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorsResources.textFieldBorderColor,
+            width: 3,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorsResources.textFieldBorderColor,
+            width: 3,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+    ),
   );
 }
