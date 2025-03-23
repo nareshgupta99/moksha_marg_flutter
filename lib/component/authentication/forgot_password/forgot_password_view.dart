@@ -8,8 +8,8 @@ import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class ForgotPasswordView extends StatelessWidget {
+  ForgotPasswordView({super.key});
   TextEditingController nameController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
 
@@ -28,7 +28,7 @@ class LoginView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          heading(text: "Login to Your account"),
+          heading(text: "Forgot Password?"),
           Padding(
             padding: EdgeInsets.only(top: 32,bottom: 16),
             child: customTextField(
@@ -36,20 +36,13 @@ class LoginView extends StatelessWidget {
                 controller: nameController,
                 hintText: "Enter your email"),
           ),
-          customObsecureTextField(
-              textFieldLabel: "Password",
-              controller: registerPasswordController,
-              hintText: "Enter your password"),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: socialLogin(),
-          ),
-          customDividersWithText(text: "Or continue with"),
+         
+          
           Padding(
             padding:  EdgeInsets.only(top:16,bottom: 32),
             child: customButton(onPressed: () {}, text: "Login", width: Get.width),
           ),
-          socialFooter( text1: "Don't have an account?", text2: "Sign up", onTap: () {})
+          socialFooter( text1: "", text2: "Go Back", onTap: () {})
         ],
       ),
     );
