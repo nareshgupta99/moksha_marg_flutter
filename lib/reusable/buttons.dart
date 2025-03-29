@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:moksha_marg/util/colors_resources.dart';
 
-Widget customButton({required VoidCallback onPressed,double? height,double? width,required String text}) {
+Widget customButton(
+    {required VoidCallback onPressed,
+    double? height,
+    double? width,
+    required String text}) {
   return Container(
-    width: width ,
-    height: height  ,
+    width: width,
+    height: height,
     child: OutlinedButton(
       style: OutlinedButton.styleFrom(
         backgroundColor: Colors.black,
@@ -15,6 +20,22 @@ Widget customButton({required VoidCallback onPressed,double? height,double? widt
       ),
       onPressed: onPressed,
       child: Text(text),
+    ),
+  );
+}
+
+Widget circularButton({required VoidCallback onPressed,required IconData iconData}) {
+  return CircleAvatar(
+    radius: 20,
+    backgroundColor: ColorsResources.greyColor, 
+    child: IconButton(
+      icon:  Icon(
+        iconData,
+        color: Colors.black, // Icon color
+        size: 20, // Icon size
+      ),
+      onPressed:onPressed
+      
     ),
   );
 }

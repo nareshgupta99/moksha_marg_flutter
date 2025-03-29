@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-import 'package:moksha_marg/component/authentication/forgot_password/forgot_password_view.dart';
-import 'package:moksha_marg/component/authentication/login/login.dart';
-import 'package:moksha_marg/component/authentication/registration/view/registration_view.dart';
-import 'package:moksha_marg/component/authentication/reset_password/reset_password_view.dart';
-import 'package:moksha_marg/component/guides/guides_details_view.dart';
-import 'package:moksha_marg/component/guides/guides_view.dart';
-import 'package:moksha_marg/component/home/view/home_view.dart';
+import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
+import 'package:moksha_marg/app/authentication/login/login.dart';
+import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
+import 'package:moksha_marg/app/authentication/reset_password/reset_password_view.dart';
+import 'package:moksha_marg/app/guides/guides_details_view.dart';
+import 'package:moksha_marg/app/guides/guides_view.dart';
+import 'package:moksha_marg/app/home/home_view.dart';
+import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
+import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
 
 class RoutesHelper {
   static const String _home = "/home";
@@ -15,6 +17,9 @@ class RoutesHelper {
   static const String _resetPassword = "/reset_password";
   static const String _guides = "/guides";
   static const String _guidesDetails = "/guides_details";
+  static const String _restaurent = "/restaurent";
+  static const String _restaurentDetails = "/restaurent_details";
+
 
   static String getHome() => _home;
   static String getRegistration() => _registration;
@@ -23,6 +28,8 @@ class RoutesHelper {
   static String getResetPassword() => _resetPassword;
   static String getGuide() => _guides;
   static String getGuidesDetails() => _guidesDetails;
+  static String getRestaurent() =>_restaurent;
+  static String getRestaurentDetails() =>_restaurentDetails;
 
   static List<GetPage> routes = [
     GetPage(name: _home, page: () => HomeView()),
@@ -32,5 +39,7 @@ class RoutesHelper {
     GetPage(name: _resetPassword, page: () => ResetPasswordView()),
     GetPage(name: _guides, page: () => GuidesView()),
     GetPage(name: _guidesDetails, page: () => GuidesDetailsView()),
+    GetPage(name: _restaurent, page: () => RestaurentView()),
+    GetPage(name: _restaurentDetails, page: () => RestaurentDetailsView()),
   ];
 }

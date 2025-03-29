@@ -6,6 +6,7 @@ import 'package:moksha_marg/reusable/star_rating.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
 
 class GuidesView extends StatelessWidget {
@@ -25,15 +26,15 @@ class GuidesView extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.padding16,
+                vertical: Dimensions.padding16),
             child: searchBar(text: "Search Guides....")),
         Expanded(
           child: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                  onTap: () => RoutesHelper.getGuidesDetails(),
-                  child: _guidesCard(url: Images.temple2, text: ""));
+              return _guidesCard(url: Images.temple2, text: "");
             },
           ),
         )
@@ -43,7 +44,8 @@ class GuidesView extends StatelessWidget {
 
   Widget _guidesCard({required String url, required String text}) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -63,16 +65,18 @@ class GuidesView extends StatelessWidget {
                   fit: BoxFit.fill,
                 )),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.padding16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding:
+                          EdgeInsets.symmetric(vertical: Dimensions.padding16),
                       child: heading(text: "Tomb", fontSize: 18)),
                   Text("Explore the city's hidden gems with local expert"),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding:
+                        EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: Row(
                       children: [
                         heading(text: "Languages: ", fontSize: 18),
@@ -91,7 +95,9 @@ class GuidesView extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(RoutesHelper.getGuidesDetails());
+                      },
                       child: Row(
                         children: [
                           Text("View Guide"),

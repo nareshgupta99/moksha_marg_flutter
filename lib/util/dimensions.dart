@@ -5,6 +5,7 @@ class Dimensions {
   static double font13 = 13.r;
   static double font14 = 14.r;
   static double font16 = 16.r;
+  static double font18 = 18.r;
   static double font19 = 19.r;
   static double font20 = 20.r;
   static double font22 = 22.r;

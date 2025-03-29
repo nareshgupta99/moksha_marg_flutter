@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:moksha_marg/component/guides/guides_details_view.dart';
-import 'package:moksha_marg/component/guides/guides_view.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MokshaMarg());
 }
+
+ final List<String> _routes = [
+    RoutesHelper.getHome(),
+    RoutesHelper.getGuide(),
+    RoutesHelper.getGuide(),
+    RoutesHelper.getGuide(),
+  ];
 
 class MokshaMarg extends StatelessWidget {
   const MokshaMarg({super.key});
@@ -20,7 +25,7 @@ class MokshaMarg extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: RoutesHelper.getLogin(),
+            initialRoute: RoutesHelper.getRestaurent(),
             getPages: RoutesHelper.routes,
           );
         });

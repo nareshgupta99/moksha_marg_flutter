@@ -5,6 +5,7 @@ import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/star_rating.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
@@ -21,14 +22,14 @@ class GuidesDetailsView extends StatelessWidget {
 
   Widget _body() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
       child: Column(
         // spacing: 2,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(Images.temple2, height: Get.width / 2, width: Get.width),
           Padding(
-            padding: const EdgeInsets.only(top: 16),
+            padding:  EdgeInsets.only(top:  Dimensions.padding16),
             child: heading(text: "Tomb", fontSize: 32),
           ),
           Row(

@@ -32,3 +32,10 @@ Widget customDividersWithText({required String text}) {
     ],
   );
 }
+
+Widget customDivider() {
+  return Divider(
+    color: Colors.grey,
+    thickness: 1,
+  );
+}
