@@ -1,3 +1,10 @@
+step:-1. install flutter version 3.27.4
+step:-2 open usb debugging mode , after enabling developer mode
+step:-3 open project in vs code 
+step:-4 type flutter pub get in terminal 
+step:-5 click on run than choose run without debugging
+
+
 # moksha_marg
 
 A new Flutter project.
