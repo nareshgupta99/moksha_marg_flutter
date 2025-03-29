@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/star_rating.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
@@ -23,14 +24,16 @@ class GuidesView extends StatelessWidget {
   Widget _body() {
     return Column(
       children: [
-      Padding(
-        padding: EdgeInsets.only(top: 16,left: 16,right: 16,bottom: 16),
-        child: searchBar(text: "Search Guides....")),
+        Padding(
+            padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+            child: searchBar(text: "Search Guides....")),
         Expanded(
           child: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
-              return _guidesCard(url: Images.temple2, text: "");
+              return GestureDetector(
+                  onTap: () => RoutesHelper.getGuidesDetails(),
+                  child: _guidesCard(url: Images.temple2, text: ""));
             },
           ),
         )
@@ -40,7 +43,7 @@ class GuidesView extends StatelessWidget {
 
   Widget _guidesCard({required String url, required String text}) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 16,right: 16,bottom: 16),
+      padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
