@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-PreferredSizeWidget topNavigaton({String? text}) {
+PreferredSizeWidget topNavigaton({String? text,required bool isLeading}) {
   return AppBar(
-    
-    leading: Icon(Icons.arrow_back),
+    leading:isLeading == true? GestureDetector(
+      onTap: () => Get.back(),
+      child: Icon(Icons.arrow_back)):Text(""),
     automaticallyImplyLeading: false,
     title: Text(text??"MpkshaMarg", style: TextStyle(
       fontFamily: TypographyResources.pacifico,

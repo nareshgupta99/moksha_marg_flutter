@@ -14,7 +14,7 @@ class GuidesDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topNavigaton(text: "Tourist Guides"),
+      appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
       body: SingleChildScrollView(child: _body()),
     );
   }

@@ -24,10 +24,11 @@ class HomeView extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        appBar: topNavigaton(),
+        appBar: topNavigaton(isLeading: true),
         backgroundColor: ColorsResources.backgroundColor,
         bottomNavigationBar: bottomNavigaton(0),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
             child: Column(
           children: [
             customCarousel(width: width, height: height / 5, images: images),

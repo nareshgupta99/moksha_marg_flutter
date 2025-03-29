@@ -22,7 +22,7 @@ class RegistrationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topNavigaton(),
+      appBar: topNavigaton( isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: Center(child: SingleChildScrollView(child: _body())),
     );

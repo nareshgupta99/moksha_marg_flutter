@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -16,7 +17,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topNavigaton(),
+      appBar: topNavigaton(isLeading: false),
       backgroundColor: ColorsResources.backgroundColor,
       body: Center(child: SingleChildScrollView(child: _body())),
     );
@@ -24,13 +25,13 @@ class LoginView extends StatelessWidget {
 
   Widget _body() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           heading(text: "Login to Your account"),
           Padding(
-            padding: EdgeInsets.only(top: 32,bottom: 16),
+            padding: EdgeInsets.only(top: 32, bottom: 16),
             child: customTextField(
                 textFieldLabel: "Email Address",
                 controller: nameController,
@@ -46,10 +47,20 @@ class LoginView extends StatelessWidget {
           ),
           customDividersWithText(text: "Or continue with"),
           Padding(
-            padding:  EdgeInsets.only(top:16,bottom: 32),
-            child: customButton(onPressed: () {}, text: "Login", width: Get.width),
+            padding: EdgeInsets.only(top: 16, bottom: 32),
+            child: customButton(
+                onPressed: () {
+                  Get.offAllNamed(RoutesHelper.getHome());
+                },
+                text: "Login",
+                width: double.infinity),
           ),
-          socialFooter( text1: "Don't have an account?", text2: "Sign up", onTap: () {})
+          socialFooter(
+              text1: "Don't have an account?",
+              text2: "Sign up",
+              onTap: () {
+                Get.toNamed(RoutesHelper.getRegistration());
+              })
         ],
       ),
     );

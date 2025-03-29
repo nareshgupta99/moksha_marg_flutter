@@ -7,11 +7,10 @@ import 'package:moksha_marg/component/home/view/home_view.dart';
 
 class RoutesHelper {
   static const String _home = "/home";
-  static const String _registration = "/registration ";
-  static const String _login = "/login ";
-  static const String _forgotPassword = "/forgot_password ";
-  static const String _resetPassword = "/reset_password ";
-
+  static const String _registration = "/registration";
+  static const String _login = "/login";
+  static const String _forgotPassword = "/forgot_password";
+  static const String _resetPassword = "/reset_password";
 
   static String getHome() => _home;
   static String getRegistration() => _registration;

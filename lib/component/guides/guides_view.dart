@@ -13,7 +13,7 @@ class GuidesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topNavigaton(text: "Tourist Guides"),
+      appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: _body(),
       bottomNavigationBar: bottomNavigaton(1),
