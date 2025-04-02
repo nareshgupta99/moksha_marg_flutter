@@ -1,16 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/bootom_navigation_controller.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/card.dart';
 import 'package:moksha_marg/reusable/carousel.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<BootomNavigationController>().init();
+
+  }
 
   List<String> images = [
     Images.temple1,
@@ -20,14 +36,21 @@ class HomeView extends StatelessWidget {
     Images.temple5,
   ];
 
+  List<String> title = [
+    "Food Ordering",
+    "Live Darshan",
+    "guide Booking",
+    "hotel booking"
+  ];
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        appBar: topNavigaton(isLeading: true),
+        appBar: topNavigaton(isLeading: false),
         backgroundColor: ColorsResources.backgroundColor,
-        bottomNavigationBar: bottomNavigaton(0),
+        bottomNavigationBar: bottomNavigaton(),
         body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
@@ -56,10 +79,15 @@ class HomeView extends StatelessWidget {
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
-                return _serviceCard(
-                    url: images[index],
-                    heading: "Food Ordering",
-                    desc: "Satvik Meal");
+                return GestureDetector(
+                  onTap: () {
+                    onTap(index);
+                  },
+                  child: _serviceCard(
+                      url: images[index],
+                      heading: title[index],
+                      desc: "Satvik Meal"),
+                );
               }),
 
           Padding(
@@ -73,13 +101,17 @@ class HomeView extends StatelessWidget {
 
           // List View
           SizedBox(
-            height: 230,
+            height: 250,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return _livedarhanCard();
+                  return Padding(
+                    padding: EdgeInsets.only(right: Dimensions.padding12),
+                    child: GestureDetector(
+                      onTap: () => Get.toNamed(RoutesHelper.getLiveDarshan(id:"1")),
+                      child: livedarhanCard(imageUri: images[index])));
                 }),
           ),
 
@@ -163,71 +195,6 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _livedarhanCard() {
-    return Container(
-      margin: EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(8)),
-      width: Get.width / 1.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-            child: Image.asset(
-              images[0],
-              width: Get.width / 1.5,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 16, left: 16),
-            child: Text(
-              "Sidhivinayak Temple",
-              style: TextStyle(
-                  fontFamily: TypographyResources.roboto,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Text(
-              "Mumbai, Maharastra",
-              style: TextStyle(
-                  color: ColorsResources.greyColor,
-                  fontFamily: TypographyResources.roboto,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 16, left: 16),
-            child: Row(
-              spacing: 8,
-              children: [
-                Icon(
-                  CupertinoIcons.eye_fill,
-                  color: ColorsResources.greyColor,
-                ),
-                Text(
-                  "2.4k watching",
-                  style: TextStyle(
-                      color: ColorsResources.greyColor,
-                      fontFamily: TypographyResources.roboto,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget _destinationCard(
       {required String url,
       required String name,
@@ -304,5 +271,22 @@ class HomeView extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+void onTap(int index) {
+  switch (index) {
+    case 0:
+      Get.toNamed(RoutesHelper.getRestaurent());
+      break;
+    case 1:
+      Get.toNamed(RoutesHelper.getTemple());
+      break;
+    case 2:
+      Get.toNamed(RoutesHelper.getGuide());
+      break;
+    case 3:
+      Get.toNamed(RoutesHelper.getRestaurent());
+      break;
   }
 }

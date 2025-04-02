@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
@@ -13,7 +14,7 @@ PreferredSizeWidget topNavigaton({String? text, required bool isLeading}) {
         : Text(""),
     automaticallyImplyLeading: false,
     title: Text(
-      text ?? "MpkshaMarg",
+      text ?? "MokshaMarg",
       style: TextStyle(
           fontFamily: TypographyResources.pacifico,
           fontWeight: FontWeight.w900),
@@ -21,29 +22,35 @@ PreferredSizeWidget topNavigaton({String? text, required bool isLeading}) {
   );
 }
 
-Widget bottomNavigaton(int index) {
-  return BottomNavigationBar(
-      currentIndex: index,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: ColorsResources.greyColor,
-      selectedLabelStyle: TextStyle(color: Colors.black),
-      type: BottomNavigationBarType.fixed,
-      unselectedLabelStyle: TextStyle(
-        color: ColorsResources.greyColor,
-      ),
-      items: [
-        BottomNavigationBarItem(
-          icon: GestureDetector(
-            onTap: ()=>Get.offNamed(RoutesHelper.getHome()),
-            child: Icon(Icons.home)),
-          label: "Home",
+Widget bottomNavigaton() {
+  return GetBuilder<BootomNavigationController>(builder: (controller) {
+    return BottomNavigationBar(
+        currentIndex: controller.selectedIndex,
+        onTap: (value) {
+          controller.setSelectedIndex(value);
+        },
+        selectedItemColor: Colors.black,
+        unselectedItemColor: ColorsResources.greyColor,
+        selectedLabelStyle: TextStyle(color: Colors.black),
+        type: BottomNavigationBarType.fixed,
+        unselectedLabelStyle: TextStyle(
+          color: ColorsResources.greyColor,
         ),
-        BottomNavigationBarItem(icon: GestureDetector(
-          onTap: ()=>Get.offNamed(RoutesHelper.getGuide()),
-          child: Icon(Icons.bookmark)), label: "Guides",),
-        BottomNavigationBarItem(
-            icon: GestureDetector(
-              child: Icon(CupertinoIcons.video_camera_solid)), label: "Live"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ]);
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
+            label: "Guides",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.video_camera_solid),
+              label: "Live"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile"),
+        ]);
+  });
 }

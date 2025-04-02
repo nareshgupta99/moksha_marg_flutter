@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/util/extensions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationController extends GetxController implements GetxService {
   // final AuthenticationRepository repository;
-  // final SharedPreferences sharedPreferences;
-  // AuthenticationController({required this.repository, required this.sharedPreferences});
+  final SharedPreferences sharedPreferences;
+  AuthenticationController({ required this.sharedPreferences});
 
   bool loading = true;
 

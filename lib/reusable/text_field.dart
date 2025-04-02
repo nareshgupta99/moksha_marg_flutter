@@ -53,7 +53,7 @@ Widget customObsecureTextField(
     int? maxLength,
     required String textFieldLabel,
     required TextEditingController controller,
-    bool isObsecure = false}) {
+    bool isObsecure = true}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

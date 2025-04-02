@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -66,6 +67,74 @@ Widget restaurentCard(
             customButton(onPressed: onPressed, text: "Order")
           ],
         ),
+      ),
+    );
+  }
+
+
+
+Widget livedarhanCard({required String imageUri ,double? width ,double? height }) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(8)),
+      width: width?? Get.width / 1.5,
+      height:height?? Get.width / 1.5,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            child: Image.asset(
+              imageUri,
+              width: Get.width ,
+               height: Get.width / 2.5,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 16, left: 16),
+            child: Text(
+              "Sidhivinayak Temple",
+              style: TextStyle(
+                  fontFamily: TypographyResources.roboto,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: Text(
+              "Mumbai, Maharastra",
+              style: TextStyle(
+                  color: ColorsResources.greyColor,
+                  fontFamily: TypographyResources.roboto,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 16, left: 16),
+            child: Row(
+              spacing: 8,
+              children: [
+                Icon(
+                  CupertinoIcons.eye_fill,
+                  color: ColorsResources.greyColor,
+                ),
+                Text(
+                  "2.4k watching",
+                  style: TextStyle(
+                      color: ColorsResources.greyColor,
+                      fontFamily: TypographyResources.roboto,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

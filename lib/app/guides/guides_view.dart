@@ -18,7 +18,7 @@ class GuidesView extends StatelessWidget {
       appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: _body(),
-      bottomNavigationBar: bottomNavigaton(1),
+      bottomNavigationBar: bottomNavigaton(),
     );
   }
 

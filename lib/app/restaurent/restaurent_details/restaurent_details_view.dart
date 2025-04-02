@@ -16,7 +16,7 @@ class RestaurentDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topNavigaton(isLeading: true, text: "Satvik Bhoj"),
-      bottomNavigationBar: bottomNavigaton(2),
+      bottomNavigationBar: bottomNavigaton(),
       body: Column(
         children: [
           _restaurentDetailsCard(url: Images.temple1, text: "Satvik Bhoj"),

@@ -17,7 +17,7 @@ class RestaurentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topNavigaton(text: "Restaurent", isLeading: true),
-      bottomNavigationBar: bottomNavigaton(0),
+      bottomNavigationBar: bottomNavigaton(),
       body: _body(),
       backgroundColor: ColorsResources.backgroundColor,
     );
