@@ -3,6 +3,7 @@ import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_v
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
 import 'package:moksha_marg/app/authentication/reset_password/reset_password_view.dart';
+import 'package:moksha_marg/app/cart/food_cart/food_cart_view.dart';
 import 'package:moksha_marg/app/guides/guides_details_view.dart';
 import 'package:moksha_marg/app/guides/guides_view.dart';
 import 'package:moksha_marg/app/home/home_view.dart';
@@ -23,6 +24,7 @@ class RoutesHelper {
   static const String _restaurentDetails = "/restaurent_details";
   static const String _temple = "/_temple";
   static const String _liveDarshan = "/live_darshan";
+  static const String _foodCart = "/food_cart";
 
   static String getHome() => _home;
   static String getRegistration() => _registration;
@@ -35,6 +37,7 @@ class RoutesHelper {
   static String getRestaurentDetails() => _restaurentDetails;
   static String getLiveDarshan({required String  id}) => "$_liveDarshan?id=$id";
   static String getTemple() => _temple;
+  static String getFoodCart() => _foodCart;
 
   static List<GetPage> routes = [
     GetPage(name: _home, page: () => HomeView()),
@@ -48,5 +51,6 @@ class RoutesHelper {
     GetPage(name: _restaurentDetails, page: () => RestaurentDetailsView()),
     GetPage(name: _temple, page: () => TempleView()),
     GetPage(name: _liveDarshan, page: () => LiveDarshanView(id:Get.parameters['id']!)),
+    GetPage(name: _foodCart, page: () => FoodCartView()),
   ];
 }
