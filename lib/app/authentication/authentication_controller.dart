@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthenticationController extends GetxController implements GetxService {
   // final AuthenticationRepository repository;
   final SharedPreferences sharedPreferences;
-  AuthenticationController({ required this.sharedPreferences});
+  AuthenticationController({required this.sharedPreferences});
 
   bool loading = true;
 
@@ -24,6 +24,14 @@ class AuthenticationController extends GetxController implements GetxService {
   var registerEmailController = TextEditingController();
   var registerPhoneController = TextEditingController();
   var registerPasswordController = TextEditingController();
+  List<String> roles = [
+    "Select Role",
+    "visitors",
+    "restaurent partner",
+    "hotel partner",
+    "guide"
+  ];
+  String selecedRole = "Select Role";
 
   var forgotEmailController = TextEditingController();
 
@@ -45,6 +53,13 @@ class AuthenticationController extends GetxController implements GetxService {
     registerEmailController = TextEditingController();
     registerPhoneController = TextEditingController();
     registerPasswordController = TextEditingController();
+    roles = [
+      "Select Role",
+      "visitors",
+      "restaurent partner",
+      "hotel partner",
+      "guide"
+    ];
     registerPasswordObsecure = true;
   }
 
@@ -122,6 +137,7 @@ class AuthenticationController extends GetxController implements GetxService {
 
   void registerWithValidation() {
     FocusManager.instance.primaryFocus?.unfocus();
+
     if (registerNameController.text.trim().isEmpty) {
       Get.snackbar('Error', 'Name is required');
     } else if (registerEmailController.text.trim().isEmpty) {
@@ -133,6 +149,8 @@ class AuthenticationController extends GetxController implements GetxService {
     } else if (registerPasswordController.text.trim().isInvalidPassword()) {
       Get.snackbar(
           'Error', 'Entered password must be at least 8 characters long');
+    } else if (selecedRole.trim().isEmpty) {
+      Get.snackbar('Error', 'Role is required');
     } else {
       // register();
     }
@@ -179,6 +197,12 @@ class AuthenticationController extends GetxController implements GetxService {
     } else {
       // resetPassword(userId: userId);
     }
+  }
+
+  void setSelectedRole({String? value}) {
+    selecedRole = value ?? roles[0];
+    print(selecedRole);
+    update();
   }
 
   // void deleteAuth() async {

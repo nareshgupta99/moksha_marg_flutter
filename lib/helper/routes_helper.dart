@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/restaurent/add_dish.dart';
+import 'package:moksha_marg/admin/restaurent/update_dish.dart';
 import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
@@ -9,6 +11,7 @@ import 'package:moksha_marg/app/guides/guides_view.dart';
 import 'package:moksha_marg/app/home/home_view.dart';
 import 'package:moksha_marg/app/live_darshan/live_darshan_view.dart';
 import 'package:moksha_marg/app/live_darshan/temple_view.dart';
+import 'package:moksha_marg/app/profile/profile_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
 
@@ -25,6 +28,17 @@ class RoutesHelper {
   static const String _temple = "/_temple";
   static const String _liveDarshan = "/live_darshan";
   static const String _foodCart = "/food_cart";
+  static const String _profile = "/profile";
+
+
+  //Restaurent Admin Routes
+  static const String _addDish = "/add_dish";
+  static const String _updateDish = "/update_dish";
+  static const String _dish = "/dish";
+
+
+
+
 
   static String getHome() => _home;
   static String getRegistration() => _registration;
@@ -38,6 +52,13 @@ class RoutesHelper {
   static String getLiveDarshan({required String  id}) => "$_liveDarshan?id=$id";
   static String getTemple() => _temple;
   static String getFoodCart() => _foodCart;
+  static String getProfile() => _profile;
+
+  //Restaurent Admin Routes
+
+
+  static String getAddDish() => _addDish;
+  static String getUpdateDish({required String  id}) => "$_addDish?id=$id";
 
   static List<GetPage> routes = [
     GetPage(name: _home, page: () => HomeView()),
@@ -52,5 +73,12 @@ class RoutesHelper {
     GetPage(name: _temple, page: () => TempleView()),
     GetPage(name: _liveDarshan, page: () => LiveDarshanView(id:Get.parameters['id']!)),
     GetPage(name: _foodCart, page: () => FoodCartView()),
+    GetPage(name: _profile, page: () => ProfileView()),
+
+  //Restaurent Admin Routes
+
+
+    GetPage(name: _addDish, page: () => AddDish()),
+    GetPage(name: _updateDish, page: () => UpdateDish(id:Get.parameters['id']!)),
   ];
 }

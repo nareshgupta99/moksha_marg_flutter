@@ -17,13 +17,6 @@ class RegistrationView extends StatefulWidget {
 }
 
 class _RegistrationViewState extends State<RegistrationView> {
-  List<String> items = [
-    "visitors",
-    "restaurent partner",
-    "hotel partner",
-    "guide"
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -61,9 +54,13 @@ class _RegistrationViewState extends State<RegistrationView> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16),
               child: customDropDown(
-                  items: items,
-                  onChanged: (newValue) {},
-                  selected: items[0],
+                  items: controler.roles,
+                  onChanged: (newValue) {
+                    controler.setSelectedRole(value: newValue);
+                  },
+                  selected: controler.roles.contains(controler.selecedRole)
+                      ? controler.selecedRole
+                      : null,
                   textFieldLabel: "Select Role"),
             ),
             customObsecureTextField(

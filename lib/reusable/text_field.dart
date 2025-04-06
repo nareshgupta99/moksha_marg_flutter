@@ -99,7 +99,7 @@ Widget customObsecureTextField(
 Widget customDropDown(
     {required List<String> items,
     required ValueChanged onChanged,
-    required String selected,
+     String? selected,
     required String textFieldLabel}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,5 +165,48 @@ Widget searchBar({required String text}) {
           ),
           borderRadius: BorderRadius.all(Radius.circular(8))),
     ),
+  );
+}
+
+
+Widget customDescriptionField(
+    {String? hintText,
+    VoidCallback? onTap,
+    int? maxLine,
+    int? maxLength,
+    required String textFieldLabel,
+    required TextEditingController controller,}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(textFieldLabel,
+          style: TextStyle(
+              fontFamily: TypographyResources.roboto,
+              fontSize: 16,
+              fontWeight: FontWeight.w700)),
+      TextField(
+        autocorrect: false,
+        maxLength: 200,
+        minLines: 3,
+        controller: controller,
+        inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
+        decoration: InputDecoration(
+            hintText: hintText ?? "",
+            hintStyle: TextStyle(
+                fontFamily: TypographyResources.roboto,
+                color: ColorsResources.textGreyColor),
+            contentPadding: const EdgeInsets.only(bottom: 3, left: 7),
+            fillColor: ColorsResources.textFillColor,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: ColorsResources.textFieldBorderColor, width: 3)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: ColorsResources.textFieldBorderColor, width: 3))),
+      ),
+    ],
   );
 }
