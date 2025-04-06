@@ -54,7 +54,10 @@ class _LoginViewState extends State<LoginView> {
                 textFieldLabel: "Password",
                 controller: controller.loginPasswordController,
                 hintText: "Enter your password",
-                isObsecure: controller.loginPasswordObsecure),
+                isObsecure: controller.loginPasswordObsecure,
+                onTap: ()=>controller.setLoginPasswordObsecure()
+                ),
+              
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: socialLogin(),
@@ -64,7 +67,8 @@ class _LoginViewState extends State<LoginView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    Get.offAllNamed(RoutesHelper.getHome());
+                    // Get.offAllNamed(RoutesHelper.getHome());
+                    controller.loginWithValidaion();
                   },
                   text: "Login",
                   width: double.infinity),

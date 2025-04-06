@@ -77,7 +77,11 @@ class _RegistrationViewState extends State<RegistrationView> {
             Padding(
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
-                  onPressed: () {}, text: "Signup", width: Get.width),
+                  onPressed: () {
+                    controler.registerWithValidation();
+                  },
+                  text: "Signup",
+                  width: Get.width),
             ),
             socialFooter(
                 text1: "Already have an account?",

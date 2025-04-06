@@ -22,7 +22,7 @@ class MokshaMarg extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: RoutesHelper.getLogin(),
+            initialRoute: RoutesHelper.getSplash(),
             getPages: RoutesHelper.routes,
           );
         });

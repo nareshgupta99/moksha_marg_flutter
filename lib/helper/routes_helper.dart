@@ -14,6 +14,7 @@ import 'package:moksha_marg/app/live_darshan/temple_view.dart';
 import 'package:moksha_marg/app/profile/profile_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
+import 'package:moksha_marg/splash/splash_view.dart';
 
 class RoutesHelper {
   static const String _home = "/home";
@@ -29,6 +30,7 @@ class RoutesHelper {
   static const String _liveDarshan = "/live_darshan";
   static const String _foodCart = "/food_cart";
   static const String _profile = "/profile";
+  static const String _splash = "/splash";
 
 
   //Restaurent Admin Routes
@@ -53,6 +55,7 @@ class RoutesHelper {
   static String getTemple() => _temple;
   static String getFoodCart() => _foodCart;
   static String getProfile() => _profile;
+  static String getSplash() => _splash;
 
   //Restaurent Admin Routes
 
@@ -74,6 +77,7 @@ class RoutesHelper {
     GetPage(name: _liveDarshan, page: () => LiveDarshanView(id:Get.parameters['id']!)),
     GetPage(name: _foodCart, page: () => FoodCartView()),
     GetPage(name: _profile, page: () => ProfileView()),
+    GetPage(name: _splash, page: () => SplashView()),
 
   //Restaurent Admin Routes
 

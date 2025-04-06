@@ -9,9 +9,9 @@ enum Endpoints {
 
 const Map<Endpoints, String> endpointRawValues = {
   // AUTHENTICATION
-  Endpoints.login: "/api/v1/login",
-  Endpoints.register: "/api/v1/register",
-  Endpoints.sendOtp: "/api/v1/sendOtp",
-  Endpoints.forgetPassword: "/api/v1/forgetPassword",
-  Endpoints.verifyOtp: "/api/v1/verifyOtp",
+  Endpoints.login: "/api/v1/auth/login",
+  Endpoints.register: "/api/v1/auth/register",
+  Endpoints.sendOtp: "/api/v1/auth/sendOtp",
+  Endpoints.forgetPassword: "/api/v1/auth/forgetPassword",
+  Endpoints.verifyOtp: "/api/v1/auth/verifyOtp",
 };
