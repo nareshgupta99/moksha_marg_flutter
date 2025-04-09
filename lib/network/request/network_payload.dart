@@ -39,4 +39,17 @@ class NetworkPayload {
       "password": payload.password,
     };
   }
+
+  static Map<String, dynamic>? restaurantPayload({required RestaurantPayload payload}) {
+  return {
+    "name": payload.name,
+    "address": payload.addres,
+    "openingTime": payload.openingTime,
+    "closingTime": payload.closingTime,
+    "startingPrice": payload.startingPrice,
+    "latitude": payload.latitude,
+    "longitude": payload.longitude,
+  };
+}
+
 }

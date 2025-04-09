@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/restaurent/add_dish.dart';
+import 'package:moksha_marg/admin/restaurent/add_restaurent_details_view.dart';
 import 'package:moksha_marg/admin/restaurent/update_dish.dart';
 import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
 import 'package:moksha_marg/app/authentication/reset_password/reset_password_view.dart';
+import 'package:moksha_marg/app/authentication/verify_otp/verify_otp.dart';
 import 'package:moksha_marg/app/cart/food_cart/food_cart_view.dart';
 import 'package:moksha_marg/app/guides/guides_details_view.dart';
 import 'package:moksha_marg/app/guides/guides_view.dart';
@@ -31,12 +33,15 @@ class RoutesHelper {
   static const String _foodCart = "/food_cart";
   static const String _profile = "/profile";
   static const String _splash = "/splash";
+  static const String _verifyOtp = "/verify_otp";
 
 
   //Restaurent Admin Routes
+  static const String _addRestaurant = "/add_restaurant";
   static const String _addDish = "/add_dish";
   static const String _updateDish = "/update_dish";
   static const String _dish = "/dish";
+  
 
 
 
@@ -56,12 +61,15 @@ class RoutesHelper {
   static String getFoodCart() => _foodCart;
   static String getProfile() => _profile;
   static String getSplash() => _splash;
+  static String getVerifyOtp({required String email, required int userId}) =>"$_splash>id=$userId&email=$email";
 
   //Restaurent Admin Routes
 
 
+  static String getAddRestaurent() => _addRestaurant;
   static String getAddDish() => _addDish;
   static String getUpdateDish({required String  id}) => "$_addDish?id=$id";
+  
 
   static List<GetPage> routes = [
     GetPage(name: _home, page: () => HomeView()),
@@ -78,11 +86,13 @@ class RoutesHelper {
     GetPage(name: _foodCart, page: () => FoodCartView()),
     GetPage(name: _profile, page: () => ProfileView()),
     GetPage(name: _splash, page: () => SplashView()),
+    GetPage(name: _verifyOtp, page: () => VerifyOtpView(userId: Get.parameters['userId']!, email: Get.parameters['email']!,)),
 
   //Restaurent Admin Routes
 
 
     GetPage(name: _addDish, page: () => AddDish()),
+    GetPage(name: _addRestaurant, page: () => AddRestaurentDetailsView()),
     GetPage(name: _updateDish, page: () => UpdateDish(id:Get.parameters['id']!)),
   ];
 }

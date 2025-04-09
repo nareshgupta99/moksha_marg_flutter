@@ -57,6 +57,13 @@ class _LoginViewState extends State<LoginView> {
                 isObsecure: controller.loginPasswordObsecure,
                 onTap: ()=>controller.setLoginPasswordObsecure()
                 ),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: ()=>Get.toNamed(RoutesHelper.getForgotPassword()),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text("forgot password"),),
+              ),
               
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),

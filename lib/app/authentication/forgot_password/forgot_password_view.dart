@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
@@ -22,35 +23,41 @@ class ForgotPasswordView extends StatelessWidget {
   }
 
   Widget _body() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          heading(text: "Forgot Password?"),
-          Padding(
-            padding: EdgeInsets.only(
-                top: Dimensions.padding32, bottom: Dimensions.padding16),
-            child: customTextField(
-                textFieldLabel: "Email Address",
-                controller: nameController,
-                hintText: "Enter your email"),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: Dimensions.padding16, bottom: Dimensions.padding32),
-            child:
-                customButton(onPressed: () {}, text: "Login", width: Get.width),
-          ),
-          socialFooter(
-              text1: "",
-              text2: "Go Back",
-              onTap: () {
-                Get.back();
-              })
-        ],
-      ),
-    );
+    return GetBuilder<AuthenticationController>(builder: (controller) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            heading(text: "Forgot Password?"),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: Dimensions.padding32, bottom: Dimensions.padding16),
+              child: customTextField(
+                  textFieldLabel: "Email Address",
+                  controller: controller.forgotEmailController,
+                  hintText: "Enter your email"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: Dimensions.padding16, bottom: Dimensions.padding32),
+              child: customButton(
+                  onPressed: () {
+                    controller.sendOtpWithValidation();
+                  },
+                  text: "Submit",
+                  width: Get.width),
+            ),
+            socialFooter(
+                text1: "",
+                text2: "Go Back",
+                onTap: () {
+                  Get.back();
+                })
+          ],
+        ),
+      );
+    });
   }
 }

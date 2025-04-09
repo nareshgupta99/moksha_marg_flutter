@@ -7,7 +7,7 @@ Widget customCarousel(
     required List<String> images}) {
   return CarouselSlider(
     options: CarouselOptions(
-      // autoPlay: true,
+      autoPlay: true,
       height: height,
       viewportFraction: 1.0,
       // autoPlayInterval: Duration(seconds: 5),

@@ -1,30 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:moksha_marg/file_picker_controller.dart';
 
-class ImageUploadCard extends StatefulWidget {
-  @override
-  _ImageUploadCardState createState() => _ImageUploadCardState();
-}
-
-class _ImageUploadCardState extends State<ImageUploadCard> {
-  String? fileName;
-
-  Future<void> pickImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'png'],
-    );
-
-    if (result != null) {
-      setState(() {
-        fileName = result.files.single.name;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
+Widget customFileUpload() {
+  return GetBuilder<FilePickerController>(builder: (controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +14,7 @@ class _ImageUploadCardState extends State<ImageUploadCard> {
         ),
         const SizedBox(height: 10),
         GestureDetector(
-          onTap: pickImage,
+          onTap: controller.pickImage,
           child: DottedBorder(
             color: Colors.grey,
             dashPattern: [6, 4],
@@ -51,7 +31,7 @@ class _ImageUploadCardState extends State<ImageUploadCard> {
                   Icon(Icons.image_outlined, size: 40, color: Colors.grey),
                   const SizedBox(height: 10),
                   Text(
-                    fileName ?? "Upload images",
+                    controller.fileName ?? "Upload images",
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 5),
@@ -66,5 +46,5 @@ class _ImageUploadCardState extends State<ImageUploadCard> {
         ),
       ],
     );
-  }
+  });
 }

@@ -8,7 +8,7 @@ class BootomNavigationController extends GetxController implements GetxService {
     RoutesHelper.getHome(),
     RoutesHelper.getGuide(),
     RoutesHelper.getTemple(),
-    RoutesHelper.getProfile(),
+    RoutesHelper.getAddRestaurent(),
   ];
 
   void init() {
@@ -17,7 +17,7 @@ class BootomNavigationController extends GetxController implements GetxService {
       RoutesHelper.getHome(),
       RoutesHelper.getGuide(),
       RoutesHelper.getTemple(),
-      RoutesHelper.getProfile(),
+      RoutesHelper.getAddRestaurent(),
     ];
   }
 

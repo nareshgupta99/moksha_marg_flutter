@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
+import 'package:moksha_marg/reusable/custom_checkbox.dart';
 import 'package:moksha_marg/reusable/custom_file_uploader.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/util/dimensions.dart';
 
-class AddDish extends StatefulWidget {
+class AddRestaurentDetailsView extends StatefulWidget {
+  const AddRestaurentDetailsView({super.key});
+
   @override
-  State<AddDish> createState() => _AddDishState();
+  State<AddRestaurentDetailsView> createState() => _AddRestaurentDetailsState();
 }
 
-class _AddDishState extends State<AddDish> {
+class _AddRestaurentDetailsState extends State<AddRestaurentDetailsView> {
   @override
   void initState() {
     super.initState();
@@ -33,28 +36,29 @@ class _AddDishState extends State<AddDish> {
             child: Column(
               children: [
                 customTextField(
-                    textFieldLabel: "Dish Name",
+                    textFieldLabel: "Restaurent Name",
                     controller: TextEditingController()),
                 Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
-                        textFieldLabel: "Price",
+                        textFieldLabel: "Address",
                         controller: TextEditingController())),
                 customTextField(
-                    textFieldLabel: "Short Description",
-                    controller: TextEditingController(),
-                    maxLength: 150,
-                    maxLine: 2),
-                Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: Dimensions.padding16),
-                    child: customTextField(
-                        textFieldLabel: "Description",
-                        controller: TextEditingController(),
-                        maxLine: 4,
-                        maxLength: 300)),
-                // ImageUploadCard(),
+                    textFieldLabel: "Opening Time",
+                    controller: TextEditingController()),
+                customTextField(
+                    textFieldLabel: "Closing Time",
+                    controller: TextEditingController()),
+                customTextField(
+                    textFieldLabel: "Starting Price",
+                    controller: TextEditingController()),
+                Row(
+                  children: [
+                    customCheckBox(
+                        isChecked: false, onChanged: () {}, label: "Veg")
+                  ],
+                ),
                 customFileUpload(),
                 customButton(onPressed: () {}, text: "Add Dish")
               ],

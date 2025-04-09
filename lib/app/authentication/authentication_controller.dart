@@ -173,7 +173,7 @@ class AuthenticationController extends GetxController implements GetxService {
         (email == null || !email.isValidEmail())) {
       Get.snackbar('Error', 'Enter valid email');
     } else {
-      // sendOtp(email: email);
+      sendOtp(email: email);
     }
   }
 

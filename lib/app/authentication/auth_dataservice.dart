@@ -66,37 +66,37 @@ extension AuthenticationDataService on AuthenticationController {
     });
   }
 
-  // Future<void> sendOtp({String? email}) async {
-  //   loading = true;
-  //   var authPayload = AuthPayload();
-  //   authPayload.email = email ?? forgotEmailController.text.trim();
-  //   update();
-  //   await repository.sendOtp(authPayload, (result, response, message) {
-  //     switch (result) {
-  //       case Result.onSuccess:
-  //         loading = false;
-  //         update();
-  //         if (email == null || email.trim().isEmpty) {
-  //           Get.toNamed(RoutesHelper.getVerifyOtp(
-  //               id: response!.data!.id ?? "",
-  //               email: forgotEmailController.text.trim()));
-  //         } else {
-  //           Get.snackbar('Success', response?.message ?? "");
-  //         }
-  //         break;
-  //       case Result.onFailed:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //       case Result.onException:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //     }
-  //   });
-  // }
+  Future<void> sendOtp({String? email}) async {
+    loading = true;
+    var authPayload = AuthPayload();
+    authPayload.email = email ?? forgotEmailController.text.trim();
+    update();
+    await repository.sendOtp(authPayload, (result, response, message) {
+      switch (result) {
+        case Result.onSuccess:
+          loading = false;
+          update();
+          if (email == null || email.trim().isEmpty) {
+            Get.toNamed(RoutesHelper.getVerifyOtp(
+                userId: 0,
+                email: forgotEmailController.text.trim()));
+          } else {
+            Get.snackbar('Success', response?.message ?? "");
+          }
+          break;
+        case Result.onFailed:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+        case Result.onException:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+      }
+    });
+  }
 
   // Future<void> verifyOtp({required String userId, required String otp}) async {
   //   loading = true;

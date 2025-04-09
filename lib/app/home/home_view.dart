@@ -29,18 +29,18 @@ class _HomeViewState extends State<HomeView> {
   }
 
   List<String> images = [
-    Images.temple1,
+    Images.food,
     Images.temple2,
-    Images.temple3,
-    Images.temple4,
+    Images.guide,
+    Images.hotel,
     Images.temple5,
   ];
 
   List<String> title = [
     "Food Ordering",
     "Live Darshan",
-    "guide Booking",
-    "hotel booking"
+    "Gide Booking",
+    "Hotel Booking"
   ];
 
   @override
