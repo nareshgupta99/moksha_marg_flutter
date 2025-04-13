@@ -6,26 +6,26 @@ import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
 extension DishDataservice on DishController {
-  Future<void> createDish() async {
+  Future<void> createDish(int id) async {
     // loading = true;
     DishPayload dishPayload = DishPayload();
     dishPayload.dishName = addDishNameController.text.trim();
     dishPayload.description = descriptionController.text.trim();
     dishPayload.shortDescription = shortDescriptionController.text.trim();
-    dishPayload.price=priceControllerController.text.trim();
+    dishPayload.price = priceControllerController.text.trim();
     dishPayload.foodTypes = selecedFoodTypes;
     dishPayload.image = Get.find<FilePickerController>().multipartFiles;
+    id = 1;
 
     update();
-    await repository.addDish(dishPayload,
-        (result, response, message) {
+    await repository.addDish(id, dishPayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
           final data = response?.data;
           //  = data!;
           update();
-          Get.offAllNamed(RoutesHelper.getHome());
+          Get.snackbar('Success', 'Dish Added');
           break;
         case Result.onFailed:
           // loading = false;
@@ -41,10 +41,10 @@ extension DishDataservice on DishController {
     });
   }
 
-  Future<void> getAllRestaurantData({required int id}) async {
+  Future<void> getAllDishDataByRestaurant({required int id}) async {
     // loading = true;
 
-    await repository.getAllDishByRestaurant(id,(result, response, message) {
+    await repository.getAllDishByRestaurant(id, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
@@ -80,6 +80,34 @@ extension DishDataservice on DishController {
           print(data?.dishName);
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
+          break;
+        case Result.onFailed:
+          // loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+        case Result.onException:
+          // loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+      }
+    });
+  }
+
+  Future<void> deleteDishById({required int id}) async {
+    // loading = true;
+
+    await repository.deleteDishById(id, (result, response, message) {
+      switch (result) {
+        case Result.onSuccess:
+          // loading = false;
+          final data = response?.data;
+          // dish = data!;
+        dishList=  dishList.where((d) => d.dishId != data?.dishId).toList();
+          // print(data?.dishName);
+          Get.snackbar('Success', message?.tr ?? "Dish Deleted");
+          update();
           break;
         case Result.onFailed:
           // loading = false;

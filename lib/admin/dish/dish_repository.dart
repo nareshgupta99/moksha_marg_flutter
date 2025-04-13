@@ -14,10 +14,10 @@ class DishRepository extends GetxController implements GetxService {
   final NetworkManager network;
   DishRepository({required this.network});
 
-  Future<void> addDish(DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+  Future<void> addDish(int id,DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
     try {
       
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.addDish, method: HTTPMethod.multipartPOST,slashedQuery:"/1", payload: NetworkPayload.dishPayload(payload: payload),multipartFiles: payload.image,multipartPayload: {"dish": jsonEncode(NetworkPayload.dishPayload(payload: payload))}  );
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.addDish, method: HTTPMethod.multipartPOST,slashedQuery:"/$id", payload: NetworkPayload.dishPayload(payload: payload),multipartFiles: payload.image,multipartPayload: {"dish": jsonEncode(NetworkPayload.dishPayload(payload: payload))}  );
       try {
         final response = NetworkResponse.fromJson(networkResponse, (json) => DishData.fromJson(json));
         completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
@@ -54,6 +54,23 @@ class DishRepository extends GetxController implements GetxService {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.getRestaurantById, method: HTTPMethod.get,slashedQuery:"/$id" );
+      try {
+        final response = NetworkResponse.fromJson(networkResponse, (json) => DishData.fromJson(json));
+        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
+      } catch (e) {
+        print("Exception :: ${e.toString()}");
+        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+      }
+    } catch (exception) {
+      completion(Result.onException, null, exception.toString());
+      rethrow;
+    }
+  }
+
+   Future<void> deleteDishById(int id, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+    try {
+      
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.deleteDish, method: HTTPMethod.delete,slashedQuery:"/$id" );
       try {
         final response = NetworkResponse.fromJson(networkResponse, (json) => DishData.fromJson(json));
         completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);

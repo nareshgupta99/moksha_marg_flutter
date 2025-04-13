@@ -7,6 +7,7 @@ import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
+import 'package:moksha_marg/util/food_type_enum.dart';
 import 'package:moksha_marg/util/network_image.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
@@ -33,7 +34,7 @@ Widget restaurentCard(
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16)),
               child: cachedImage(
-                url:url,
+                url: url,
                 width: 120,
                 height: 80,
                 fit: BoxFit.fill,
@@ -144,12 +145,14 @@ Widget livedarhanCard(
 }
 
 Widget dishMenuItemsCard(
-    {required String url,
+    {String? foodType,
+    required String url,
     required dishName,
     required String type,
     required VoidCallback onPressed,
     required String availabelStatus,
     required String price}) {
+  print("food :: $foodType");
   return Container(
     // margin: EdgeInsets.symmetric(horizontal: 8),
     decoration: BoxDecoration(
@@ -165,8 +168,8 @@ Widget dishMenuItemsCard(
             onTap: onPressed,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Image.asset(
-                url,
+              child: cachedImage(
+                url: url,
                 width: 120,
                 height: 100,
                 fit: BoxFit.fill,
@@ -181,14 +184,19 @@ Widget dishMenuItemsCard(
                 Row(
                   spacing: 8,
                   children: [
-                    label(
-                        text: "Non-Veg",
-                        backGroundColor: ColorsResources.lightRedColor,
-                        textColor: ColorsResources.darkRedColor),
-                    label(
-                        text: "few Left",
-                        backGroundColor: ColorsResources.lightOrangeColor,
-                        textColor: ColorsResources.darkOrangeColor),
+                    (foodType == FoodTypeEnum.VEG.name
+                        ? label(
+                            text: "Veg",
+                            backGroundColor: ColorsResources.lightGreenColor,
+                            textColor: ColorsResources.darkGreenColor)
+                        : label(
+                            text: "Non-Veg",
+                            backGroundColor: ColorsResources.lightRedColor,
+                            textColor: ColorsResources.darkRedColor))
+                    // label(
+                    //     text: "few Left",
+                    //     backGroundColor: ColorsResources.lightOrangeColor,
+                    //     textColor: ColorsResources.darkOrangeColor),
                   ],
                 ),
                 Padding(
@@ -215,7 +223,6 @@ Widget dishMenuItemsCard(
                         onPressed: () {}, iconData: CupertinoIcons.minus),
                     Text(price),
                     circularButton(onPressed: () {}, iconData: Icons.add),
-                    
                   ],
                 ),
               ],
@@ -233,18 +240,26 @@ Widget deliveryAddressCard() {
         color: const Color.fromRGBO(255, 255, 255, 1),
         borderRadius: BorderRadius.circular(8)),
     child: Padding(
-      padding:  EdgeInsets.symmetric(horizontal: Dimensions.padding16,vertical: Dimensions.padding12),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.padding16, vertical: Dimensions.padding12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           heading(text: "Contact Details"),
-          customTextField(textFieldLabel: "", controller: TextEditingController(),hintText: "Full Name"),
-          customTextField(textFieldLabel: "", controller: TextEditingController(),hintText: "Phone Number"),
-          customTextField(textFieldLabel: "", controller: TextEditingController(),hintText: "Email Address"),
+          customTextField(
+              textFieldLabel: "",
+              controller: TextEditingController(),
+              hintText: "Full Name"),
+          customTextField(
+              textFieldLabel: "",
+              controller: TextEditingController(),
+              hintText: "Phone Number"),
+          customTextField(
+              textFieldLabel: "",
+              controller: TextEditingController(),
+              hintText: "Email Address"),
         ],
       ),
     ),
   );
 }
-
-

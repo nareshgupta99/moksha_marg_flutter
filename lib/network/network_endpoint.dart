@@ -32,5 +32,6 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.addDish:"/api/v1/dish/add/restaurant",
   Endpoints.getAllDishByRestaurant:"/api/v1/dish/restaurant",
   Endpoints.getDishById:"/api/v1/dish",
+  Endpoints.deleteDish:"/api/v1/dish/delete",
 
 };

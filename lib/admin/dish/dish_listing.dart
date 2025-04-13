@@ -1,45 +1,67 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/dish/dish_controller.dart';
+import 'package:moksha_marg/network/response/add_dish.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
+import 'package:moksha_marg/util/network_image.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class DishListing extends StatelessWidget {
+class DishListing extends StatefulWidget {
+  const DishListing({super.key});
+
+  @override
+  State<DishListing> createState() => _DishListingState();
+}
+
+class _DishListingState extends State<DishListing> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<DishController>().init();
+    Get.find<DishController>().getAllDishByRestaurant(id: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: topNavigaton(isLeading: true),
-      body:  _body(),
-      bottomNavigationBar: bottomNavigaton(),
+    return GetBuilder<DishController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: topNavigaton(isLeading: true),
+          body: _body(controller),
+          bottomNavigationBar: bottomNavigaton(),
+        );
+      }
     );
   }
 
-  Widget _body() {
+  Widget _body(DishController controller) {
     return Column(children: [
       heading(text: "Dish"),
       Expanded(
         child: ListView.builder(
-          shrinkWrap: true,
-          itemBuilder: (element, index) {
-          return Padding(
-            padding:  EdgeInsets.only(top:Dimensions.padding16,left: Dimensions.padding16,right: Dimensions.padding16),
-            child: _dishCard(
-                url: Images.temple1, name: "Paneer Tikka", add: "", onTap: () {}),
-          );
-        }),
+          itemCount: controller.dishList.length,
+            shrinkWrap: true,
+            itemBuilder: (element, index) {
+              return Padding(
+                padding: EdgeInsets.only(
+                    top: Dimensions.padding16,
+                    left: Dimensions.padding16,
+                    right: Dimensions.padding16),
+                child: _dishCard(dish: controller.dishList[index], controller: controller),
+              );
+            }),
       )
     ]);
   }
 
   Widget _dishCard(
-      {required String url,
-      required String name,
-      required String add,
-      required VoidCallback onTap}) {
+      {required DishController controller,
+      required DishData dish}) {
     return Container(
       // margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
@@ -53,8 +75,9 @@ class DishListing extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-            child: Image.asset(
-              Images.temple1,
+            child: cachedImage(
+              url: dish.image??"",
+              height: Get.width / 2,
               width: Get.width,
               fit: BoxFit.fill,
             ),
@@ -62,7 +85,7 @@ class DishListing extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 16, left: 16),
             child: Text(
-              name,
+              dish.dishName??"",
               style: TextStyle(
                   fontFamily: TypographyResources.roboto,
                   fontSize: 14,
@@ -72,7 +95,7 @@ class DishListing extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 16),
             child: Text(
-              add,
+              dish.shortDescription??"",
               style: TextStyle(
                   color: ColorsResources.greyColor,
                   fontFamily: TypographyResources.roboto,
@@ -92,7 +115,7 @@ class DishListing extends StatelessWidget {
                       CupertinoIcons.money_dollar,
                     ),
                     Text(
-                      "200",
+                     " ${dish.price}",
                       style: TextStyle(
                           fontFamily: TypographyResources.roboto,
                           fontSize: 14,
@@ -100,19 +123,25 @@ class DishListing extends StatelessWidget {
                     ),
                   ],
                 ),
-               Row(
-                spacing: Dimensions.mainAxisSpacing16,
-                children: [
-                   GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: Icon(Icons.edit_square,color: Colors.blue,)),
-                   
-                   
-                   GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: Icon(Icons.delete, color: Colors.red,)),
-                ],
-               )
+                Row(
+                  spacing: Dimensions.mainAxisSpacing16,
+                  children: [
+                    GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: (){},
+                        child: Icon(
+                          Icons.edit_square,
+                          color: Colors.blue,
+                        )),
+                    GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: ()=>controller.deleteDish(id: dish.dishId ?? 0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        )),
+                  ],
+                )
               ],
             ),
           )

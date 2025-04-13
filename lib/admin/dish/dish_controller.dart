@@ -39,6 +39,18 @@ class DishController extends GetxController implements GetxService {
   }
 
   void addDish() {
-    createDish();
+    createDish(1);
+  }
+
+  void getAllDishByRestaurant({required int id}) {
+    getAllDishDataByRestaurant(id: 1);
+  }
+
+  void getDishById({required int id}) {
+    getDishById(id: id);
+  }
+
+  void deleteDish({required int id}) {
+    deleteDishById(id: id);
   }
 }

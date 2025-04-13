@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/dish/dish_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restaurant_dataservice.dart';
 import 'package:moksha_marg/admin/restaurent/restaurent_repository.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
@@ -44,6 +45,12 @@ class RestarantController extends GetxController implements GetxService {
     restaurants = [];
   }
 
+  void initRestaurentDetails({required String restaurantId}) {
+    restaurants = [];
+    Get.find<RestarantController>().getRestaurantById(id:"$restaurantId");
+    Get.find<DishController>().getAllDishByRestaurant(id:restaurantData?.restaurantId??1);
+
+  }
   void registerWithValidation() async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (restaurantNameController.text.trim().isEmpty) {
