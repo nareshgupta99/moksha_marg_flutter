@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:moksha_marg/network/request/network_request_body.dart';
 
@@ -53,6 +52,17 @@ class NetworkPayload {
       "latitude": payload.latitude,
       "longitude": payload.longitude,
       "foodTypes":payload.foodType
+    };
+  }
+
+  static Map<String, dynamic>? dishPayload(
+      {required DishPayload payload}) {
+    return {
+      "dishName": payload.dishName,
+      "price": payload.price,
+      "foodTypes": payload.foodTypes,
+      "shortDescription": payload.shortDescription,
+      "description": payload.description,
     };
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/dish/dish_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/custom_file_uploader.dart';
@@ -16,12 +17,12 @@ class _AddDishState extends State<AddDish> {
   @override
   void initState() {
     super.initState();
-    Get.find<RestarantController>().init();
+    Get.find<DishController>().init();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RestarantController>(builder: (controller) {
+    return GetBuilder<DishController>(builder: (controller) {
       return Scaffold(
         appBar: topNavigaton(isLeading: false),
         bottomNavigationBar: bottomNavigaton(),
@@ -34,16 +35,16 @@ class _AddDishState extends State<AddDish> {
               children: [
                 customTextField(
                     textFieldLabel: "Dish Name",
-                    controller: TextEditingController()),
+                    controller: controller.addDishNameController),
                 Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
                         textFieldLabel: "Price",
-                        controller: TextEditingController())),
+                        controller: controller.priceControllerController)),
                 customTextField(
                     textFieldLabel: "Short Description",
-                    controller: TextEditingController(),
+                    controller:controller.shortDescriptionController,
                     maxLength: 150,
                     maxLine: 2),
                 Padding(
@@ -51,12 +52,21 @@ class _AddDishState extends State<AddDish> {
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
                         textFieldLabel: "Description",
-                        controller: TextEditingController(),
+                        controller:controller.descriptionController,
                         maxLine: 4,
                         maxLength: 300)),
-                // ImageUploadCard(),
+
+                        customDropDown(
+                  items: controller.foodTypesList,
+                  onChanged: (newValue) {
+                    controller.setSelectedRole(value: newValue);
+                  },
+                  selected: controller.foodTypesList.contains(controller.selecedFoodTypes)
+                      ? controller.selecedFoodTypes
+                      : null,
+                  textFieldLabel: "Select Type"),
                 customFileUpload(),
-                customButton(onPressed: ()=> controller.registerWithValidation() , text: "Add Dish")
+                customButton(onPressed: ()=> controller.addDish() , text: "Add Dish")
               ],
             ),
           ),

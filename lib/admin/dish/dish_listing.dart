@@ -1,24 +1,37 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moksha_marg/reusable/buttons.dart';
+import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
 class DishListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return _body();
+    return Scaffold(
+      appBar: topNavigaton(isLeading: true),
+      body:  _body(),
+      bottomNavigationBar: bottomNavigaton(),
+    );
   }
 
   Widget _body() {
     return Column(children: [
       heading(text: "Dish"),
-      ListView.builder(itemBuilder: (element, index) {
-        return _dishCard(
-            url: Images.temple1, name: "Paneer Tikka", add: "", onTap: () {});
-      })
+      Expanded(
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (element, index) {
+          return Padding(
+            padding:  EdgeInsets.only(top:Dimensions.padding16,left: Dimensions.padding16,right: Dimensions.padding16),
+            child: _dishCard(
+                url: Images.temple1, name: "Paneer Tikka", add: "", onTap: () {}),
+          );
+        }),
+      )
     ]);
   }
 
@@ -76,10 +89,10 @@ class DishListing extends StatelessWidget {
                 Row(
                   children: [
                     Icon(
-                      CupertinoIcons.building_2_fill,
+                      CupertinoIcons.money_dollar,
                     ),
                     Text(
-                      "50+ hotels",
+                      "200",
                       style: TextStyle(
                           fontFamily: TypographyResources.roboto,
                           fontSize: 14,
@@ -87,11 +100,19 @@ class DishListing extends StatelessWidget {
                     ),
                   ],
                 ),
-                customButton(
-                    onPressed: () {},
-                    text: "View Details",
-                    width: 20,
-                    height: 12)
+               Row(
+                spacing: Dimensions.mainAxisSpacing16,
+                children: [
+                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: Icon(Icons.edit_square,color: Colors.blue,)),
+                   
+                   
+                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: Icon(Icons.delete, color: Colors.red,)),
+                ],
+               )
               ],
             ),
           )

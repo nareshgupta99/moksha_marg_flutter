@@ -145,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
           ),
 
           restaurentCard(
-            url: images[0],
+            url: "https://res.cloudinary.com/dnkci1bpn/image/upload/v1744529611/l8lmitpjashecngenalh.jpg",
             type: "Pure Vegetarian",
             rating: 4.5,
             priceWithUnit: "200 for two",

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -8,7 +6,6 @@ import 'package:moksha_marg/admin/restaurent/restaurent_repository.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_resources.dart';
 import 'package:moksha_marg/network/response/restaurant_data.dart';
-import 'package:http/http.dart' as http;
 
 class RestarantController extends GetxController implements GetxService {
   final RestaurentRepository repository;
@@ -16,7 +13,7 @@ class RestarantController extends GetxController implements GetxService {
 
   String fileName = "";
   PlatformFile? Singlefile = null;
- late MultipartFiles multipartFile ;
+  late MultipartFiles multipartFile;
 
   var restaurantNameController = TextEditingController();
   var addressController = TextEditingController();
@@ -25,11 +22,14 @@ class RestarantController extends GetxController implements GetxService {
   var startingPriceController = TextEditingController();
   List<String> foodTypes = List.empty(growable: true);
   bool restaurentFoodTypeChecked = false;
-  late RestaurantData restaurantData;
+  RestaurantData? restaurantData = null;
+  List<RestaurantData> restaurants = [];
+
 
   void init() {
     fileName = "";
     Singlefile = null;
+    restaurantData = null;
     restaurantNameController = TextEditingController();
     addressController = TextEditingController();
     openingTimeController = TextEditingController();
@@ -38,6 +38,10 @@ class RestarantController extends GetxController implements GetxService {
     restaurentFoodTypeChecked = false;
     // foodTypes = List.empty(growable: true);
     foodTypes.add("VEG");
+  }
+
+  void initRestaurantData() {
+    restaurants = [];
   }
 
   void registerWithValidation() async {
@@ -56,16 +60,22 @@ class RestarantController extends GetxController implements GetxService {
       Get.snackbar("Error", "food Type is Required");
     } else if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
       Get.snackbar("Error", "Image is Required");
-    } else { 
+    } else {
       registerRestaurant();
     }
   }
 
+  void getAllRestaurant() {
+    getAllRestaurantData();
+  }
+
+  void getRestaurantById({required String id}) {
+    getRestaurantDataById(id: int.parse(id));
+  }
+
   void setRestaurantFoodType({required String foodType, required bool value}) {
-    print("restaurent $restaurentFoodTypeChecked");
     if (!foodTypes.contains(foodType)) foodTypes.add(foodType);
     restaurentFoodTypeChecked = !value;
-    print("2 restaurent $restaurentFoodTypeChecked");
     update();
   }
 }

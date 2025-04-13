@@ -42,7 +42,7 @@ class RestaurantData {
         foodTypes: json["foodTypes"] == null
             ? []
             : List<FoodType>.from(
-                json["foodTypes"]!.map((x) => FoodType.fromJson(x))),
+                json["foodTypes"].map((x) => FoodType.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

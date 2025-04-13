@@ -22,3 +22,12 @@ class RestaurantPayload {
   String? longitude;
   List<String> foodType = [];
 }
+
+class DishPayload {
+  String? dishName;
+  List<MultipartFiles>? image;
+  String? price;
+  String? foodTypes;
+  String? description;
+  String? shortDescription;
+}

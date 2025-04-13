@@ -7,6 +7,7 @@ import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
+import 'package:moksha_marg/util/network_image.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
 Widget restaurentCard(
@@ -31,8 +32,8 @@ Widget restaurentCard(
             onTap: onPressed,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Image.asset(
-                url,
+              child: cachedImage(
+                url:url,
                 width: 120,
                 height: 80,
                 fit: BoxFit.fill,

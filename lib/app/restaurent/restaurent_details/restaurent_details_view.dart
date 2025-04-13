@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/card.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
@@ -9,72 +10,98 @@ import 'package:moksha_marg/reusable/star_rating.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
+import 'package:moksha_marg/util/network_image.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class RestaurentDetailsView extends StatelessWidget {
+class RestaurentDetailsView extends StatefulWidget {
+  String id;
+  RestaurentDetailsView({super.key, required this.id});
+
+  @override
+  State<RestaurentDetailsView> createState() => _RestaurentDetailsViewState();
+}
+
+class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<RestarantController>().init();
+    print("id:: ${widget.id}");
+    Get.find<RestarantController>().getRestaurantById(id: widget.id);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: topNavigaton(isLeading: true, text: "Satvik Bhoj"),
-      bottomNavigationBar: bottomNavigaton(),
-      body: Column(
-        children: [
-          _restaurentDetailsCard(url: Images.temple1, text: "Satvik Bhoj"),
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Menu Items",
-                      style: TextStyle(
-                          fontFamily: TypographyResources.roboto,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700),
-                    ),
 
-                    //list view of dish
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: 5,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: ()=>Get.toNamed(RoutesHelper.getFoodCart()),
-                                  child: dishMenuItemsCard(
-                                      availabelStatus: "Availabel",
-                                      onPressed: () {},
-                                      price: "200",
-                                      dishName: "Maghrita Pizza ",
-                                      type: "Veg",
-                                      url: Images.temple1),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: Dimensions.padding16),
-                                  child: customDivider(),
-                                )
-                              ],
-                            );
-                          }),
-                    )
-                  ],
+    return GetBuilder<RestarantController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: topNavigaton(isLeading: true, text: controller.restaurantData?.name),
+          bottomNavigationBar: bottomNavigaton(),
+          body: Column(
+            children: [
+              _restaurentDetailsCard(
+                isOpen:controller.restaurantData?.open ??false,
+                timing:"${ controller.restaurantData?.openingTime} - ${ controller.restaurantData?.closeTime}" ,
+                url: controller.restaurantData?.image??"", text: controller.restaurantData?.name??""),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Menu Items",
+                          style: TextStyle(
+                              fontFamily: TypographyResources.roboto,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700),
+                        ),
+        
+                        //list view of dish
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: 5,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () =>
+                                          Get.toNamed(RoutesHelper.getFoodCart()),
+                                      child: dishMenuItemsCard(
+                                          availabelStatus: "Availabel",
+                                          onPressed: () {},
+                                          price: "200",
+                                          dishName: "Maghrita Pizza ",
+                                          type: "Veg",
+                                          url: Images.temple1),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: Dimensions.padding16),
+                                      child: customDivider(),
+                                    )
+                                  ],
+                                );
+                              }),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
 
-Widget _restaurentDetailsCard({required String url, required String text}) {
+Widget _restaurentDetailsCard({ required bool isOpen,required String url, required String text, required String timing}) {
   return Padding(
     padding: EdgeInsets.symmetric(
         horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
@@ -91,8 +118,8 @@ Widget _restaurentDetailsCard({required String url, required String text}) {
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
-              child: Image.asset(
-                url,
+              child: cachedImage(
+                url: url,
                 height: Get.width / 2,
                 fit: BoxFit.fill,
               )),
@@ -130,7 +157,7 @@ Widget _restaurentDetailsCard({required String url, required String text}) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(CupertinoIcons.clock_fill),
-                      Text("open: 10AM- 11PM")
+                      Text("${isOpen? "open":"close"}: $timing")
                     ],
                   ),
                 ),
@@ -142,4 +169,3 @@ Widget _restaurentDetailsCard({required String url, required String text}) {
     ),
   );
 }
-

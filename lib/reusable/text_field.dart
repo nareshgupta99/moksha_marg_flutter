@@ -147,7 +147,7 @@ Widget searchBar({required String text}) {
   return TextField(
     decoration: InputDecoration(
       prefixIcon: Icon(Icons.search),
-      suffixIcon: Text("") ?? Icon(Icons.close_outlined),
+      suffixIcon: Text(""),
       iconColor: ColorsResources.textFieldBorderColor,
       hintText: text,
       fillColor: ColorsResources.textFillColor,

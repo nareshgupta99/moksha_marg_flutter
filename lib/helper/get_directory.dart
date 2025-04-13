@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/dish/dish_controller.dart';
+import 'package:moksha_marg/admin/dish/dish_repository.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restaurent_repository.dart';
 import 'package:moksha_marg/app/authentication/auth_repository.dart';
@@ -16,6 +18,8 @@ Future<void> init() async {
   Get.lazyPut(() => NetworkManager());
   Get.lazyPut(() => AuthenticationRepository(network: Get.find()));
   Get.lazyPut(() => RestaurentRepository (network: Get.find()));
+  Get.lazyPut(() => DishRepository(network: Get.find()));
+
 
 
   Get.lazyPut(() => SplashController(sharedPreferences:sharedPreference));
@@ -24,5 +28,8 @@ Future<void> init() async {
   Get.lazyPut(() => ProfileController(sharedPreferences: sharedPreference));
   Get.lazyPut(() => RestarantController(repository: Get.find()));
   Get.lazyPut(() => FilePickerController());
+  Get.lazyPut(() => DishController(repository: Get.find()));
+
+
   
 }

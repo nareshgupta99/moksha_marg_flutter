@@ -40,8 +40,9 @@ class NetworkResponse0<T> {
     );
   }
 
-  Map<String, dynamic> toJson(
-          List<Map<String, dynamic>> Function(List<T>? dataList) toJsonT) =>
+  get data => null;
+
+  Map<String, dynamic> toJson( List<Map<String, dynamic>> Function(List<T>? dataList) toJsonT) =>
       {
         "message": message,
         "status": status,

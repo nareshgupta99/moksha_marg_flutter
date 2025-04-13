@@ -1,31 +1,29 @@
 import 'package:get/get.dart';
-import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
+import 'package:moksha_marg/admin/dish/dish_controller.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
-extension RestaurantDataservice on RestarantController {
-  Future<void> registerRestaurant() async {
+extension DishDataservice on DishController {
+  Future<void> createDish() async {
     // loading = true;
-    RestaurantPayload restaurantPayload = RestaurantPayload();
-    restaurantPayload.address = addressController.text.trim();
-    restaurantPayload.name = restaurantNameController.text.trim();
-    restaurantPayload.closingTime = clossingTimeController.text.trim();
-    restaurantPayload.openingTime = openingTimeController.text.trim();
-    restaurantPayload.startingPrice = startingPriceController.text.trim();
-    restaurantPayload.startingPrice = startingPriceController.text.trim();
-    restaurantPayload.foodType = foodTypes;
-    restaurantPayload.image = Get.find<FilePickerController>().multipartFiles;
+    DishPayload dishPayload = DishPayload();
+    dishPayload.dishName = addDishNameController.text.trim();
+    dishPayload.description = descriptionController.text.trim();
+    dishPayload.shortDescription = shortDescriptionController.text.trim();
+    dishPayload.price=priceControllerController.text.trim();
+    dishPayload.foodTypes = selecedFoodTypes;
+    dishPayload.image = Get.find<FilePickerController>().multipartFiles;
 
     update();
-    await repository.registerRestaurant(restaurantPayload,
+    await repository.addDish(dishPayload,
         (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
           final data = response?.data;
-          restaurantData = data!;
+          //  = data!;
           update();
           Get.offAllNamed(RoutesHelper.getHome());
           break;
@@ -43,15 +41,15 @@ extension RestaurantDataservice on RestarantController {
     });
   }
 
-  Future<void> getAllRestaurantData() async {
+  Future<void> getAllRestaurantData({required int id}) async {
     // loading = true;
 
-    await repository.getAllRestaurant((result, response, message) {
+    await repository.getAllDishByRestaurant(id,(result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
           final data = response?.dataList;
-          restaurants = response?.dataList ?? [];
+          dishList = response?.dataList ?? [];
           print("network 0 = ${response?.dataList?.length}");
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
@@ -70,16 +68,16 @@ extension RestaurantDataservice on RestarantController {
     });
   }
 
-  Future<void> getRestaurantDataById({required int id}) async {
+  Future<void> getDish({required int id}) async {
     // loading = true;
 
-    await repository.getRestaurantDataById(id, (result, response, message) {
+    await repository.getDishById(id, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
           final data = response?.data;
-          restaurantData = data!;
-          print(restaurantData?.address);
+          dish = data!;
+          print(data?.dishName);
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
           break;
