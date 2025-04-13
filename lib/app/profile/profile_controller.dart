@@ -44,7 +44,7 @@ class ProfileController extends GetxController implements GetxService {
   
   void deleteAuth() async {
     await sharedPreferences.remove(Keys.authData);
-    await sharedPreferences.remove(Keys.guestUuid);
+    await sharedPreferences.remove(Keys.bearerToken);
     Get.offAndToNamed(RoutesHelper.getSplash());
   }
 

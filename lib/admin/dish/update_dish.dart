@@ -25,7 +25,7 @@ class _UpdateDishState extends State<UpdateDish> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topNavigaton(isLeading: false),
-      bottomNavigationBar: bottomNavigaton(),
+      bottomNavigationBar: bottomNavigatonRestaurent(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(

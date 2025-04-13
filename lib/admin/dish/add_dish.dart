@@ -25,7 +25,7 @@ class _AddDishState extends State<AddDish> {
     return GetBuilder<DishController>(builder: (controller) {
       return Scaffold(
         appBar: topNavigaton(isLeading: false),
-        bottomNavigationBar: bottomNavigaton(),
+        bottomNavigationBar: bottomNavigatonRestaurent(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(

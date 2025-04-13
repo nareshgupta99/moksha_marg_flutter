@@ -61,7 +61,7 @@ Widget bottomNavigatonRestaurent() {
     return BottomNavigationBar(
         currentIndex: controller.selectedIndex,
         onTap: (value) {
-          controller.setSelectedIndex(value);
+          controller.setRestaurentSelectedIndex(value);
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: ColorsResources.greyColor,
@@ -73,7 +73,7 @@ Widget bottomNavigatonRestaurent() {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Dish",
+            label: "DashBoard",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),

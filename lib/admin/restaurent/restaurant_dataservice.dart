@@ -27,7 +27,7 @@ extension RestaurantDataservice on RestarantController {
           final data = response?.data;
           restaurantData = data!;
           update();
-          Get.offAllNamed(RoutesHelper.getHome());
+          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           // loading = false;

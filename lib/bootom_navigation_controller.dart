@@ -22,7 +22,14 @@ class BootomNavigationController extends GetxController implements GetxService {
     RoutesHelper.getHome(),
     RoutesHelper.getGuide(),
     RoutesHelper.getTemple(),
+    RoutesHelper.getProfile(),
+  ];
+
+  final List<String> _routesRestaurentOwner = [
     RoutesHelper.getDishListing(),
+    RoutesHelper.getAddDish(),
+    RoutesHelper.getAddDish(),
+    RoutesHelper.getAddDish(),
   ];
 
   void init() {
@@ -31,13 +38,19 @@ class BootomNavigationController extends GetxController implements GetxService {
       RoutesHelper.getHome(),
       RoutesHelper.getGuide(),
       RoutesHelper.getTemple(),
-      RoutesHelper.getDishListing(),
+      RoutesHelper.getProfile(),
     ];
   }
 
   void setSelectedIndex(int index) {
     selectedIndex = index;
     Get.offNamed(_routes[index]);
+    update();
+  }
+
+  void setRestaurentSelectedIndex(int index){
+     selectedIndex = index;
+    Get.offNamed(_routesRestaurentOwner[index]);
     update();
   }
 }

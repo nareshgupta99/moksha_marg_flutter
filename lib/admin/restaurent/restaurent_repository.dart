@@ -6,7 +6,6 @@ import 'package:moksha_marg/network/network_manager.dart';
 import 'package:moksha_marg/network/network_response.dart';
 import 'package:moksha_marg/network/request/network_payload.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
-import 'package:moksha_marg/network/response/login_data.dart';
 import 'package:moksha_marg/network/response/restaurant_data.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 import 'package:get/get.dart';

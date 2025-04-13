@@ -25,7 +25,6 @@ extension DishDataservice on DishController {
           final data = response?.data;
           //  = data!;
           update();
-          Get.snackbar('Success', 'Dish Added');
           break;
         case Result.onFailed:
           // loading = false;

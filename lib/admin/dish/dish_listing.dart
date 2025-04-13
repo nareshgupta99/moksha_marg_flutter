@@ -33,7 +33,7 @@ class _DishListingState extends State<DishListing> {
         return Scaffold(
           appBar: topNavigaton(isLeading: true),
           body: _body(controller),
-          bottomNavigationBar: bottomNavigaton(),
+          bottomNavigationBar: bottomNavigatonRestaurent(),
         );
       }
     );

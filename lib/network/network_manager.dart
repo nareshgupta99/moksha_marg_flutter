@@ -2,6 +2,8 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:moksha_marg/app/authentication/authentication_controller.dart';
+import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/network/network_endpoint.dart';
 import 'package:moksha_marg/network/network_exception.dart';
 import 'package:moksha_marg/network/network_resources.dart';
@@ -157,6 +159,7 @@ class NetworkManager extends GetxService {
         throw FetchNetworkException(
             exceptionRawValues[Exceptions.unauthorized401]);
       case (403):
+        Get.find<ProfileController>().deleteAuth();
         throw FetchNetworkException(
             exceptionRawValues[Exceptions.forbidden403]);
       case (404):

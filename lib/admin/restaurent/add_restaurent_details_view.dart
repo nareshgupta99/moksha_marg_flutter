@@ -27,7 +27,7 @@ class _AddRestaurentDetailsState extends State<AddRestaurentDetailsView> {
     return GetBuilder<RestarantController>(builder: (controller) {
       return Scaffold(
         appBar: topNavigaton(isLeading: false),
-        bottomNavigationBar: bottomNavigaton(),
+        // bottomNavigationBar: bottomNavigaton(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(

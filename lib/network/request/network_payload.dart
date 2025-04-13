@@ -51,7 +51,8 @@ class NetworkPayload {
       "startingPrice": payload.startingPrice,
       "latitude": payload.latitude,
       "longitude": payload.longitude,
-      "foodTypes":payload.foodType
+      "foodTypes":payload.foodType,
+      "open":true
     };
   }
 
