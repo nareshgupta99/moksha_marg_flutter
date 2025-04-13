@@ -221,7 +221,8 @@ class AuthenticationController extends GetxController implements GetxService {
 
   Future<void> setAuthData(LoginData? data) async {
     try {
-      await sharedPreferences.setString(Keys.authData, jsonEncode(data!.toJson()));
+      await sharedPreferences.setString(Keys.bearerToken, jsonEncode(data!.token));
+      await sharedPreferences.setString(Keys.authData, jsonEncode(data.toJson()));
     } catch (e) {
       rethrow;
     }

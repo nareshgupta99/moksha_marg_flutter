@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:moksha_marg/network/request/network_request_body.dart';
 
 class NetworkPayload {
@@ -15,7 +17,7 @@ class NetworkPayload {
       "password": payload.password,
       "countryCode": payload.countryCode,
       "phoneNumber": payload.phoneNumber,
-      "role":payload.role
+      "role": payload.role
     };
   }
 
@@ -40,16 +42,17 @@ class NetworkPayload {
     };
   }
 
-  static Map<String, dynamic>? restaurantPayload({required RestaurantPayload payload}) {
-  return {
-    "name": payload.name,
-    "address": payload.addres,
-    "openingTime": payload.openingTime,
-    "closingTime": payload.closingTime,
-    "startingPrice": payload.startingPrice,
-    "latitude": payload.latitude,
-    "longitude": payload.longitude,
-  };
-}
-
+  static Map<String, dynamic>? restaurantPayload(
+      {required RestaurantPayload payload}) {
+    return {
+      "name": payload.name,
+      "address": payload.address,
+      "openingTime": payload.openingTime,
+      "closeTime": payload.closingTime,
+      "startingPrice": payload.startingPrice,
+      "latitude": payload.latitude,
+      "longitude": payload.longitude,
+      "foodTypes":payload.foodType
+    };
+  }
 }

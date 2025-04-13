@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:moksha_marg/network/network_resources.dart';
 
 class AuthPayload {
   int? userId;
@@ -11,14 +11,14 @@ class AuthPayload {
   String? role;
 }
 
-
-class RestaurantPayload{
+class RestaurantPayload {
   String? name;
-  String? addres;
+  String? address;
   String? openingTime;
   String? closingTime;
   String? startingPrice;
-  PlatformFile? otp;
+  List<MultipartFiles>? image;
   String? latitude;
   String? longitude;
+  List<String> foodType = [];
 }

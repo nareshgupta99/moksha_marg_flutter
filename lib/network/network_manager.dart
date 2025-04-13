@@ -25,7 +25,7 @@ class NetworkManager extends GetxService {
     };
     if (token != null) {
       _requestCurl.addAll({
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${jsonDecode(token)}',
       });
     }
     final requestCurlTree =
@@ -48,14 +48,15 @@ class NetworkManager extends GetxService {
             .replace(queryParameters: queryParameters);
     print('Request url :: $url');
     // print('Endpoint :: ${endpointRawValues[endpoint]!}');
-    // print('Bearer token :: ${bearerToken ?? 'Not Authorized'}');
     final bearerToken = await LocalStorage.getStringData(key: Keys.bearerToken);
+    print('Bearer token :: ${bearerToken ?? 'Not Authorized'}');
 
     networkRequestCurlWith(token: bearerToken);
 
     final payloadTree = const JsonEncoder.withIndent('  ').convert(payload);
     if (payload != null) print('Payload :: $payloadTree');
 
+    print("multipart");
     final multipartPayloadTree =
         const JsonEncoder.withIndent('  ').convert(multipartPayload);
     if (multipartPayload != null)

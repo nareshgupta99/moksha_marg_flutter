@@ -11,12 +11,13 @@ class SplashController extends GetxController implements GetxService {
   SplashController({required this.sharedPreferences});
 
   void init() {
+    // sharedPreferences.clear();
     Future.delayed(Duration.zero, () {
       Timer(const Duration(seconds: 2), () {
         String? loginData = sharedPreferences.getString(Keys.authData);
         String? guestData = sharedPreferences.getString(Keys.guestUuid);
         if (loginData != null || guestData != null) {
-          // print("login DAta == $loginData");
+          print("login DAta == $loginData");
           Get.offAllNamed(RoutesHelper.getHome());
         } else {
           Get.offAndToNamed(RoutesHelper.getLogin());

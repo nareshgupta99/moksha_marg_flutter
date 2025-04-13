@@ -56,7 +56,7 @@ class _AddDishState extends State<AddDish> {
                         maxLength: 300)),
                 // ImageUploadCard(),
                 customFileUpload(),
-                customButton(onPressed: () {}, text: "Add Dish")
+                customButton(onPressed: ()=> controller.registerWithValidation() , text: "Add Dish")
               ],
             ),
           ),

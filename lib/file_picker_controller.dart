@@ -1,29 +1,29 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/network/network_resources.dart';
 
 class FilePickerController extends GetxController implements GetxService {
+  String fileName = "";
   
-
- String fileName = "";
-  FilePickerResult? result = null;
+  List<MultipartFiles> multipartFiles = [];
 
   void init() {
-    String fileName = "";
-    FilePickerResult? result = null;
+     fileName = "";
   }
 
   Future<void> pickImage() async {
-    result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'png', 'jpeg'],
     );
 
     if (result != null) {
-      fileName = result?.files.single.name??"";
+      fileName = result.files.single.name;
+      final pickedFile = File(result.files.single.path!);
+      multipartFiles.add(MultipartFiles("image", pickedFile));
       update();
     }
   }
-
-
-
 }

@@ -4,6 +4,7 @@ enum Endpoints {
   sendOtp,
   forgetPassword,
   verifyOtp,
+  addRestaurant
  
 }
 
@@ -14,4 +15,5 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.sendOtp: "/api/v1/auth/sendOtp",
   Endpoints.forgetPassword: "/api/v1/auth/forgetPassword",
   Endpoints.verifyOtp: "/api/v1/auth/verifyOtp",
+  Endpoints.addRestaurant:"/api/v1/restaurant/register"
 };

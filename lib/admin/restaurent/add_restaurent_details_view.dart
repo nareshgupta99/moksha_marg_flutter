@@ -37,30 +37,30 @@ class _AddRestaurentDetailsState extends State<AddRestaurentDetailsView> {
               children: [
                 customTextField(
                     textFieldLabel: "Restaurent Name",
-                    controller: TextEditingController()),
+                    controller: controller.restaurantNameController),
                 Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
                         textFieldLabel: "Address",
-                        controller: TextEditingController())),
+                        controller: controller.addressController)),
                 customTextField(
                     textFieldLabel: "Opening Time",
-                    controller: TextEditingController()),
+                    controller:controller.openingTimeController),
                 customTextField(
                     textFieldLabel: "Closing Time",
-                    controller: TextEditingController()),
+                    controller: controller.clossingTimeController),
                 customTextField(
                     textFieldLabel: "Starting Price",
-                    controller: TextEditingController()),
+                    controller: controller.startingPriceController),
                 Row(
                   children: [
                     customCheckBox(
-                        isChecked: false, onChanged: () {}, label: "Veg")
+                        isChecked: controller.restaurentFoodTypeChecked, onChanged: (v)=>controller.setRestaurantFoodType(value: v, foodType: "VEG"), label: "Veg")
                   ],
                 ),
                 customFileUpload(),
-                customButton(onPressed: () {}, text: "Add Dish")
+                customButton(onPressed: () =>controller.registerWithValidation(), text: "Add Dish")
               ],
             ),
           ),
