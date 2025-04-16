@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/add_dish.dart';
+import 'package:moksha_marg/admin/dish/edit_dish_view.dart';
 import 'package:moksha_marg/admin/restaurent/add_restaurent_details_view.dart';
 import 'package:moksha_marg/admin/dish/dish_listing.dart';
 import 'package:moksha_marg/admin/dish/update_dish.dart';
+import 'package:moksha_marg/admin/restaurent/restaurent_profile.dart';
 import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
@@ -17,6 +21,7 @@ import 'package:moksha_marg/app/live_darshan/temple_view.dart';
 import 'package:moksha_marg/app/profile/profile_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
+import 'package:moksha_marg/network/response/add_dish.dart';
 import 'package:moksha_marg/splash/splash_view.dart';
 
 class RoutesHelper {
@@ -40,10 +45,14 @@ class RoutesHelper {
 
   //Restaurent Admin Routes
   static const String _addRestaurant = "/add_restaurant";
+  static const String _editRestaurant = "/edit_restaurant";
   static const String _addDish = "/add_dish";
+  static const String _editDish = "/edit_dish";
   static const String _updateDish = "/update_dish";
   static const String _dish = "/dish";
   static const String _dishListing = "/dish_listing";
+  static const String _restaurentProfile = "/restaurent_profile";
+
 
   
 
@@ -65,6 +74,7 @@ class RoutesHelper {
   static String getFoodCart() => _foodCart;
   static String getProfile() => _profile;
   static String getSplash() => _splash;
+  static String getRestaurentProfile() => _restaurentProfile;
   static String getVerifyOtp({required String email, required int userId}) =>"$_splash>id=$userId&email=$email";
 
   //Restaurent Admin Routes
@@ -74,6 +84,11 @@ class RoutesHelper {
   static String getAddDish() => _addDish;
   static String getUpdateDish({required String  id}) => "$_addDish?id=$id";
   static String getDishListing() => _dishListing;
+  static String getEditDish({required DishData dish}) {
+    String encodeDish = base64Url.encode(utf8.encode(jsonEncode(dish.toJson())));
+    return "$_editDish?dish=$encodeDish";
+  }
+
 
   
 
@@ -99,7 +114,9 @@ class RoutesHelper {
 
     GetPage(name: _addDish, page: () => AddDish()),
     GetPage(name: _dishListing, page: () => DishListing()),
+    GetPage(name: _restaurentProfile, page: () => RestaurentProfileView()),
     GetPage(name: _addRestaurant, page: () => AddRestaurentDetailsView()),
     GetPage(name: _updateDish, page: () => UpdateDish(id:Get.parameters['id']!)),
+    GetPage(name: _editDish, page: () => EditDishView(dish:DishData.fromJson(jsonDecode(utf8.decode(base64Url.decode(Get.parameters['dish']!)))))),
   ];
 }

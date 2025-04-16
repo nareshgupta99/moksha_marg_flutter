@@ -15,7 +15,11 @@ enum Endpoints {
   updateDishStatus,
   getAllDishByRestaurant,
   getDishById,
- 
+  addItemToFoodCart,
+  removeOneQuantityFromFoodCart,
+  removeAllFromFoodCart,
+  getAllFromFoodCart,
+  removeOneItemFromFoodCart
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -25,13 +29,17 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.sendOtp: "/api/v1/auth/sendOtp",
   Endpoints.forgetPassword: "/api/v1/auth/forgetPassword",
   Endpoints.verifyOtp: "/api/v1/auth/verifyOtp",
-  Endpoints.addRestaurant:"/api/v1/restaurant/register",
-  Endpoints.getAllRestaurant:"/api/v1/restaurant",
-  Endpoints.getRestaurantById:"/api/v1/restaurant",
-  Endpoints.updateRestaurantOpentStatus:"/api/v1/restaurant/update",
-  Endpoints.addDish:"/api/v1/dish/add/restaurant",
-  Endpoints.getAllDishByRestaurant:"/api/v1/dish/restaurant",
-  Endpoints.getDishById:"/api/v1/dish",
-  Endpoints.deleteDish:"/api/v1/dish/delete",
-
+  Endpoints.addRestaurant: "/api/v1/restaurant/register",
+  Endpoints.getAllRestaurant: "/api/v1/restaurant",
+  Endpoints.getRestaurantById: "/api/v1/restaurant",
+  Endpoints.updateRestaurantOpentStatus: "/api/v1/restaurant/update",
+  Endpoints.addDish: "/api/v1/dish/add/restaurant",
+  Endpoints.getAllDishByRestaurant: "/api/v1/dish/restaurant",
+  Endpoints.getDishById: "/api/v1/dish",
+  Endpoints.deleteDish: "/api/v1/dish/delete",
+  Endpoints.addItemToFoodCart: "/api/v1/food/cart/add",
+  Endpoints.removeOneQuantityFromFoodCart: "/api/v1/food/cart/remove-one",
+  Endpoints.removeAllFromFoodCart: "/api/v1/food/cart/all",
+  Endpoints.getAllFromFoodCart: "/api/v1/food/cart/all",
+  Endpoints.removeOneItemFromFoodCart: "/api/v1/food/cart/delete",
 };

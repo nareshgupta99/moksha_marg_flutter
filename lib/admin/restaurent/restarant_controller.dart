@@ -26,7 +26,6 @@ class RestarantController extends GetxController implements GetxService {
   RestaurantData? restaurantData = null;
   List<RestaurantData> restaurants = [];
 
-
   void init() {
     fileName = "";
     Singlefile = null;
@@ -46,11 +45,12 @@ class RestarantController extends GetxController implements GetxService {
   }
 
   void initRestaurentDetails({required String restaurantId}) {
-    restaurants = [];
-    Get.find<RestarantController>().getRestaurantById(id:"$restaurantId");
-    Get.find<DishController>().getAllDishByRestaurant(id:restaurantData?.restaurantId??1);
-
+    print("restaurent id:: $restaurantId");
+    Get.find<RestarantController>().getRestaurantById(id: "$restaurantId");
+    Get.find<DishController>()
+        .getAllDishByRestaurant(id: restaurantData?.restaurantId ?? 0);
   }
+
   void registerWithValidation() async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (restaurantNameController.text.trim().isEmpty) {

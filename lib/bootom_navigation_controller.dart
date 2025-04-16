@@ -4,12 +4,7 @@ import 'package:moksha_marg/helper/routes_helper.dart';
 class BootomNavigationController extends GetxController implements GetxService {
   int selectedIndex = 0;
 
-  List<String> visitorAdminRoutesName = [
-    "Home",
-    "Guides",
-    "Live",
-    "Profile"
-  ];
+  List<String> visitorAdminRoutesName = ["Home", "Guides", "Live", "Profile"];
 
   List<String> restaurentOwnerRoutesName = [
     "Update",
@@ -29,7 +24,7 @@ class BootomNavigationController extends GetxController implements GetxService {
     RoutesHelper.getDishListing(),
     RoutesHelper.getAddDish(),
     RoutesHelper.getAddDish(),
-    RoutesHelper.getAddDish(),
+    RoutesHelper.getRestaurentProfile(),
   ];
 
   void init() {
@@ -48,8 +43,8 @@ class BootomNavigationController extends GetxController implements GetxService {
     update();
   }
 
-  void setRestaurentSelectedIndex(int index){
-     selectedIndex = index;
+  void setRestaurentSelectedIndex(int index) {
+    selectedIndex = index;
     Get.offNamed(_routesRestaurentOwner[index]);
     update();
   }

@@ -58,11 +58,10 @@ class NetworkManager extends GetxService {
     final payloadTree = const JsonEncoder.withIndent('  ').convert(payload);
     if (payload != null) print('Payload :: $payloadTree');
 
-    print("multipart");
     final multipartPayloadTree =
         const JsonEncoder.withIndent('  ').convert(multipartPayload);
-    if (multipartPayload != null)
-      print('Multipart Payload :: $multipartPayloadTree');
+    // if (multipartPayload != null)
+    //   print('Multipart Payload :: $multipartPayloadTree');
 
     dynamic jsonResponse;
     dynamic httpResponse;

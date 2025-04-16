@@ -151,10 +151,12 @@ Widget dishMenuItemsCard(
     required String type,
     required VoidCallback onPressed,
     required String availabelStatus,
+    required String quantity,
+    required VoidCallback addButton,
+    required VoidCallback subButton,
     required String price}) {
-  print("food :: $foodType");
+  print("foodType :: $foodType");
   return Container(
-    // margin: EdgeInsets.symmetric(horizontal: 8),
     decoration: BoxDecoration(
         color: const Color.fromRGBO(255, 255, 255, 1),
         borderRadius: BorderRadius.circular(8)),
@@ -165,6 +167,7 @@ Widget dishMenuItemsCard(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: onPressed,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -220,9 +223,9 @@ Widget dishMenuItemsCard(
                   spacing: 8,
                   children: [
                     circularButton(
-                        onPressed: () {}, iconData: CupertinoIcons.minus),
-                    Text(price),
-                    circularButton(onPressed: () {}, iconData: Icons.add),
+                        onPressed: subButton, iconData: CupertinoIcons.minus),
+                    Text(quantity),
+                    circularButton(onPressed: addButton, iconData: Icons.add),
                   ],
                 ),
               ],

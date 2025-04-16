@@ -18,7 +18,8 @@ extension AuthenticationDataService on AuthenticationController {
           final loginData = response?.data;
           setAuthData(loginData);
           update();
-          Get.offAllNamed(RoutesHelper.getHome());
+          secureRoutes(loginData!);
+          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           loading = false;
@@ -45,7 +46,6 @@ extension AuthenticationDataService on AuthenticationController {
     authPayload.role = selecedRole.trim();
     update();
     await repository.register(authPayload, (result, response, message) {
-      print("result =$result");
       switch (result) {
         case Result.onSuccess:
           loading = false;
@@ -78,8 +78,7 @@ extension AuthenticationDataService on AuthenticationController {
           update();
           if (email == null || email.trim().isEmpty) {
             Get.toNamed(RoutesHelper.getVerifyOtp(
-                userId: 0,
-                email: forgotEmailController.text.trim()));
+                userId: 0, email: forgotEmailController.text.trim()));
           } else {
             Get.snackbar('Success', response?.message ?? "");
           }

@@ -49,9 +49,7 @@ extension DishDataservice on DishController {
           // loading = false;
           final data = response?.dataList;
           dishList = response?.dataList ?? [];
-          print("network 0 = ${response?.dataList?.length}");
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           // loading = false;
@@ -76,7 +74,6 @@ extension DishDataservice on DishController {
           // loading = false;
           final data = response?.data;
           dish = data!;
-          print(data?.dishName);
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
           break;
@@ -104,7 +101,6 @@ extension DishDataservice on DishController {
           final data = response?.data;
           // dish = data!;
         dishList=  dishList.where((d) => d.dishId != data?.dishId).toList();
-          // print(data?.dishName);
           Get.snackbar('Success', message?.tr ?? "Dish Deleted");
           update();
           break;

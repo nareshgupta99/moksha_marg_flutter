@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_dataservice.dart';
 import 'package:moksha_marg/admin/dish/dish_repository.dart';
+import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_resources.dart';
 import 'package:moksha_marg/network/response/add_dish.dart';
 import 'package:moksha_marg/util/food_type_enum.dart';
@@ -15,12 +16,17 @@ class DishController extends GetxController implements GetxService {
   late MultipartFiles multipartFile;
   String selecedFoodTypes = "";
   List<DishData> dishList = [];
-  DishData? dish = null;
+  DishData? dish;
 
   var addDishNameController = TextEditingController();
   var priceControllerController = TextEditingController();
   var shortDescriptionController = TextEditingController();
   var descriptionController = TextEditingController();
+
+  var editDishNameController = TextEditingController();
+  var editPriceController = TextEditingController();
+  var editShortDescriptionController = TextEditingController();
+  var editdescriptionController = TextEditingController();
 
   String foodTypes = "";
 
@@ -30,11 +36,22 @@ class DishController extends GetxController implements GetxService {
     FoodTypeEnum.NON_VEG.name,
   ];
 
-  void init() {}
+  void init() {
+    editDishNameController = TextEditingController();
+    editPriceController = TextEditingController();
+    editShortDescriptionController = TextEditingController();
+    editdescriptionController = TextEditingController();
+  }
+
+  void editDishintilize({required DishData dish}) {
+    editDishNameController.text = dish.dishName ?? "";
+    editPriceController.text = "${dish.price}";
+    editShortDescriptionController.text = dish.shortDescription ?? "";
+    editdescriptionController.text = dish.description ?? "";
+  }
 
   void setSelectedRole({String? value}) {
     selecedFoodTypes = value ?? foodTypesList[2];
-    print(selecedFoodTypes);
     update();
   }
 
@@ -44,7 +61,7 @@ class DishController extends GetxController implements GetxService {
   }
 
   void getAllDishByRestaurant({required int id}) {
-    getAllDishDataByRestaurant(id: 1);
+    getAllDishDataByRestaurant(id: id);
   }
 
   void getDishById({required int id}) {

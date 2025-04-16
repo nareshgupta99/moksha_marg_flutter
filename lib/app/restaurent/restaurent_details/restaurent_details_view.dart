@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
+import 'package:moksha_marg/app/cart/food_cart_controller.dart';
+import 'package:moksha_marg/app/cart/food_cart_dataservice.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
+import 'package:moksha_marg/network/response/food_cart_data.dart';
 import 'package:moksha_marg/reusable/card.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -25,8 +28,9 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
   @override
   void initState() {
     super.initState();
-    Get.find<RestarantController>().initRestaurentDetails(restaurantId: widget.id);
-    print("id:: ${widget.id}");
+    Get.find<RestarantController>()
+        .initRestaurentDetails(restaurantId: widget.id);
+    Get.find<FoodCartController>().getAllFromCart();
   }
 
   @override
@@ -62,38 +66,63 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
 
                       //list view of dish
                       GetBuilder<DishController>(builder: (controller) {
-                        return Expanded(
-                          child: ListView.builder(
-                              itemCount: controller.dishList.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () => Get.toNamed(
-                                          RoutesHelper.getFoodCart()),
-                                      child: dishMenuItemsCard(
-                                          foodType: "${controller.dishList[index].foodTypes?.name}",
-                                          availabelStatus: "Availabel",
-                                          onPressed: () {},
-                                          price:
-                                              "${controller.dishList[index].price}",
-                                          dishName:
-                                              "${controller.dishList[index].dishName}",
-                                          type:
-                                              "${controller.dishList[index].foodTypes?.name}",
-                                          url:
-                                              "${controller.dishList[index].image}"),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: Dimensions.padding16),
-                                      child: customDivider(),
-                                    )
-                                  ],
-                                );
-                              }),
-                        );
+                        return GetBuilder<FoodCartController>(
+                            builder: (foodCartController) {
+                          return Expanded(
+                            child: ListView.builder(
+                                itemCount: controller.dishList.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  FoodCartData? cartData = foodCartController
+                                      .cartItems
+                                      .firstWhereOrNull(
+                                    (ele) =>
+                                        controller.dishList[index].dishId ==
+                                        ele.dishId,
+                                  );
+
+                                  return Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () => Get.toNamed(
+                                            RoutesHelper.getFoodCart()),
+                                        child: dishMenuItemsCard(
+                                            addButton: () => foodCartController
+                                                .addItemToFoodCart(
+                                                    dishId: controller
+                                                            .dishList[index]
+                                                            .dishId ??
+                                                        0),
+                                            subButton: (cartData?.quantity == 0 ||
+                                                    cartData == null
+                                                ? () {}
+                                                : () => foodCartController
+                                                    .removeOneFromCart(
+                                                        cartItemId:
+                                                            cartData.cartItemId ??
+                                                                0)),
+                                            quantity:
+                                                "${cartData?.quantity ?? 0}",
+                                            foodType:
+                                                "${controller.dishList[index].foodTypes?.name}",
+                                            availabelStatus: "Availabel",
+                                            onPressed: () {},
+                                            price:
+                                                "${controller.dishList[index].price}",
+                                            dishName: "${controller.dishList[index].dishName}",
+                                            type: "${controller.dishList[index].foodTypes?.name}",
+                                            url: "${controller.dishList[index].image}"),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Dimensions.padding16),
+                                        child: customDivider(),
+                                      )
+                                    ],
+                                  );
+                                }),
+                          );
+                        });
                       })
                     ],
                   ),

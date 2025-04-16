@@ -27,7 +27,7 @@ extension RestaurantDataservice on RestarantController {
           final data = response?.data;
           restaurantData = data!;
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
+          Get.offAllNamed(RoutesHelper.getAddDish());
           break;
         case Result.onFailed:
           // loading = false;
@@ -52,7 +52,6 @@ extension RestaurantDataservice on RestarantController {
           // loading = false;
           final data = response?.dataList;
           restaurants = response?.dataList ?? [];
-          print("network 0 = ${response?.dataList?.length}");
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
           break;
@@ -79,7 +78,6 @@ extension RestaurantDataservice on RestarantController {
           // loading = false;
           final data = response?.data;
           restaurantData = data!;
-          print(restaurantData?.address);
           update();
           // Get.offAllNamed(RoutesHelper.getHome());
           break;

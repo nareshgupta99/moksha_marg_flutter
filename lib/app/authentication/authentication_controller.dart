@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/authentication/auth_dataservice.dart';
 import 'package:moksha_marg/app/authentication/auth_repository.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/response/login_data.dart';
 import 'package:moksha_marg/util/extensions.dart';
 import 'package:moksha_marg/util/local_keys.dart';
@@ -13,7 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthenticationController extends GetxController implements GetxService {
   final AuthenticationRepository repository;
   final SharedPreferences sharedPreferences;
-  AuthenticationController({required this.sharedPreferences,required this.repository});
+  AuthenticationController(
+      {required this.sharedPreferences, required this.repository});
 
   bool loading = true;
 
@@ -31,12 +33,12 @@ class AuthenticationController extends GetxController implements GetxService {
   var registerPhoneController = TextEditingController();
   var registerPasswordController = TextEditingController();
   List<String> roles = [
-     "SELECT ROLE",
-      Role.VISITOR.name,
-      Role.ADMIN.name,
-      Role.HOTEL_OWNER.name,
-      Role.GUIDE.name,
-      Role.RESTAURENT_OWNER.name
+    "SELECT ROLE",
+    Role.VISITOR.name,
+    Role.ADMIN.name,
+    Role.HOTEL_OWNER.name,
+    Role.GUIDE.name,
+    Role.RESTAURENT_OWNER.name
   ];
   String selecedRole = "SELECT ROLE";
 
@@ -68,7 +70,6 @@ class AuthenticationController extends GetxController implements GetxService {
       Role.GUIDE.name,
       Role.RESTAURENT_OWNER.name
     ];
-    print(Role.VISITOR.name);
     registerPasswordObsecure = true;
   }
 
@@ -156,8 +157,10 @@ class AuthenticationController extends GetxController implements GetxService {
     } else if (registerPasswordController.text.trim().isEmpty) {
       Get.snackbar('Error', 'Password is required');
     } else if (registerPasswordController.text.trim().isInvalidPassword()) {
-      Get.snackbar(  'Error', 'Entered password must be at least 8 characters long');
-    } else if (selecedRole.trim().isEmpty || selecedRole.trim() == "SELECT ROLE") {
+      Get.snackbar(
+          'Error', 'Entered password must be at least 8 characters long');
+    } else if (selecedRole.trim().isEmpty ||
+        selecedRole.trim() == "SELECT ROLE") {
       Get.snackbar('Error', 'Role is required');
     } else {
       register();
@@ -209,7 +212,6 @@ class AuthenticationController extends GetxController implements GetxService {
 
   void setSelectedRole({String? value}) {
     selecedRole = value ?? roles[0];
-    print(selecedRole);
     update();
   }
 
@@ -221,8 +223,13 @@ class AuthenticationController extends GetxController implements GetxService {
 
   Future<void> setAuthData(LoginData? data) async {
     try {
-      await sharedPreferences.setString(Keys.bearerToken, jsonEncode(data!.token));
-      await sharedPreferences.setString(Keys.authData, jsonEncode(data.toJson()));
+      await sharedPreferences.setString(
+          Keys.bearerToken, jsonEncode(data!.token));
+      await sharedPreferences.setString(
+          Keys.authData, jsonEncode(data.toJson()));
+
+      await sharedPreferences.setString(
+          Keys.restaurentId, data.restaurantId ?? "");
     } catch (e) {
       rethrow;
     }
@@ -235,4 +242,18 @@ class AuthenticationController extends GetxController implements GetxService {
   // }
 
   // String _getAuthData() => sharedPreferences.getString(Keys.authData) ?? '';
+
+  void secureRoutes(LoginData decodeLoginData) {
+    if (decodeLoginData.roles == Role.VISITOR.name) {
+      Get.offAllNamed(RoutesHelper.getHome());
+    } else if (decodeLoginData.roles == Role.RESTAURENT_OWNER.name) {
+      if (decodeLoginData.restaurantId == null) {
+        Get.offAllNamed(RoutesHelper.getAddRestaurent());
+      } else {
+        Get.offAllNamed(RoutesHelper.getDishListing());
+      }
+    } else {
+      Get.offAndToNamed(RoutesHelper.getLogin());
+    }
+  }
 }

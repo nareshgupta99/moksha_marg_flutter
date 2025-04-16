@@ -31,3 +31,8 @@ class DishPayload {
   String? description;
   String? shortDescription;
 }
+
+class FoodCartPayload {
+  int? dishId;
+  int? quantity;
+}

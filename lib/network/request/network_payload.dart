@@ -1,4 +1,3 @@
-
 import 'package:moksha_marg/network/request/network_request_body.dart';
 
 class NetworkPayload {
@@ -51,13 +50,12 @@ class NetworkPayload {
       "startingPrice": payload.startingPrice,
       "latitude": payload.latitude,
       "longitude": payload.longitude,
-      "foodTypes":payload.foodType,
-      "open":true
+      "foodTypes": payload.foodType,
+      "open": true
     };
   }
 
-  static Map<String, dynamic>? dishPayload(
-      {required DishPayload payload}) {
+  static Map<String, dynamic>? dishPayload({required DishPayload payload}) {
     return {
       "dishName": payload.dishName,
       "price": payload.price,
@@ -65,5 +63,10 @@ class NetworkPayload {
       "shortDescription": payload.shortDescription,
       "description": payload.description,
     };
+  }
+
+  static Map<String, dynamic>? foodCartPayload(
+      {required FoodCartPayload payload}) {
+    return {"dishId": payload.dishId, "quantity": payload.quantity};
   }
 }

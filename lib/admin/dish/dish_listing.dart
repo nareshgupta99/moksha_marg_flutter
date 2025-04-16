@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_controller.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/response/add_dish.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
-import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/network_image.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
@@ -28,15 +28,13 @@ class _DishListingState extends State<DishListing> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DishController>(
-      builder: (controller) {
-        return Scaffold(
-          appBar: topNavigaton(isLeading: true),
-          body: _body(controller),
-          bottomNavigationBar: bottomNavigatonRestaurent(),
-        );
-      }
-    );
+    return GetBuilder<DishController>(builder: (controller) {
+      return Scaffold(
+        appBar: topNavigaton(isLeading: true),
+        body: _body(controller),
+        bottomNavigationBar: bottomNavigatonRestaurent(),
+      );
+    });
   }
 
   Widget _body(DishController controller) {
@@ -44,7 +42,7 @@ class _DishListingState extends State<DishListing> {
       heading(text: "Dish"),
       Expanded(
         child: ListView.builder(
-          itemCount: controller.dishList.length,
+            itemCount: controller.dishList.length,
             shrinkWrap: true,
             itemBuilder: (element, index) {
               return Padding(
@@ -52,7 +50,8 @@ class _DishListingState extends State<DishListing> {
                     top: Dimensions.padding16,
                     left: Dimensions.padding16,
                     right: Dimensions.padding16),
-                child: _dishCard(dish: controller.dishList[index], controller: controller),
+                child: _dishCard(
+                    dish: controller.dishList[index], controller: controller),
               );
             }),
       )
@@ -60,8 +59,7 @@ class _DishListingState extends State<DishListing> {
   }
 
   Widget _dishCard(
-      {required DishController controller,
-      required DishData dish}) {
+      {required DishController controller, required DishData dish}) {
     return Container(
       // margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
@@ -76,7 +74,7 @@ class _DishListingState extends State<DishListing> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8), topRight: Radius.circular(8)),
             child: cachedImage(
-              url: dish.image??"",
+              url: dish.image ?? "",
               height: Get.width / 2,
               width: Get.width,
               fit: BoxFit.fill,
@@ -85,7 +83,7 @@ class _DishListingState extends State<DishListing> {
           Padding(
             padding: EdgeInsets.only(top: 16, left: 16),
             child: Text(
-              dish.dishName??"",
+              dish.dishName ?? "",
               style: TextStyle(
                   fontFamily: TypographyResources.roboto,
                   fontSize: 14,
@@ -95,7 +93,7 @@ class _DishListingState extends State<DishListing> {
           Padding(
             padding: EdgeInsets.only(left: 16),
             child: Text(
-              dish.shortDescription??"",
+              dish.shortDescription ?? "",
               style: TextStyle(
                   color: ColorsResources.greyColor,
                   fontFamily: TypographyResources.roboto,
@@ -115,7 +113,7 @@ class _DishListingState extends State<DishListing> {
                       CupertinoIcons.money_dollar,
                     ),
                     Text(
-                     " ${dish.price}",
+                      " ${dish.price}",
                       style: TextStyle(
                           fontFamily: TypographyResources.roboto,
                           fontSize: 14,
@@ -128,14 +126,17 @@ class _DishListingState extends State<DishListing> {
                   children: [
                     GestureDetector(
                         behavior: HitTestBehavior.opaque,
-                        onTap: (){},
+                        onTap: () {
+                          Get.toNamed(RoutesHelper.getEditDish(dish: dish));
+                        },
                         child: Icon(
                           Icons.edit_square,
                           color: Colors.blue,
                         )),
                     GestureDetector(
                         behavior: HitTestBehavior.opaque,
-                        onTap: ()=>controller.deleteDish(id: dish.dishId ?? 0),
+                        onTap: () =>
+                            controller.deleteDish(id: dish.dishId ?? 0),
                         child: Icon(
                           Icons.delete,
                           color: Colors.red,
