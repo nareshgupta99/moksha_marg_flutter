@@ -69,4 +69,15 @@ class NetworkPayload {
       {required FoodCartPayload payload}) {
     return {"dishId": payload.dishId, "quantity": payload.quantity};
   }
+
+
+  static Map<String, dynamic>? orderPayload(
+      {required OrderPayload payload}) {
+    return {"amount": payload.amount, "method": payload.method};
+  }
+
+  static Map<String, dynamic>? paymentVerificationPayload(
+      {required PaymentVerificationPayload payload}) {
+    return {"orderId": payload.razorpayOrderId, "signature": payload.signature, "paymentId":payload.paymentId};
+  }
 }

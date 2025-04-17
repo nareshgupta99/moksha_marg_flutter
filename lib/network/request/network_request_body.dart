@@ -36,3 +36,14 @@ class FoodCartPayload {
   int? dishId;
   int? quantity;
 }
+
+class OrderPayload {
+  double? amount;
+  String? method;
+}
+
+class PaymentVerificationPayload {
+  String? paymentId;
+  String? razorpayOrderId;
+  String? signature;
+}

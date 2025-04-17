@@ -75,7 +75,7 @@ class RoutesHelper {
   static String getProfile() => _profile;
   static String getSplash() => _splash;
   static String getRestaurentProfile() => _restaurentProfile;
-  static String getVerifyOtp({required String email, required int userId}) =>"$_splash>id=$userId&email=$email";
+  static String getVerifyOtp({required String email, required int userId}) =>"$_verifyOtp?id=$userId&email=$email";
 
   //Restaurent Admin Routes
 
@@ -107,7 +107,7 @@ class RoutesHelper {
     GetPage(name: _foodCart, page: () => FoodCartView()),
     GetPage(name: _profile, page: () => ProfileView()),
     GetPage(name: _splash, page: () => SplashView()),
-    GetPage(name: _verifyOtp, page: () => VerifyOtpView(userId: Get.parameters['userId']!, email: Get.parameters['email']!,)),
+    GetPage(name: _verifyOtp, page: () => VerifyOtpView(userId: Get.parameters['id']!, email: Get.parameters['email']!,)),
 
   //Restaurent Admin Routes
 

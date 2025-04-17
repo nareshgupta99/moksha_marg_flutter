@@ -7,6 +7,8 @@ import 'package:moksha_marg/app/authentication/auth_repository.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_repository.dart';
+import 'package:moksha_marg/app/cart/order_cart_controller.dart';
+import 'package:moksha_marg/app/cart/order_cart_repository.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
@@ -22,6 +24,8 @@ Future<void> init() async {
   Get.lazyPut(() => RestaurentRepository (network: Get.find()));
   Get.lazyPut(() => DishRepository(network: Get.find()));
   Get.lazyPut(() => FoodCartRepository(network: Get.find()));
+  Get.lazyPut(() => OrderCartRepository(network: Get.find()));
+
 
 
 
@@ -33,6 +37,7 @@ Future<void> init() async {
   Get.lazyPut(() => FilePickerController());
   Get.lazyPut(() => DishController(repository: Get.find()));
   Get.lazyPut(() => FoodCartController(sharedPreferences: sharedPreference,repository: Get.find()));
+  Get.lazyPut(() => OrderCartController(sharedPreferences: sharedPreference,repository: Get.find()));
 
 
 

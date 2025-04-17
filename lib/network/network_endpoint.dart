@@ -19,7 +19,9 @@ enum Endpoints {
   removeOneQuantityFromFoodCart,
   removeAllFromFoodCart,
   getAllFromFoodCart,
-  removeOneItemFromFoodCart
+  removeOneItemFromFoodCart,
+  createFoodOrder,
+  paymentVerificationForFood
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -42,4 +44,6 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.removeAllFromFoodCart: "/api/v1/food/cart/all",
   Endpoints.getAllFromFoodCart: "/api/v1/food/cart/all",
   Endpoints.removeOneItemFromFoodCart: "/api/v1/food/cart/delete",
+  Endpoints.createFoodOrder:"/api/v1/food/order/create",
+  Endpoints.paymentVerificationForFood:""
 };

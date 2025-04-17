@@ -75,13 +75,14 @@ extension AuthenticationDataService on AuthenticationController {
       switch (result) {
         case Result.onSuccess:
           loading = false;
+          authData = response?.data;
           update();
-          if (email == null || email.trim().isEmpty) {
-            Get.toNamed(RoutesHelper.getVerifyOtp(
-                userId: 0, email: forgotEmailController.text.trim()));
-          } else {
             Get.snackbar('Success', response?.message ?? "");
-          }
+        
+            Get.toNamed(RoutesHelper.getVerifyOtp(
+                userId: authData?.id ?? 0, email:authData?.email ??"" ));
+          
+          
           break;
         case Result.onFailed:
           loading = false;
@@ -97,32 +98,32 @@ extension AuthenticationDataService on AuthenticationController {
     });
   }
 
-  // Future<void> verifyOtp({required String userId, required String otp}) async {
-  //   loading = true;
-  //   var authPayload = AuthPayload();
-  //   authPayload.userId = userId;
-  //   authPayload.otp = otp;
-  //   update();
-  //   await repository.verifyOtp(authPayload, (result, response, message) {
-  //     switch (result) {
-  //       case Result.onSuccess:
-  //         loading = false;
-  //         update();
-  //         Get.toNamed(RoutesHelper.getResetPassword(id: userId));
-  //         break;
-  //       case Result.onFailed:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //       case Result.onException:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //     }
-  //   });
-  // }
+  Future<void> verifyOtp({required int  userId, required String otp}) async {
+    loading = true;
+    var authPayload = AuthPayload();
+    authPayload.userId = userId;
+    authPayload.otp = otp;
+    update();
+    await repository.verifyOtp(authPayload, (result, response, message) {
+      switch (result) {
+        case Result.onSuccess:
+          loading = false;
+          update();
+          // Get.toNamed(RoutesHelper.getResetPassword(id: userId));
+          break;
+        case Result.onFailed:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+        case Result.onException:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+      }
+    });
+  }
 
   // Future<void> resetPassword({required String userId}) async {
   //   loading = true;

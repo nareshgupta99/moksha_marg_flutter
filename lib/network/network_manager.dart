@@ -49,7 +49,7 @@ class NetworkManager extends GetxService {
         : Uri.parse(_baseURL + endpointRawValues[endpoint]!)
             .replace(queryParameters: queryParameters);
     print('Request url :: $url');
-    // print('Endpoint :: ${endpointRawValues[endpoint]!}');
+    print('Endpoint :: ${endpointRawValues[endpoint]!}');
     final bearerToken = await LocalStorage.getStringData(key: Keys.bearerToken);
     print('Bearer token :: ${bearerToken ?? 'Not Authorized'}');
 

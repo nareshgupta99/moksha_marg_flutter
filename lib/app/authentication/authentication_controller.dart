@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:moksha_marg/app/authentication/auth_dataservice.dart';
 import 'package:moksha_marg/app/authentication/auth_repository.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
+import 'package:moksha_marg/network/response/auth_data.dart';
 import 'package:moksha_marg/network/response/login_data.dart';
 import 'package:moksha_marg/util/extensions.dart';
 import 'package:moksha_marg/util/local_keys.dart';
@@ -46,6 +47,9 @@ class AuthenticationController extends GetxController implements GetxService {
 
   var resetPasswordController = TextEditingController();
   var resetConfirmPasswordController = TextEditingController();
+
+
+  AuthData? authData;
 
   List<TextEditingController> verifyOtpControler =
       List.generate(6, (index) => TextEditingController());
@@ -180,18 +184,21 @@ class AuthenticationController extends GetxController implements GetxService {
     }
   }
 
-  String otp = "";
-  void verifyOtpWithValidation({required String userId}) {
+ String otp = "";
+
+  void verifyOtpWithValidation({required int userId}) {
     otp = "";
-    verifyOtpControler.forEach((val) => otp = otp + val.text.trim());
+    for (var val in verifyOtpControler) {
+      otp = otp + val.text.trim();
+    }
     // debugConsole("userid aur=th contr: $userId");
     if (otp.isEmpty) {
       Get.snackbar('Error', 'Otp is required');
     } else if (!otp.isValidOtp()) {
-      Get.snackbar(
-          'Error', 'Entered password must be at least 6 characters long');
+      Get.snackbar('Error', 'Entered password must be at least 6 characters long');
     } else {
-      // debugConsole(otp);?
+      // debugConsole(otp);
+      verifyOtp(userId: userId, otp: otp);
     }
   }
 

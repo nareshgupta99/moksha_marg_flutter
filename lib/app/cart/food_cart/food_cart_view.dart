@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/cart/food_cart_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_dataservice.dart';
+import 'package:moksha_marg/app/cart/order_cart_controller.dart';
+import 'package:moksha_marg/network/response/food_cart_data.dart';
+import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/card.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
-
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 class FoodCartView extends StatefulWidget {
   const FoodCartView({super.key});
 
@@ -17,10 +20,12 @@ class FoodCartView extends StatefulWidget {
 }
 
 class _FoodCartViewState extends State<FoodCartView> {
+  
   @override
   void initState() {
     super.initState();
     Get.find<FoodCartController>().getAllItemFromCart();
+
   }
 
   @override
@@ -46,8 +51,11 @@ class _FoodCartViewState extends State<FoodCartView> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return dishMenuItemsCard(
-                        addButton: () => Controller.addItemToFoodCart(dishId:Controller.cartItems[index].dishId ?? 0),
-                        subButton:()=> Controller.removeOneFromCart(cartItemId:Controller.cartItems[index].cartItemId ??0),
+                        addButton: () => Controller.addItemToFoodCart(
+                            dishId: Controller.cartItems[index].dishId ?? 0),
+                        subButton: () => Controller.removeOneFromCart(
+                            cartItemId:
+                                Controller.cartItems[index].cartItemId ?? 0),
                         availabelStatus: "Availabel",
                         quantity: "${Controller.cartItems[index].quantity}",
                         onPressed: () {},
@@ -97,7 +105,7 @@ class _FoodCartViewState extends State<FoodCartView> {
                 padding: EdgeInsets.symmetric(vertical: Dimensions.padding16),
                 child: deliveryAddressCard(),
               ),
-              _paymentSummaryCard()
+              _paymentSummaryCard(Controller.cartItems)
             ],
           ),
         ),
@@ -106,7 +114,11 @@ class _FoodCartViewState extends State<FoodCartView> {
   }
 }
 
-Widget _paymentSummaryCard() {
+Widget _paymentSummaryCard(List<FoodCartData> cartItems) {
+  double total = 0;
+  cartItems.forEach((ele) {
+    total += (ele.price ?? 1) * (ele.quantity ?? 1);
+  });
   return Container(
     decoration: BoxDecoration(
         color: const Color.fromRGBO(255, 255, 255, 1),
@@ -121,19 +133,36 @@ Widget _paymentSummaryCard() {
             padding: EdgeInsets.only(bottom: Dimensions.padding16),
             child: heading(text: "Payment Summary"),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Food Item"), Text("100")],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Food Item"), Text("100")],
-          ),
           customDivider(),
+          ListView.builder(
+            itemCount: cartItems.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              total = ((cartItems[index].price ?? 1) *
+                      (cartItems[index].quantity ?? 1)) +
+                  total;
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(cartItems[index].itemName ?? ""),
+                  Text(
+                      "${(cartItems[index].price ?? 1) * (cartItems[index].quantity ?? 1)}")
+                ],
+              );
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Total Amount"), Text("100")],
-          )
+            children: [Text("Total Amount"), Text("$total")],
+          ),
+          GetBuilder<OrderCartController>(builder: (orderController) {
+            return customButton(
+                onPressed: () {
+                  orderController.createOrderForFood(amount: total);
+                },
+                text: "order",
+                width: Get.width);
+          })
         ],
       ),
     ),
