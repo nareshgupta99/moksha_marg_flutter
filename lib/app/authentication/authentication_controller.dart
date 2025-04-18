@@ -213,7 +213,7 @@ class AuthenticationController extends GetxController implements GetxService {
         resetConfirmPasswordController.text.trim()) {
       Get.snackbar('Error', 'Password and Confirm password must be same');
     } else {
-      // resetPassword(userId: userId);
+      resetPassword(userId: userId);
     }
   }
 

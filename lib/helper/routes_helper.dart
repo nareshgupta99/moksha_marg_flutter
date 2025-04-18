@@ -65,7 +65,7 @@ class RoutesHelper {
   static String getRegistration() => _registration;
   static String getLogin() => _login;
   static String getForgotPassword() => _forgotPassword;
-  static String getResetPassword() => _resetPassword;
+  static String getResetPassword({required String userId}) => "${_resetPassword}?id=$userId";
   static String getGuide() => _guides;
   static String getGuidesDetails() => _guidesDetails;
   static String getRestaurent() => _restaurent;
@@ -101,7 +101,7 @@ class RoutesHelper {
     GetPage(name: _registration, page: () => RegistrationView()),
     GetPage(name: _login, page: () => LoginView()),
     GetPage(name: _forgotPassword, page: () => ForgotPasswordView()),
-    GetPage(name: _resetPassword, page: () => ResetPasswordView()),
+    GetPage(name: _resetPassword, page: () => ResetPasswordView(userId: "${Get.parameters['id']}",)),
     GetPage(name: _guides, page: () => GuidesView()),
     GetPage(name: _guidesDetails, page: () => GuidesDetailsView()),
     GetPage(name: _restaurent, page: () => RestaurentView()),

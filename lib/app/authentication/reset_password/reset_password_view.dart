@@ -1,64 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/app/authentication/authentication_controller.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
-import 'package:moksha_marg/reusable/otp_field.dart';
+import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 
-class ResetPasswordView extends StatelessWidget {
-  ResetPasswordView({super.key});
-  TextEditingController nameController = TextEditingController();
-  TextEditingController registerPasswordController = TextEditingController();
-  String email = "nareshgupta0899@gmail.com";
-  List<TextEditingController> controllers = List.generate(6,(index)=>TextEditingController());
+class ResetPasswordView extends StatefulWidget {
+  String userId;
+  ResetPasswordView({super.key, required this.userId});
+
+  @override
+  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordView> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<AuthenticationController>().initResetPassword();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("userId:: ${widget.userId}");
     return Scaffold(
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
-      body: SingleChildScrollView(child: _body()),
+      body: Center(child: SingleChildScrollView(child: _body())),
     );
   }
 
   Widget _body() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 64),
-      child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          heading(text: "Verify Otp"),
-          RichText(
-            text: TextSpan(
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-                children: [
-                  const TextSpan(
-                      text:
-                          "A 6-digit verification code has been sent to you via"),
-                  TextSpan(
-                      text: " ${email} ",
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12)),
-                  const TextSpan(
-                      text: ", Please enter that to verify your account."),
-                ]),
-          ),
-
+    return GetBuilder<AuthenticationController>(builder: (controller) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            heading(text: "please Enter new Password"),
             Padding(
-              padding: const EdgeInsets.only(top: 32),
-              child: OtpFields(onChanged: (value) {}, controllers:controllers),
+              padding: EdgeInsets.only(top: 32, bottom: 16),
+              child: customObsecureTextField(
+                  textFieldLabel: "Password",
+                  controller: controller.resetPasswordController,
+                  hintText: "Enter your password",
+                  isObsecure: controller.resetPasswordObsecure,
+                  onTap: () => controller.setResetPasswordObsecure()),
             ),
-
+            customObsecureTextField(
+                textFieldLabel: "Confirm Password",
+                controller: controller.resetConfirmPasswordController,
+                hintText: "Enter your password",
+                isObsecure: controller.resetconfirmResetPasswordObsecure,
+                onTap: () => controller.setResetconfirmResetPasswordObsecure()),
             Padding(
-            padding:  EdgeInsets.only(top:16,bottom: 32),
-            child: customButton(onPressed: () {}, text: "Submit", width: Get.width),
-          ),
-         
-        ],
-      ),
-    );
+              padding: EdgeInsets.only(top: 16, bottom: 32),
+              child: customButton(
+                  onPressed: () {
+                    controller.resetPasswordWithValidation(
+                        userId: widget.userId);
+                  },
+                  text: "Submit",
+                  width: double.infinity),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

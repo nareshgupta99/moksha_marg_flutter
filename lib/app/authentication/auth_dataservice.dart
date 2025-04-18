@@ -109,7 +109,7 @@ extension AuthenticationDataService on AuthenticationController {
         case Result.onSuccess:
           loading = false;
           update();
-          // Get.toNamed(RoutesHelper.getResetPassword(id: userId));
+          Get.toNamed(RoutesHelper.getResetPassword(userId: "$userId"));
           break;
         case Result.onFailed:
           loading = false;
@@ -125,30 +125,30 @@ extension AuthenticationDataService on AuthenticationController {
     });
   }
 
-  // Future<void> resetPassword({required String userId}) async {
-  //   loading = true;
-  //   var authPayload = AuthPayload();
-  //   authPayload.userId = userId;
-  //   authPayload.password = resetPasswordController.text.trim();
-  //   update();
-  //   await repository.resetPassword(authPayload, (result, response, message) {
-  //     switch (result) {
-  //       case Result.onSuccess:
-  //         loading = false;
-  //         update();
-  //         Get.offAllNamed(RoutesHelper.getLogin());
-  //         break;
-  //       case Result.onFailed:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //       case Result.onException:
-  //         loading = false;
-  //         update();
-  //         Get.snackbar('Error', message?.tr ?? "error");
-  //         break;
-  //     }
-  //   });
-  // }
+  Future<void> resetPassword({required String userId}) async {
+    loading = true;
+    var authPayload = AuthPayload();
+    authPayload.userId = int.parse( userId);
+    authPayload.password = resetPasswordController.text.trim();
+    update();
+    await repository.resetPassword(authPayload, (result, response, message) {
+      switch (result) {
+        case Result.onSuccess:
+          loading = false;
+          update();
+          Get.offAllNamed(RoutesHelper.getLogin());
+          break;
+        case Result.onFailed:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+        case Result.onException:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+      }
+    });
+  }
 }

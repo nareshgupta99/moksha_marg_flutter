@@ -21,8 +21,7 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
 
   TextEditingController registerPasswordController = TextEditingController();
 
-  List<TextEditingController> textControllers =
-      List.generate(6, (index) => TextEditingController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +61,13 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
             Padding(
               padding: const EdgeInsets.only(top: 32),
               child: OtpFields(
-                  onChanged: (value) {}, controllers: textControllers),
+                  onChanged: (value) {}, controllers: controller.verifyOtpControler),
             ),
             Padding(
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    // controller.
+                    controller.verifyOtpWithValidation(userId:int.parse( widget.userId) );
                   },
                   text: "Submit",
                   width: Get.width),
