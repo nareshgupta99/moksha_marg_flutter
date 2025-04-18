@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
-import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
@@ -97,7 +96,7 @@ Widget bottomNavigatonAdmin() {
     return BottomNavigationBar(
         currentIndex: controller.selectedIndex,
         onTap: (value) {
-          controller.setRestaurentSelectedIndex(value);
+          controller.setAdminIndex(value);
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: ColorsResources.greyColor,

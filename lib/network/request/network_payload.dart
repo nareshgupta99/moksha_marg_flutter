@@ -103,6 +103,6 @@ class NetworkPayload {
     return {
       "name": payload.name,
     };
-  }
+  }  
 
 }

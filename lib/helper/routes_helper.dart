@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/add_dish.dart';
 import 'package:moksha_marg/admin/dish/edit_dish_view.dart';
+import 'package:moksha_marg/admin/profile/admin_profile.dart';
 import 'package:moksha_marg/admin/restaurent/add_restaurent_details_view.dart';
 import 'package:moksha_marg/admin/dish/dish_listing.dart';
 import 'package:moksha_marg/admin/dish/update_dish.dart';
 import 'package:moksha_marg/admin/restaurent/restaurent_profile.dart';
 import 'package:moksha_marg/admin/temple/add_temple_view.dart';
+import 'package:moksha_marg/admin/temple/temple_listing.dart';
 import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
@@ -58,6 +60,8 @@ class RoutesHelper {
   static const String _dish = "/dish";
   static const String _dishListing = "/dish_listing";
   static const String _restaurentProfile = "/restaurent_profile";
+  static const String _adminProfile = "/admin_profile";
+  static const String _templeListing = "/temple_listing";
 
 
   
@@ -85,7 +89,11 @@ class RoutesHelper {
   static String getSplash() => _splash;
   static String getRestaurentProfile() => _restaurentProfile;
   static String getVerifyOtp({required String email, required int userId}) =>"$_verifyOtp?id=$userId&email=$email";
+  
   static String getChangedPassword() => _changedPassword;
+  static String getAdminProfile() => _adminProfile;
+
+  
 
   //Restaurent Admin Routes
 
@@ -99,6 +107,7 @@ class RoutesHelper {
     return "$_editDish?dish=$encodeDish";
   }
   static String getAddTemple() => _addTemple;
+  static String getTempleListing() => _templeListing;
 
 
 
@@ -126,6 +135,8 @@ class RoutesHelper {
 
 
     GetPage(name: _addDish, page: () => AddDish()),
+    GetPage(name: _templeListing, page: () => TempleListingView()),
+    GetPage(name: _adminProfile, page: () => AdminProfileView()),
     GetPage(name: _addTemple, page: () => AddTempleView()),
     GetPage(name: _dishListing, page: () => DishListing()),
     GetPage(name: _restaurentProfile, page: () => RestaurentProfileView()),

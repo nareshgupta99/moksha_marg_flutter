@@ -59,10 +59,11 @@ class TempleController extends GetxController implements GetxService {
   }
 
   void deletTemple({required int id}) {
+    print("temple");
     deleteTempleById(id: id);
   }
 
   String? getYoutubeVideoId(String url) {
-  return YoutubePlayer.convertUrlToId(url);
-}
+    return YoutubePlayer.convertUrlToId(url);
+  }
 }

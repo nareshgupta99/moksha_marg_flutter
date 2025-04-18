@@ -26,4 +26,5 @@ class FilePickerController extends GetxController implements GetxService {
       update();
     }
   }
+
 }

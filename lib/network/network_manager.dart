@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/network/network_endpoint.dart';
 import 'package:moksha_marg/network/network_exception.dart';
@@ -60,8 +59,8 @@ class NetworkManager extends GetxService {
 
     final multipartPayloadTree =
         const JsonEncoder.withIndent('  ').convert(multipartPayload);
-    // if (multipartPayload != null)
-    //   print('Multipart Payload :: $multipartPayloadTree');
+    if (multipartPayload != null)
+      print('Multipart Payload :: $multipartPayloadTree');
 
     dynamic jsonResponse;
     dynamic httpResponse;

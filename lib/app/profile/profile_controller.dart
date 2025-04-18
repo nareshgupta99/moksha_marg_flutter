@@ -1,9 +1,12 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/profile/profile_dataservice.dart';
 import 'package:moksha_marg/app/profile/profile_repository.dart';
 import 'package:moksha_marg/app/profile/setting_model.dart';
+import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
+import 'package:moksha_marg/network/network_resources.dart';
 import 'package:moksha_marg/network/response/login_data.dart';
 import 'package:moksha_marg/util/local_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart'
@@ -14,6 +17,9 @@ class ProfileController extends GetxController implements GetxService {
   final ProfileRepository repository;
   ProfileController(
       {required this.sharedPreferences, required this.repository});
+
+  PlatformFile? Singlefile;
+  late MultipartFiles multipartFile;
 
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
@@ -26,11 +32,19 @@ class ProfileController extends GetxController implements GetxService {
 
   List<Setting> userSettingItems = [
     Setting(name: "Change Password", icon: Icons.arrow_forward_ios),
+    Setting(name: "Cart", icon: Icons.arrow_forward_ios),
+    Setting(name: "Order", icon: Icons.arrow_forward_ios),
     Setting(name: "Help & Support", icon: Icons.arrow_forward_ios),
     Setting(name: "Language", icon: Icons.arrow_forward_ios),
     Setting(name: "Logout", icon: Icons.logout_outlined),
   ];
 
+  List<Setting> adminSettingItems = [
+    Setting(name: "Change Password", icon: Icons.arrow_forward_ios),
+    Setting(name: "Help & Support", icon: Icons.arrow_forward_ios),
+    Setting(name: "Language", icon: Icons.arrow_forward_ios),
+    Setting(name: "Logout", icon: Icons.logout_outlined),
+  ];
   void init() {
     oldPasswordController = TextEditingController();
     newPasswordController = TextEditingController();
@@ -38,12 +52,6 @@ class ProfileController extends GetxController implements GetxService {
     oldPasswordObsecure = true;
     newPasswordObsecure = true;
     confirmPasswordObsecure = true;
-    userSettingItems = [
-      Setting(name: "Change Password", icon: Icons.arrow_forward_ios),
-      Setting(name: "Help & Support", icon: Icons.arrow_forward_ios),
-      Setting(name: "Language", icon: Icons.arrow_forward_ios),
-      Setting(name: "Logout", icon: Icons.logout_outlined),
-    ];
   }
 
   void deleteAuth() async {
@@ -86,4 +94,13 @@ class ProfileController extends GetxController implements GetxService {
     getUserProfile();
   }
 
+  void updateImage() async {
+    Get.find<FilePickerController>().init();
+    await Get.find<FilePickerController>().pickImage();
+    if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
+      Get.snackbar("Error", "Image is Required");
+    } else {
+      updateUserImage();
+    }
+  }
 }

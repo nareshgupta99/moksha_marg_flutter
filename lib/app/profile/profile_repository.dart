@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:moksha_marg/network/network_endpoint.dart';
 import 'package:moksha_marg/network/network_exception.dart';
 import 'package:moksha_marg/network/network_manager.dart';
@@ -31,7 +33,7 @@ class ProfileRepository extends GetxController implements GetxService {
 
   Future<void> updateImage(AuthPayload payload, Function(Result result, NetworkResponse? response, String? message) completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.updateProfilePictuce, method: HTTPMethod.post, multipartFiles: payload.image);
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.updateProfilePictuce, method: HTTPMethod.multipartPOST, multipartFiles: payload.image);
       try {
         final response = NetworkResponse.fromJson(networkResponse, (json) {});
         completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);

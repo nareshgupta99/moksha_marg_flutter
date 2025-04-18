@@ -31,7 +31,6 @@ enum Endpoints {
   updateProfilePictuce,
   updateUserProfile,
   updatePassword,
-
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -60,8 +59,8 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.getAllTemple: "/api/v1/temple/all",
   Endpoints.getTmpleById: "/api/v1/temple",
   Endpoints.deleteTempleById: "/api/v1/temple/delete",
-  Endpoints. getUserProfile:"/api/v1/user",
-  Endpoints.updateProfilePictuce:"/api/v1/user/edit",
-  Endpoints.updateUserProfile:"/api/v1/user/edit/image",
-  Endpoints.updatePassword:"/api/v1/user/edit/password",
+  Endpoints.getUserProfile: "/api/v1/user",
+  Endpoints.updateProfilePictuce: "/api/v1/user/edit/image",
+  Endpoints.updateUserProfile: "/api/v1/user/edit",
+  Endpoints.updatePassword: "/api/v1/user/edit/password",
 };

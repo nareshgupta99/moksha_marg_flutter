@@ -10,6 +10,7 @@ class LoginData {
   bool? isGuideAdded;
   bool? isRestaurentAdded;
   String? restaurantId;
+  String? image;
 
   LoginData({
     this.userId,
@@ -21,6 +22,7 @@ class LoginData {
     this.isGuideAdded,
     this.isRestaurentAdded,
     this.restaurantId,
+    this.image
   });
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
@@ -32,7 +34,9 @@ class LoginData {
       roles: json["roles"],
       isGuideAdded: json['isGuideAdded'],
       isRestaurentAdded: json['isRestaurentAdded'],
-      restaurantId: json["restaurantId"]);
+      restaurantId: json["restaurantId"],
+      image:json["image"]
+      );
 
   Map<String, dynamic> toJson() => {
         "userId": userId,
@@ -43,6 +47,7 @@ class LoginData {
         "roles": roles,
         "isGuideAdded": isGuideAdded,
         "isRestaurentAdded": isRestaurentAdded,
-        "restaurantId": restaurantId
+        "restaurantId": restaurantId,
+        "image":image
       };
 }

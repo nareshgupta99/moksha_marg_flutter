@@ -22,7 +22,7 @@ extension TempleDataservice on TempleController {
           final data = response?.data;
           templeData = data;
           update();
-          Get.snackbar("success", response?.message??"");
+          Get.snackbar("success", response?.message ?? "");
           break;
         case Result.onFailed:
           // loading = false;
@@ -100,7 +100,7 @@ extension TempleDataservice on TempleController {
           final data = response?.data;
           templeData = data!;
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
+          getAllTemple();
           break;
         case Result.onFailed:
           // loading = false;

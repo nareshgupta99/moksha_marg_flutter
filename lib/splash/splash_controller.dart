@@ -30,7 +30,7 @@ class SplashController extends GetxController implements GetxService {
               Get.offAllNamed(RoutesHelper.getDishListing());
             }
           } else if (decodeLoginData.roles == Role.ADMIN.name) {
-            Get.offAllNamed(RoutesHelper.getAddTemple());
+            Get.offAllNamed(RoutesHelper.getTempleListing());
           }
         } else {
           Get.offAndToNamed(RoutesHelper.getLogin());

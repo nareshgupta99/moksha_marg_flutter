@@ -78,7 +78,11 @@ Widget restaurentCard(
 }
 
 Widget livedarhanCard(
-    {required String imageUri, double? width, double? height,required String templeName, required String city}) {
+    {required String imageUri,
+    double? width,
+    double? height,
+    required String templeName,
+    required String city}) {
   return Container(
     decoration: BoxDecoration(
         color: Colors.white, borderRadius: BorderRadius.circular(8)),
@@ -92,7 +96,7 @@ Widget livedarhanCard(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8), topRight: Radius.circular(8)),
           child: cachedImage(
-            url:imageUri,
+            url: imageUri,
             width: Get.width,
             height: Get.width / 2.5,
             fit: BoxFit.cover,
@@ -266,3 +270,4 @@ Widget deliveryAddressCard() {
     ),
   );
 }
+

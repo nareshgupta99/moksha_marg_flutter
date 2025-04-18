@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
-import 'package:moksha_marg/app/profile/setting_model.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -28,7 +27,6 @@ class _ProfileViewState extends State<ProfileView> {
     super.initState();
     Get.find<ProfileController>().init();
     Get.find<ProfileController>().getProfile();
-
   }
 
   @override
@@ -56,18 +54,19 @@ class _ProfileViewState extends State<ProfileView> {
                       Padding(
                           padding: EdgeInsets.only(top: Dimensions.padding32),
                           child: heading(text: "Settings")),
-                      ListView.builder(
-                          itemCount: controller.userSettingItems.length,
-                          shrinkWrap: true,
-                          itemBuilder: (element, index) {
-                            return GestureDetector(
-                              onTap: () => onTap(index),
-                              child: _settingCardItem(
-                                name: controller.userSettingItems[index].name,
-                                icon: controller.userSettingItems[index].icon,
-                              ),
-                            );
-                          })
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: controller.userSettingItems.length,
+                            itemBuilder: (element, index) {
+                              return GestureDetector(
+                                onTap: () => onTap(index),
+                                child: _settingCardItem(
+                                  name: controller.userSettingItems[index].name,
+                                  icon: controller.userSettingItems[index].icon,
+                                ),
+                              );
+                            }),
+                      )
                     ],
                   )),
             ),
@@ -177,6 +176,9 @@ class _ProfileViewState extends State<ProfileView> {
         // logout(context);
         break;
       case 3:
+        // logout(context);
+        break;
+      case 5:
         logout(context);
         break;
     }

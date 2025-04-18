@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,6 @@ class _AdminProfileViewState extends State<AdminProfileView> {
     super.initState();
     Get.find<ProfileController>().init();
     Get.find<ProfileController>().getProfile();
-
   }
 
   @override
@@ -55,18 +55,19 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                       Padding(
                           padding: EdgeInsets.only(top: Dimensions.padding32),
                           child: heading(text: "Settings")),
-                      ListView.builder(
-                          itemCount: controller.userSettingItems.length,
-                          shrinkWrap: true,
-                          itemBuilder: (element, index) {
-                            return GestureDetector(
-                              onTap: () => onTap(index),
-                              child: _settingCardItem(
-                                name: controller.userSettingItems[index].name,
-                                icon: controller.userSettingItems[index].icon,
-                              ),
-                            );
-                          })
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: controller.adminSettingItems.length,
+                            itemBuilder: (element, index) {
+                              return GestureDetector(
+                                onTap: () => onTap(index),
+                                child: _settingCardItem(
+                                  name: controller.userSettingItems[index].name,
+                                  icon: controller.userSettingItems[index].icon,
+                                ),
+                              );
+                            }),
+                      )
                     ],
                   )),
             ),
@@ -80,7 +81,8 @@ class _AdminProfileViewState extends State<AdminProfileView> {
         Stack(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(Images.temple1),
+              backgroundImage:
+                  CachedNetworkImageProvider(controller.user?.image ?? ""),
               radius: 60.r,
             ),
             Positioned(
@@ -99,7 +101,7 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => () {},
+                  onTap: () => controller.updateImage(),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,

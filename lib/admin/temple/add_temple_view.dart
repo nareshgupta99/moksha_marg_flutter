@@ -26,7 +26,7 @@ class _AddTempleState extends State<AddTempleView> {
     return GetBuilder<TempleController>(builder: (controller) {
       return Scaffold(
         appBar: topNavigaton(isLeading: false),
-        // bottomNavigationBar: bottomNavigaton(),
+        bottomNavigationBar: bottomNavigatonAdmin(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
