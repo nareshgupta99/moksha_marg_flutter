@@ -22,6 +22,7 @@ import 'package:moksha_marg/app/profile/profile_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
 import 'package:moksha_marg/network/response/add_dish.dart';
+import 'package:moksha_marg/network/response/temple_data.dart';
 import 'package:moksha_marg/splash/splash_view.dart';
 
 class RoutesHelper {
@@ -69,7 +70,10 @@ class RoutesHelper {
   static String getGuidesDetails() => _guidesDetails;
   static String getRestaurent() => _restaurent;
   static String getRestaurentDetails({required int id}) =>"$_restaurentDetails?id=$id";
-  static String getLiveDarshan({required String  id}) => "$_liveDarshan?id=$id";
+  static String getLiveDarshan({required TempleData temple}) {
+    String encodeTemple = base64Url.encode(utf8.encode(jsonEncode(temple.toJson())));
+    return "$_liveDarshan?temple=$encodeTemple";
+  }
   static String getTemple() => _temple;
   static String getFoodCart() => _foodCart;
   static String getProfile() => _profile;
@@ -103,7 +107,7 @@ class RoutesHelper {
     GetPage(name: _restaurent, page: () => RestaurentView()),
     GetPage(name: _restaurentDetails, page: () => RestaurentDetailsView(id:"${Get.parameters['id']}")),
     GetPage(name: _temple, page: () => TempleView()),
-    GetPage(name: _liveDarshan, page: () => LiveDarshanView(id:Get.parameters['id']!)),
+    GetPage(name: _liveDarshan, page: () => LiveDarshanView(temple:TempleData.fromJson(jsonDecode(utf8.decode(base64Url.decode(Get.parameters['temple']!)))))),
     GetPage(name: _foodCart, page: () => FoodCartView()),
     GetPage(name: _profile, page: () => ProfileView()),
     GetPage(name: _splash, page: () => SplashView()),

@@ -110,8 +110,11 @@ class _HomeViewState extends State<HomeView> {
                   return Padding(
                     padding: EdgeInsets.only(right: Dimensions.padding12),
                     child: GestureDetector(
-                      onTap: () => Get.toNamed(RoutesHelper.getLiveDarshan(id:"1")),
-                      child: livedarhanCard(imageUri: images[index])));
+                      // onTap: () => Get.toNamed(RoutesHelper.getLiveDarshan(id:1)),
+                      child: livedarhanCard(
+                        templeName: "Sidhivinayak ",
+                        city: "Merrut",
+                        imageUri: images[index])));
                 }),
           ),
 

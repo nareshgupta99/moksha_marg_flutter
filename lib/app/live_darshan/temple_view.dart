@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/temple_controller.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/card.dart';
@@ -30,9 +31,9 @@ class _TempleViewState extends State<TempleView> {
   void initState() {
     super.initState();
     Get.find<BootomNavigationController>().init();
-
+    Get.find<TempleController>().init();
+    Get.find<TempleController>().getAllTemple();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,29 +46,39 @@ class _TempleViewState extends State<TempleView> {
   }
 
   Widget _body() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          searchBar(text: "Search Temple"),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(top: Dimensions.padding16),
-              child: ListView.builder(
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                        padding: EdgeInsets.only(bottom: Dimensions.padding16),
-                        child: GestureDetector(
-                          onTap: () => Get.toNamed(RoutesHelper.getLiveDarshan(id: "1")),
-                          child: livedarhanCard(imageUri: images[index])));
-                  }),
-            ),
-          )
-        ],
-      ),
-    );
+    return GetBuilder<TempleController>(builder: (controller) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            searchBar(text: "Search Temple"),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(top: Dimensions.padding16),
+                child: ListView.builder(
+                    itemCount: controller.temples.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                          padding:
+                              EdgeInsets.only(bottom: Dimensions.padding16),
+                          child: GestureDetector(
+                            onTap: () => Get.toNamed(
+                                RoutesHelper.getLiveDarshan(temple: controller.temples[index])),
+                            child: livedarhanCard(
+                                templeName:
+                                    controller.temples[index].name ?? "",
+                                city: controller.temples[index].city ?? "",
+                                imageUri:
+                                    controller.temples[index].image ?? ""),
+                          ));
+                    }),
+              ),
+            )
+          ],
+        ),
+      );
+    });
   }
 }
 

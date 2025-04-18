@@ -18,7 +18,7 @@ class ProfileController extends GetxController implements GetxService {
   bool confirmPasswordObsecure = true;
 
   List<Setting> userSettingItems = [
-    Setting(name: "Privacy", icon: Icons.arrow_forward_ios),
+    Setting(name: "Change Password", icon: Icons.arrow_forward_ios),
     Setting(name: "Help & Support", icon: Icons.arrow_forward_ios),
     Setting(name: "Language", icon: Icons.arrow_forward_ios),
     Setting(name: "Logout", icon: Icons.logout_outlined),

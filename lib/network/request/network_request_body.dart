@@ -47,3 +47,12 @@ class PaymentVerificationPayload {
   String? razorpayOrderId;
   String? signature;
 }
+
+class TemplePayload {
+  int? id;
+  String? name;
+  String? streetAddress;
+  String? city;
+  String? liveLink;
+  List<MultipartFiles>? image;
+}

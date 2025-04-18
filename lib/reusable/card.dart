@@ -78,7 +78,7 @@ Widget restaurentCard(
 }
 
 Widget livedarhanCard(
-    {required String imageUri, double? width, double? height}) {
+    {required String imageUri, double? width, double? height,required String templeName, required String city}) {
   return Container(
     decoration: BoxDecoration(
         color: Colors.white, borderRadius: BorderRadius.circular(8)),
@@ -91,8 +91,8 @@ Widget livedarhanCard(
         ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-          child: Image.asset(
-            imageUri,
+          child: cachedImage(
+            url:imageUri,
             width: Get.width,
             height: Get.width / 2.5,
             fit: BoxFit.cover,
@@ -101,7 +101,7 @@ Widget livedarhanCard(
         Padding(
           padding: EdgeInsets.only(top: 16, left: 16),
           child: Text(
-            "Sidhivinayak Temple",
+            templeName,
             style: TextStyle(
                 fontFamily: TypographyResources.roboto,
                 fontSize: 14,
@@ -111,7 +111,7 @@ Widget livedarhanCard(
         Padding(
           padding: EdgeInsets.only(left: 16),
           child: Text(
-            "Mumbai, Maharastra",
+            city,
             style: TextStyle(
                 color: ColorsResources.greyColor,
                 fontFamily: TypographyResources.roboto,

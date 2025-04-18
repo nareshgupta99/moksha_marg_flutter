@@ -21,7 +21,12 @@ enum Endpoints {
   getAllFromFoodCart,
   removeOneItemFromFoodCart,
   createFoodOrder,
-  paymentVerificationForFood
+  paymentVerificationForFood,
+  addTemple,
+  deleteTemple,
+  getAllTemple,
+  getTmpleById,
+  deleteTempleById
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -44,6 +49,10 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.removeAllFromFoodCart: "/api/v1/food/cart/all",
   Endpoints.getAllFromFoodCart: "/api/v1/food/cart/all",
   Endpoints.removeOneItemFromFoodCart: "/api/v1/food/cart/delete",
-  Endpoints.createFoodOrder:"/api/v1/food/order/create",
-  Endpoints.paymentVerificationForFood:""
+  Endpoints.createFoodOrder: "/api/v1/food/order/create",
+  Endpoints.paymentVerificationForFood: "",
+  Endpoints.addTemple: "/api/v1/temple/add",
+  Endpoints.getAllTemple: "/api/v1/temple/all",
+  Endpoints.getTmpleById: "/api/v1/temple",
+  Endpoints.deleteTempleById: "/api/v1/temple/delete",
 };

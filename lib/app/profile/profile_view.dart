@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/app/profile/setting_model.dart';
@@ -57,7 +58,7 @@ class _ProfileViewState extends State<ProfileView> {
                           shrinkWrap: true,
                           itemBuilder: (element, index) {
                             return GestureDetector(
-                              onTap: ()=>onTap(index),
+                              onTap: () => onTap(index),
                               child: _settingCardItem(
                                 name: controller.userSettingItems[index].name,
                                 icon: controller.userSettingItems[index].icon,
@@ -74,9 +75,41 @@ class _ProfileViewState extends State<ProfileView> {
   Widget _header() {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundImage: AssetImage(Images.temple1),
-          radius: 50,
+        Stack(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(Images.temple1),
+              radius: 60.r,
+            ),
+            Positioned(
+              bottom: 3.r,
+              left: 20.r,
+              right: 20.r,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30.r),
+                  ),
+                ),
+                alignment: Alignment.center,
+                width: Get.width,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => () {},
+                  child: Text(
+                    'Update',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
         Padding(
           padding: EdgeInsets.only(left: Dimensions.padding16),
@@ -122,8 +155,8 @@ class _ProfileViewState extends State<ProfileView> {
 
   void logout(BuildContext context) async {
     String? loginData = await LocalStorage.getStringData(key: Keys.authData);
-    String? guestData = await LocalStorage.getStringData(key: Keys.guestUuid);
-    if (loginData != null || guestData != null) {
+    String? bearer = await LocalStorage.getStringData(key: Keys.bearerToken);
+    if (loginData != null || bearer != null) {
       showLogoutDialog(
           context, () => Get.find<ProfileController>().deleteAuth());
     }
