@@ -21,12 +21,11 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
 
   TextEditingController registerPasswordController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     print(widget.email);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: SingleChildScrollView(child: _body()),
@@ -61,13 +60,15 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
             Padding(
               padding: const EdgeInsets.only(top: 32),
               child: OtpFields(
-                  onChanged: (value) {}, controllers: controller.verifyOtpControler),
+                  onChanged: (value) {},
+                  controllers: controller.verifyOtpControler),
             ),
             Padding(
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    controller.verifyOtpWithValidation(userId:int.parse( widget.userId) );
+                    controller.verifyOtpWithValidation(
+                        userId: int.parse(widget.userId));
                   },
                   text: "Submit",
                   width: Get.width),

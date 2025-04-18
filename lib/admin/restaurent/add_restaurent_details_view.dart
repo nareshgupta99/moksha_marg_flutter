@@ -26,6 +26,7 @@ class _AddRestaurentDetailsState extends State<AddRestaurentDetailsView> {
   Widget build(BuildContext context) {
     return GetBuilder<RestarantController>(builder: (controller) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: topNavigaton(isLeading: false),
         // bottomNavigationBar: bottomNavigaton(),
         body: SingleChildScrollView(

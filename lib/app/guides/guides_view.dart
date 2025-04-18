@@ -15,6 +15,7 @@ class GuidesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: _body(),

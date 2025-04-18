@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -80,7 +81,8 @@ class _ProfileViewState extends State<ProfileView> {
         Stack(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(Images.temple1),
+              backgroundImage:
+                  CachedNetworkImageProvider(controller.user?.image ?? ""),
               radius: 60.r,
             ),
             Positioned(
@@ -170,7 +172,7 @@ class _ProfileViewState extends State<ProfileView> {
         Get.toNamed(RoutesHelper.getChangedPassword());
         break;
       case 1:
-        // changeLanguageView(context: context);
+        Get.toNamed(RoutesHelper.getFoodCart());
         break;
       case 2:
         // logout(context);

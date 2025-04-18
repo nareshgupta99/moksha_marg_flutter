@@ -12,6 +12,7 @@ import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+
 class FoodCartView extends StatefulWidget {
   const FoodCartView({super.key});
 
@@ -20,17 +21,16 @@ class FoodCartView extends StatefulWidget {
 }
 
 class _FoodCartViewState extends State<FoodCartView> {
-  
   @override
   void initState() {
     super.initState();
     Get.find<FoodCartController>().getAllItemFromCart();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: true, text: "Food Order"),
       bottomNavigationBar: bottomNavigaton(),
       body: _body(),

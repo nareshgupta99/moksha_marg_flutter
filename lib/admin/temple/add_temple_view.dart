@@ -25,6 +25,7 @@ class _AddTempleState extends State<AddTempleView> {
   Widget build(BuildContext context) {
     return GetBuilder<TempleController>(builder: (controller) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: topNavigaton(isLeading: false),
         bottomNavigationBar: bottomNavigatonAdmin(),
         body: SingleChildScrollView(

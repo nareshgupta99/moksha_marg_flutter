@@ -154,10 +154,10 @@ class NetworkManager extends GetxService {
         throw FetchNetworkException(
             exceptionRawValues[Exceptions.badRequest400]);
       case (401):
-        throw FetchNetworkException(
-            exceptionRawValues[Exceptions.unauthorized401]);
-      case (403):
         Get.find<ProfileController>().deleteAuth();
+        // throw FetchNetworkException(
+        //     exceptionRawValues[Exceptions.unauthorized401]);
+      case (403):
         throw FetchNetworkException(
             exceptionRawValues[Exceptions.forbidden403]);
       case (404):

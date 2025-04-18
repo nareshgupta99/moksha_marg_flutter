@@ -21,14 +21,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   void initState() {
     super.initState();
     Get.find<BootomNavigationController>().init();
     Get.find<TempleController>().getAllTemple();
-
-
   }
 
   List<String> images = [
@@ -51,6 +48,7 @@ class _HomeViewState extends State<HomeView> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: topNavigaton(isLeading: false),
         backgroundColor: ColorsResources.backgroundColor,
         bottomNavigationBar: bottomNavigaton(),
@@ -66,105 +64,108 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _body(BuildContext context) {
-    return GetBuilder<TempleController>(
-      builder: (templeController) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // services section
-              GridView.builder(
+    return GetBuilder<TempleController>(builder: (templeController) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // services section
+            GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 4,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      onTap(index);
+                    },
+                    child: _serviceCard(
+                        url: images[index],
+                        heading: title[index],
+                        desc: "Satvik Meal"),
+                  );
+                }),
+
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Text("Live Darshan Now",
+                  style: TextStyle(
+                      fontFamily: TypographyResources.roboto,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 24)),
+            ),
+
+            // List View
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                    crossAxisCount: 2,
-                  ),
+                  itemCount: templeController.temples.length,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        onTap(index);
-                      },
-                      child: _serviceCard(
-                          url: images[index],
-                          heading: title[index],
-                          desc: "Satvik Meal"),
-                    );
-                  }),
-        
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text("Live Darshan Now",
-                    style: TextStyle(
-                        fontFamily: TypographyResources.roboto,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 24)),
-              ),
-        
-              // List View
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: templeController.temples.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
+                    return Padding(
                         padding: EdgeInsets.only(right: Dimensions.padding12),
                         child: GestureDetector(
-                          onTap: () => Get.toNamed(RoutesHelper.getLiveDarshan( temple:templeController.temples[index])),
-                          child: livedarhanCard(
-                            templeName:templeController.temples[index].name ??"",
-                            city: templeController.temples[index].city??"",
-                            imageUri: images[index])));
-                    }),
+                            onTap: () => Get.toNamed(
+                                RoutesHelper.getLiveDarshan(
+                                    temple: templeController.temples[index])),
+                            child: livedarhanCard(
+                                templeName:
+                                    templeController.temples[index].name ?? "",
+                                city:
+                                    templeController.temples[index].city ?? "",
+                                imageUri: templeController.temples[index].image??"" )));
+                  }),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Text(
+                "Popular Destination ",
+                style: TextStyle(
+                    fontFamily: TypographyResources.roboto,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 24),
               ),
-        
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text(
-                  "Popular Destination ",
-                  style: TextStyle(
-                      fontFamily: TypographyResources.roboto,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 24),
-                ),
+            ),
+
+            _destinationCard(
+              url: images[0],
+              name: "Tirupati Balaji",
+              add: "Andhra Pradesh",
+              onTap: () {},
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Text(
+                "Nearby Food Service",
+                style: TextStyle(
+                    fontFamily: TypographyResources.roboto,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 24),
               ),
-        
-              _destinationCard(
-                url: images[0],
-                name: "Tirupati Balaji",
-                add: "Andhra Pradesh",
-                onTap: () {},
-              ),
-        
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text(
-                  "Nearby Food Service",
-                  style: TextStyle(
-                      fontFamily: TypographyResources.roboto,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 24),
-                ),
-              ),
-        
-              restaurentCard(
-                url: "https://res.cloudinary.com/dnkci1bpn/image/upload/v1744529611/l8lmitpjashecngenalh.jpg",
-                type: "Pure Vegetarian",
-                rating: 4.5,
-                priceWithUnit: "200 for two",
-                restaurentName: "Satvik Bhoj",
-                onPressed: () {},
-              )
-            ],
-          ),
-        );
-      }
-    );
+            ),
+
+            restaurentCard(
+              url:
+                  "https://res.cloudinary.com/dnkci1bpn/image/upload/v1744529611/l8lmitpjashecngenalh.jpg",
+              type: "Pure Vegetarian",
+              rating: 4.5,
+              priceWithUnit: "200 for two",
+              restaurentName: "Satvik Bhoj",
+              onPressed: () {},
+            )
+          ],
+        ),
+      );
+    });
   }
 
   Widget _serviceCard(

@@ -29,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: false),
       backgroundColor: ColorsResources.backgroundColor,
       body: Center(child: SingleChildScrollView(child: _body())),
@@ -55,16 +56,15 @@ class _LoginViewState extends State<LoginView> {
                 controller: controller.loginPasswordController,
                 hintText: "Enter your password",
                 isObsecure: controller.loginPasswordObsecure,
-                onTap: ()=>controller.setLoginPasswordObsecure()
-                ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: ()=>Get.toNamed(RoutesHelper.getForgotPassword()),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("forgot password"),),
+                onTap: () => controller.setLoginPasswordObsecure()),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => Get.toNamed(RoutesHelper.getForgotPassword()),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text("forgot password"),
               ),
-              
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: socialLogin(),

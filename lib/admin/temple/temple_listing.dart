@@ -31,6 +31,7 @@ class _TempleListingViewState extends State<TempleListingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(text: "Temples", isLeading: true),
       bottomNavigationBar: bottomNavigatonAdmin(),
       body: _body(),
@@ -61,7 +62,8 @@ class _TempleListingViewState extends State<TempleListingView> {
                                     temple: controller.temples[index])),
                             child: livedarhanCardAdmin(
                                 edit: () {},
-                                delete: () =>controller.deletTemple(id:controller.temples[index].id??0 ),
+                                delete: () => controller.deletTemple(
+                                    id: controller.temples[index].id ?? 0),
                                 templeName:
                                     controller.temples[index].name ?? "",
                                 city: controller.temples[index].city ?? "",
@@ -77,9 +79,6 @@ class _TempleListingViewState extends State<TempleListingView> {
     });
   }
 }
-
-
-
 
 Widget livedarhanCardAdmin(
     {required String imageUri,
@@ -123,9 +122,10 @@ Widget livedarhanCardAdmin(
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: Dimensions.padding16,right: Dimensions.padding16),
+              padding: EdgeInsets.only(
+                  top: Dimensions.padding16, right: Dimensions.padding16),
               child: Row(
-                        spacing: Dimensions.mainAxisSpacing16,
+                spacing: Dimensions.mainAxisSpacing16,
                 children: [
                   GestureDetector(
                       behavior: HitTestBehavior.opaque,

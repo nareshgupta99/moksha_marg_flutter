@@ -23,6 +23,7 @@ class _AddDishState extends State<AddDish> {
   Widget build(BuildContext context) {
     return GetBuilder<DishController>(builder: (controller) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: topNavigaton(isLeading: false),
         bottomNavigationBar: bottomNavigatonRestaurent(),
         body: SingleChildScrollView(

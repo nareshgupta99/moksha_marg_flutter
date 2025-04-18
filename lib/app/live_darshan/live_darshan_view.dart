@@ -117,7 +117,7 @@ class _LiveDarshanViewState extends State<LiveDarshanView> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: Dimensions.padding12),
+                                      horizontal: Dimensions.padding12,vertical: Dimensions.padding16),
                                   child: player,
                                 ),
                                 Padding(

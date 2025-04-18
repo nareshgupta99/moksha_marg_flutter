@@ -16,6 +16,7 @@ class ForgotPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: Center(child: SingleChildScrollView(child: _body())),

@@ -27,6 +27,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   Widget build(BuildContext context) {
     print("userId:: ${widget.userId}");
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: Center(child: SingleChildScrollView(child: _body())),
