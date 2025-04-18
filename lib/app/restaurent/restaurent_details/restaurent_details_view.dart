@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_controller.dart';
+import 'package:moksha_marg/admin/dish/dish_dataservice.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_dataservice.dart';
@@ -28,8 +29,8 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
   @override
   void initState() {
     super.initState();
-    Get.find<RestarantController>()
-        .initRestaurentDetails(restaurantId: widget.id);
+    Get.find<RestarantController>().getRestaurantById(id: widget.id);
+    Get.find<DishController>().getAllDishDataByRestaurant(id: int.parse(widget.id));
     Get.find<FoodCartController>().getAllFromCart();
   }
 
@@ -83,36 +84,35 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
 
                                   return Column(
                                     children: [
-                                      GestureDetector(
-                                        onTap: () => Get.toNamed(
-                                            RoutesHelper.getFoodCart()),
-                                        child: dishMenuItemsCard(
-                                            addButton: () => foodCartController
-                                                .addItemToFoodCart(
-                                                    dishId: controller
-                                                            .dishList[index]
-                                                            .dishId ??
-                                                        0),
-                                            subButton: (cartData?.quantity == 0 ||
-                                                    cartData == null
-                                                ? () {}
-                                                : () => foodCartController
-                                                    .removeOneFromCart(
-                                                        cartItemId:
-                                                            cartData.cartItemId ??
-                                                                0)),
-                                            quantity:
-                                                "${cartData?.quantity ?? 0}",
-                                            foodType:
-                                                "${controller.dishList[index].foodTypes?.name}",
-                                            availabelStatus: "Availabel",
-                                            onPressed: () {},
-                                            price:
-                                                "${controller.dishList[index].price}",
-                                            dishName: "${controller.dishList[index].dishName}",
-                                            type: "${controller.dishList[index].foodTypes?.name}",
-                                            url: "${controller.dishList[index].image}"),
-                                      ),
+                                      dishMenuItemsCard(
+                                          addButton: () => foodCartController
+                                              .addItemToFoodCart(
+                                                  dishId: controller
+                                                          .dishList[index]
+                                                          .dishId ??
+                                                      0),
+                                          subButton: (cartData?.quantity == 0 ||
+                                                  cartData == null
+                                              ? () {}
+                                              : () => foodCartController
+                                                  .removeOneFromCart(
+                                                      cartItemId:
+                                                          cartData.cartItemId ??
+                                                              0)),
+                                          quantity:
+                                              "${cartData?.quantity ?? 0}",
+                                          foodType:
+                                              "${controller.dishList[index].foodTypes?.name}",
+                                          availabelStatus: "Availabel",
+                                          onPressed: () {},
+                                          price:
+                                              "${controller.dishList[index].price}",
+                                          dishName:
+                                              "${controller.dishList[index].dishName}",
+                                          type:
+                                              "${controller.dishList[index].foodTypes?.name}",
+                                          url:
+                                              "${controller.dishList[index].image}"),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: Dimensions.padding16),

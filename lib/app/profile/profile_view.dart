@@ -10,7 +10,6 @@ import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/alert.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
-import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/local_keys.dart';
 import 'package:moksha_marg/util/local_storage.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
@@ -101,7 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => () {},
+                  onTap: () =>controller.updateImage(),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,

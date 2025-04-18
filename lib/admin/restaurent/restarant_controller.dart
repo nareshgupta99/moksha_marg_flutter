@@ -46,9 +46,6 @@ class RestarantController extends GetxController implements GetxService {
 
   void initRestaurentDetails({required String restaurantId}) {
     print("restaurent id:: $restaurantId");
-    Get.find<RestarantController>().getRestaurantById(id: "$restaurantId");
-    Get.find<DishController>()
-        .getAllDishByRestaurant(id: restaurantData?.restaurantId ?? 0);
   }
 
   void registerWithValidation() async {

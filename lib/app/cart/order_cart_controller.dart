@@ -41,7 +41,7 @@ class OrderCartController extends GetxController implements GetxService {
     payload.paymentId = response.paymentId!;
     payload.razorpayOrderId = response.orderId!;
     payload.signature = response.signature!;
-    // paymentVerificationForFood(payload:payload);
+    paymentVerificationFood(payload: payload);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {}

@@ -55,18 +55,20 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                       Padding(
                           padding: EdgeInsets.only(top: Dimensions.padding32),
                           child: heading(text: "Settings")),
-                      ListView.builder(
-                          itemCount: controller.userSettingItems.length,
-                          shrinkWrap: true,
-                          itemBuilder: (element, index) {
-                            return GestureDetector(
-                              onTap: () => onTap(index),
-                              child: _settingCardItem(
-                                name: controller.userSettingItems[index].name,
-                                icon: controller.userSettingItems[index].icon,
-                              ),
-                            );
-                          })
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: controller.userSettingItems.length,
+                            shrinkWrap: true,
+                            itemBuilder: (element, index) {
+                              return GestureDetector(
+                                onTap: () => onTap(index),
+                                child: _settingCardItem(
+                                  name: controller.userSettingItems[index].name,
+                                  icon: controller.userSettingItems[index].icon,
+                                ),
+                              );
+                            }),
+                      )
                     ],
                   )),
             ),
@@ -170,7 +172,8 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
         Get.toNamed(RoutesHelper.getChangedPassword());
         break;
       case 1:
-        // changeLanguageView(context: context);
+        Get.toNamed(RoutesHelper.getFoodCart());
+
         break;
       case 2:
         // logout(context);

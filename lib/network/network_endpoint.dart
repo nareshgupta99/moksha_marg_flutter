@@ -54,7 +54,7 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.getAllFromFoodCart: "/api/v1/food/cart/all",
   Endpoints.removeOneItemFromFoodCart: "/api/v1/food/cart/delete",
   Endpoints.createFoodOrder: "/api/v1/food/order/create",
-  Endpoints.paymentVerificationForFood: "",
+  Endpoints.paymentVerificationForFood: "/api/v1/food/order/payment/verify",
   Endpoints.addTemple: "/api/v1/temple/add",
   Endpoints.getAllTemple: "/api/v1/temple/all",
   Endpoints.getTmpleById: "/api/v1/temple",

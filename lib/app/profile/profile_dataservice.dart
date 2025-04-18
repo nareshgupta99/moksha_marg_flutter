@@ -44,6 +44,7 @@ extension ProfileDataservice on ProfileController {
         case Result.onSuccess:
           Get.snackbar("Success", response?.message ?? "");
           update();
+          getUserProfile();
           break;
         case Result.onFailed:
           // loading = false;

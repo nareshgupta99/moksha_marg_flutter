@@ -6,11 +6,12 @@ import 'package:moksha_marg/network/network_resources.dart';
 
 class FilePickerController extends GetxController implements GetxService {
   String fileName = "";
-  
+
   List<MultipartFiles> multipartFiles = [];
 
   void init() {
-     fileName = "";
+    fileName = "";
+    multipartFiles = [];
   }
 
   Future<void> pickImage() async {
@@ -26,5 +27,4 @@ class FilePickerController extends GetxController implements GetxService {
       update();
     }
   }
-
 }
