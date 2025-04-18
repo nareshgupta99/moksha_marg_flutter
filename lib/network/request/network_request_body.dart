@@ -9,6 +9,8 @@ class AuthPayload {
   String? phoneNumber;
   String? otp;
   String? role;
+  String? oldPassword;
+  List<MultipartFiles>? image;
 }
 
 class RestaurantPayload {

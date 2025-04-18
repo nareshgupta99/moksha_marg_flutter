@@ -1,28 +1,23 @@
 import 'package:get/get.dart';
-import 'package:moksha_marg/admin/temple_controller.dart';
-import 'package:moksha_marg/file_picker_controller.dart';
+import 'package:moksha_marg/app/profile/profile_controller.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
-extension TempleDataservice on TempleController {
-  Future<void> addTemple() async {
+extension ProfileDataservice on ProfileController {
+  Future<void> updateUserPassword() async {
     // loading = true;
-    TemplePayload payload = TemplePayload();
-    payload.city = cityController.text.trim();
-    payload.liveLink = linkController.text.trim();
-    payload.name = nameController.text.trim();
-    payload.streetAddress = streetAddressController.text.trim();
-    payload.image = Get.find<FilePickerController>().multipartFiles;
-
+    var authPayload = AuthPayload();
+    authPayload.oldPassword = oldPasswordController.text.trim();
+    authPayload.password = newPasswordController.text.trim();
     update();
-    await repository.addTemple(payload, (result, response, message) {
+    await repository.updatePassword(authPayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
-          final data = response?.data;
-          templeData = data;
+          final loginData = response?.data;
+          Get.back();
           update();
-          Get.snackbar("success", response?.message??"");
           break;
         case Result.onFailed:
           // loading = false;
@@ -38,17 +33,16 @@ extension TempleDataservice on TempleController {
     });
   }
 
-  Future<void> getAllTemples() async {
+  Future<void> updateUserImage() async {
     // loading = true;
-
-    await repository.getAllTemple((result, response, message) {
+    var authPayload = AuthPayload();
+    update();
+    await repository.updateImage(authPayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
-          final data = response?.dataList;
-          temples = response?.dataList ?? [];
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
+          Get.offAndToNamed(RoutesHelper.getLogin());
           break;
         case Result.onFailed:
           // loading = false;
@@ -64,17 +58,17 @@ extension TempleDataservice on TempleController {
     });
   }
 
-  Future<void> getTempleById({required int id}) async {
+  Future<void> updateProfile({String? email}) async {
     // loading = true;
-
-    await repository.getTempelById(id, (result, response, message) {
+    var authPayload = AuthPayload();
+    authPayload.name = "";
+    update();
+    await repository.updateProfile(authPayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
-          final data = response?.data;
-          templeData = data!;
+          // authData = response?.data;
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           // loading = false;
@@ -90,17 +84,15 @@ extension TempleDataservice on TempleController {
     });
   }
 
-  Future<void> deleteTempleById({required int id}) async {
+  Future<void> getUserProfile({String? email}) async {
     // loading = true;
-
-    await repository.deleteTempelById(id, (result, response, message) {
+    update();
+    await repository.getProfile((result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
-          final data = response?.data;
-          templeData = data!;
+          user = response?.data;
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           // loading = false;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/temple_controller.dart';
-import 'package:moksha_marg/admin/temple_dataservice.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/custom_file_uploader.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -51,7 +50,7 @@ class _AddTempleState extends State<AddTempleView> {
                     textFieldLabel: "Live Link",
                     controller: controller.linkController),
                 customFileUpload(),
-                customButton(onPressed: () =>controller.addTemple(), text: "Add Temple")
+                customButton(onPressed: () =>controller.addTempleWithValidation(), text: "Add Temple")
               ],
             ),
           ),

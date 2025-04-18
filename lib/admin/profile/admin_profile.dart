@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
-import 'package:moksha_marg/app/profile/setting_model.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -15,14 +14,14 @@ import 'package:moksha_marg/util/local_keys.dart';
 import 'package:moksha_marg/util/local_storage.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+class AdminProfileView extends StatefulWidget {
+  const AdminProfileView({super.key});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  State<AdminProfileView> createState() => _AdminProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> {
+class _AdminProfileViewState extends State<AdminProfileView> {
   @override
   void initState() {
     super.initState();
@@ -36,7 +35,7 @@ class _ProfileViewState extends State<ProfileView> {
     return GetBuilder<ProfileController>(builder: (controller) {
       return Scaffold(
           appBar: topNavigaton(isLeading: false),
-          bottomNavigationBar: bottomNavigaton(),
+          bottomNavigationBar: bottomNavigatonAdmin(),
           backgroundColor: ColorsResources.backgroundColor,
           body: Padding(
             padding: EdgeInsets.symmetric(

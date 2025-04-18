@@ -88,3 +88,39 @@ Widget bottomNavigatonRestaurent() {
         ]);
   });
 }
+
+
+
+
+Widget bottomNavigatonAdmin() {
+  return GetBuilder<BootomNavigationController>(builder: (controller) {
+    return BottomNavigationBar(
+        currentIndex: controller.selectedIndex,
+        onTap: (value) {
+          controller.setRestaurentSelectedIndex(value);
+        },
+        selectedItemColor: Colors.black,
+        unselectedItemColor: ColorsResources.greyColor,
+        selectedLabelStyle: TextStyle(color: Colors.black),
+        type: BottomNavigationBarType.fixed,
+        unselectedLabelStyle: TextStyle(
+          color: ColorsResources.greyColor,
+        ),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "DashBoard",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
+            label: "Temples",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.video_camera_solid),
+              label: "Add New Temples"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile"),
+        ]);
+  });
+}

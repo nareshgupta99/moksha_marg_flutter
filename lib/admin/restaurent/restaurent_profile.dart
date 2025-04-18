@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
-import 'package:moksha_marg/app/profile/setting_model.dart';
+import 'package:moksha_marg/app/profile/profile_dataservice.dart';
+import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
@@ -25,6 +27,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
   void initState() {
     super.initState();
     Get.find<ProfileController>().init();
+    Get.find<ProfileController>().getProfile();
   }
 
   @override
@@ -48,7 +51,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                       vertical: Dimensions.padding16),
                   child: Column(
                     children: [
-                      _header(),
+                      _header(controller),
                       Padding(
                           padding: EdgeInsets.only(top: Dimensions.padding32),
                           child: heading(text: "Settings")),
@@ -57,7 +60,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                           shrinkWrap: true,
                           itemBuilder: (element, index) {
                             return GestureDetector(
-                              onTap: ()=>onTap(index),
+                              onTap: () => onTap(index),
                               child: _settingCardItem(
                                 name: controller.userSettingItems[index].name,
                                 icon: controller.userSettingItems[index].icon,
@@ -71,18 +74,50 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
     });
   }
 
-  Widget _header() {
+  Widget _header(ProfileController controller) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundImage: AssetImage(Images.temple1),
-          radius: 50,
+        Stack(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(Images.temple1),
+              radius: 60.r,
+            ),
+            Positioned(
+              bottom: 3.r,
+              left: 20.r,
+              right: 20.r,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30.r),
+                  ),
+                ),
+                alignment: Alignment.center,
+                width: Get.width,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => () {},
+                  child: Text(
+                    'Update',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
         Padding(
           padding: EdgeInsets.only(left: Dimensions.padding16),
           child: Column(
             children: [
-              heading(text: "John Doe"),
+              heading(text: controller.user?.name ?? ""),
               Text(
                 "Member since 2023",
                 style: TextStyle(color: ColorsResources.textGreyColor),
@@ -132,7 +167,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
   void onTap(int index) {
     switch (index) {
       case 0:
-        // Get.toNamed(RoutesHelper.());
+        Get.toNamed(RoutesHelper.getChangedPassword());
         break;
       case 1:
         // changeLanguageView(context: context);

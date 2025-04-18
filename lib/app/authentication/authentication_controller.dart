@@ -36,7 +36,6 @@ class AuthenticationController extends GetxController implements GetxService {
   List<String> roles = [
     "SELECT ROLE",
     Role.VISITOR.name,
-    Role.ADMIN.name,
     Role.HOTEL_OWNER.name,
     Role.GUIDE.name,
     Role.RESTAURENT_OWNER.name
@@ -47,7 +46,6 @@ class AuthenticationController extends GetxController implements GetxService {
 
   var resetPasswordController = TextEditingController();
   var resetConfirmPasswordController = TextEditingController();
-
 
   AuthData? authData;
 
@@ -69,7 +67,6 @@ class AuthenticationController extends GetxController implements GetxService {
     roles = [
       "SELECT ROLE",
       Role.VISITOR.name,
-      Role.ADMIN.name,
       Role.HOTEL_OWNER.name,
       Role.GUIDE.name,
       Role.RESTAURENT_OWNER.name
@@ -184,7 +181,7 @@ class AuthenticationController extends GetxController implements GetxService {
     }
   }
 
- String otp = "";
+  String otp = "";
 
   void verifyOtpWithValidation({required int userId}) {
     otp = "";
@@ -195,7 +192,8 @@ class AuthenticationController extends GetxController implements GetxService {
     if (otp.isEmpty) {
       Get.snackbar('Error', 'Otp is required');
     } else if (!otp.isValidOtp()) {
-      Get.snackbar('Error', 'Entered password must be at least 6 characters long');
+      Get.snackbar(
+          'Error', 'Entered password must be at least 6 characters long');
     } else {
       // debugConsole(otp);
       verifyOtp(userId: userId, otp: otp);
@@ -259,6 +257,8 @@ class AuthenticationController extends GetxController implements GetxService {
       } else {
         Get.offAllNamed(RoutesHelper.getDishListing());
       }
+    } else if (decodeLoginData.roles == Role.ADMIN.name) {
+      Get.offAllNamed(RoutesHelper.getAddTemple());
     } else {
       Get.offAndToNamed(RoutesHelper.getLogin());
     }

@@ -12,6 +12,7 @@ import 'package:moksha_marg/app/cart/food_cart_repository.dart';
 import 'package:moksha_marg/app/cart/order_cart_controller.dart';
 import 'package:moksha_marg/app/cart/order_cart_repository.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
+import 'package:moksha_marg/app/profile/profile_repository.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_manager.dart';
@@ -28,6 +29,7 @@ Future<void> init() async {
   Get.lazyPut(() => FoodCartRepository(network: Get.find()));
   Get.lazyPut(() => OrderCartRepository(network: Get.find()));
   Get.lazyPut(() => TempleRepository(network: Get.find()));
+  Get.lazyPut(() => ProfileRepository(network: Get.find()));
 
 
 
@@ -35,7 +37,7 @@ Future<void> init() async {
   Get.lazyPut(() => SplashController(sharedPreferences:sharedPreference));
   Get.lazyPut(() => AuthenticationController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => BootomNavigationController());
-  Get.lazyPut(() => ProfileController(sharedPreferences: sharedPreference));
+  Get.lazyPut(() => ProfileController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => RestarantController(repository: Get.find()));
   Get.lazyPut(() => FilePickerController());
   Get.lazyPut(() => DishController(repository: Get.find()));

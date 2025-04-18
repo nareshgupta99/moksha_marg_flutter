@@ -23,13 +23,14 @@ class SplashController extends GetxController implements GetxService {
           LoginData decodeLoginData = LoginData.fromJson(data);
           if (decodeLoginData.roles == Role.VISITOR.name) {
             Get.offAllNamed(RoutesHelper.getHome());
-          }
-          if (decodeLoginData.roles == Role.RESTAURENT_OWNER.name) {
+          } else if (decodeLoginData.roles == Role.RESTAURENT_OWNER.name) {
             if (restaurentId == null || restaurentId.isEmpty) {
               Get.offAllNamed(RoutesHelper.getAddRestaurent());
             } else {
               Get.offAllNamed(RoutesHelper.getDishListing());
             }
+          } else if (decodeLoginData.roles == Role.ADMIN.name) {
+            Get.offAllNamed(RoutesHelper.getAddTemple());
           }
         } else {
           Get.offAndToNamed(RoutesHelper.getLogin());

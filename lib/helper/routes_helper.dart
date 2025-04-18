@@ -7,6 +7,7 @@ import 'package:moksha_marg/admin/restaurent/add_restaurent_details_view.dart';
 import 'package:moksha_marg/admin/dish/dish_listing.dart';
 import 'package:moksha_marg/admin/dish/update_dish.dart';
 import 'package:moksha_marg/admin/restaurent/restaurent_profile.dart';
+import 'package:moksha_marg/admin/temple/add_temple_view.dart';
 import 'package:moksha_marg/app/authentication/forgot_password/forgot_password_view.dart';
 import 'package:moksha_marg/app/authentication/login/login.dart';
 import 'package:moksha_marg/app/authentication/registration/registration_view.dart';
@@ -19,6 +20,7 @@ import 'package:moksha_marg/app/home/home_view.dart';
 import 'package:moksha_marg/app/live_darshan/live_darshan_view.dart';
 import 'package:moksha_marg/app/live_darshan/temple_view.dart';
 import 'package:moksha_marg/app/profile/profile_view.dart';
+import 'package:moksha_marg/app/profile/update_password.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_details/restaurent_details_view.dart';
 import 'package:moksha_marg/app/restaurent/restaurent_view.dart';
 import 'package:moksha_marg/network/response/add_dish.dart';
@@ -41,6 +43,9 @@ class RoutesHelper {
   static const String _profile = "/profile";
   static const String _splash = "/splash";
   static const String _verifyOtp = "/verify_otp";
+  static const String _changedPassword = "/changed_password";
+  static const String _addTemple = "/add_temple";
+
 
 
 
@@ -80,6 +85,7 @@ class RoutesHelper {
   static String getSplash() => _splash;
   static String getRestaurentProfile() => _restaurentProfile;
   static String getVerifyOtp({required String email, required int userId}) =>"$_verifyOtp?id=$userId&email=$email";
+  static String getChangedPassword() => _changedPassword;
 
   //Restaurent Admin Routes
 
@@ -92,6 +98,8 @@ class RoutesHelper {
     String encodeDish = base64Url.encode(utf8.encode(jsonEncode(dish.toJson())));
     return "$_editDish?dish=$encodeDish";
   }
+  static String getAddTemple() => _addTemple;
+
 
 
   
@@ -112,11 +120,13 @@ class RoutesHelper {
     GetPage(name: _profile, page: () => ProfileView()),
     GetPage(name: _splash, page: () => SplashView()),
     GetPage(name: _verifyOtp, page: () => VerifyOtpView(userId: Get.parameters['id']!, email: Get.parameters['email']!,)),
+    GetPage(name: _changedPassword, page: () => UpdatePasswordView()),
 
   //Restaurent Admin Routes
 
 
     GetPage(name: _addDish, page: () => AddDish()),
+    GetPage(name: _addTemple, page: () => AddTempleView()),
     GetPage(name: _dishListing, page: () => DishListing()),
     GetPage(name: _restaurentProfile, page: () => RestaurentProfileView()),
     GetPage(name: _addRestaurant, page: () => AddRestaurentDetailsView()),

@@ -91,4 +91,18 @@ class NetworkPayload {
       "liveLink": payload.liveLink
     };
   }
+
+  static Map<String, dynamic>? updatePasswordPayload({required AuthPayload payload}) {
+    return {
+      "oldPassword": payload.oldPassword,
+      "password": payload.password,
+    };
+  }
+
+  static Map<String, dynamic>? updateProfilePayload({required AuthPayload payload}) {
+    return {
+      "name": payload.name,
+    };
+  }
+
 }
