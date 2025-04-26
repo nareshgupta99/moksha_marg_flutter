@@ -50,7 +50,7 @@ class TempleRepository extends GetxController implements GetxService {
   }
 
   
-     Future<void> getTempelById(int id, Function(Result result, NetworkResponse<TempleData>? response, String? message) completion) async {
+     Future<void> getTempelById(String id, Function(Result result, NetworkResponse<TempleData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.getRestaurantById, method: HTTPMethod.get,slashedQuery:"/$id" );
@@ -69,7 +69,7 @@ class TempleRepository extends GetxController implements GetxService {
 
 
 
-Future<void> deleteTempelById(int id, Function(Result result, NetworkResponse<TempleData>? response, String? message) completion) async {
+Future<void> deleteTempelById(String id, Function(Result result, NetworkResponse<TempleData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.deleteTempleById, method: HTTPMethod.delete,slashedQuery:"/$id" );

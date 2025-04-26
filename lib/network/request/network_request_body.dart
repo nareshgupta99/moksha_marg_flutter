@@ -1,7 +1,7 @@
 import 'package:moksha_marg/network/network_resources.dart';
 
 class AuthPayload {
-  int? userId;
+  String? userId;
   String? name;
   String? email;
   String? password;
@@ -35,7 +35,7 @@ class DishPayload {
 }
 
 class FoodCartPayload {
-  int? dishId;
+  String? dishId;
   int? quantity;
 }
 
@@ -51,7 +51,7 @@ class PaymentVerificationPayload {
 }
 
 class TemplePayload {
-  int? id;
+  String? id;
   String? name;
   String? streetAddress;
   String? city;

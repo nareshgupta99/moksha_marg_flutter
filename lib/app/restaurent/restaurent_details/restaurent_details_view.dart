@@ -30,7 +30,7 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
   void initState() {
     super.initState();
     Get.find<RestarantController>().getRestaurantById(id: widget.id);
-    Get.find<DishController>().getAllDishDataByRestaurant(id: int.parse(widget.id));
+    Get.find<DishController>().getAllDishDataByRestaurant(id: widget.id);
     Get.find<FoodCartController>().getAllFromCart();
   }
 
@@ -90,7 +90,7 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
                                                   dishId: controller
                                                           .dishList[index]
                                                           .dishId ??
-                                                      0),
+                                                      ""),
                                           subButton: (cartData?.quantity == 0 ||
                                                   cartData == null
                                               ? () {}
@@ -98,7 +98,7 @@ class _RestaurentDetailsViewState extends State<RestaurentDetailsView> {
                                                   .removeOneFromCart(
                                                       cartItemId:
                                                           cartData.cartItemId ??
-                                                              0)),
+                                                              "")),
                                           quantity:
                                               "${cartData?.quantity ?? 0}",
                                           foodType:

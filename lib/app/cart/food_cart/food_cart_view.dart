@@ -52,10 +52,10 @@ class _FoodCartViewState extends State<FoodCartView> {
                     itemBuilder: (context, index) {
                       return dishMenuItemsCard(
                         addButton: () => Controller.addItemToFoodCart(
-                            dishId: Controller.cartItems[index].dishId ?? 0),
+                            dishId: Controller.cartItems[index].dishId ??""),
                         subButton: () => Controller.removeOneFromCart(
                             cartItemId:
-                                Controller.cartItems[index].cartItemId ?? 0),
+                                Controller.cartItems[index].cartItemId ?? ""),
                         availabelStatus: "Availabel",
                         quantity: "${Controller.cartItems[index].quantity}",
                         onPressed: () {},

@@ -77,12 +77,11 @@ extension AuthenticationDataService on AuthenticationController {
           loading = false;
           authData = response?.data;
           update();
-            Get.snackbar('Success', response?.message ?? "");
-        
-            Get.toNamed(RoutesHelper.getVerifyOtp(
-                userId: authData?.id ?? 0, email:authData?.email ??"" ));
-          
-          
+          Get.snackbar('Success', response?.message ?? "");
+
+          Get.toNamed(RoutesHelper.getVerifyOtp(
+              userId: authData?.id ?? "", email: authData?.email ?? ""));
+
           break;
         case Result.onFailed:
           loading = false;
@@ -98,7 +97,7 @@ extension AuthenticationDataService on AuthenticationController {
     });
   }
 
-  Future<void> verifyOtp({required int  userId, required String otp}) async {
+  Future<void> verifyOtp({required String userId, required String otp}) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.userId = userId;
@@ -128,7 +127,7 @@ extension AuthenticationDataService on AuthenticationController {
   Future<void> resetPassword({required String userId}) async {
     loading = true;
     var authPayload = AuthPayload();
-    authPayload.userId = int.parse( userId);
+    authPayload.userId = userId;
     authPayload.password = resetPasswordController.text.trim();
     update();
     await repository.resetPassword(authPayload, (result, response, message) {

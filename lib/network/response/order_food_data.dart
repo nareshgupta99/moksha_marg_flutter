@@ -1,5 +1,5 @@
 class OrderFoodData {
-  int? foodOrderId;
+  String? foodOrderId;
   DateTime? orderDate;
   String? restaurantName;
   String? method;

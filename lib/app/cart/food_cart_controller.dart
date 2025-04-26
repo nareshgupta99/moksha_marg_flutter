@@ -18,11 +18,11 @@ class FoodCartController extends GetxController implements GetxService {
     getAllFromCart();
   }
 
-  void addItemToFoodCart({required int dishId}) {
+  void addItemToFoodCart({required String dishId}) {
     addToFoodCart(dishId: dishId, quantity: 1);
   }
 
-  void removedItemFromCart({required int cartId}) {
+  void removedItemFromCart({required String cartId}) {
     removeOneFromCart(cartItemId: cartId);
   }
 }

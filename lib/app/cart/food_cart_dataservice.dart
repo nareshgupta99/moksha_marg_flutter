@@ -32,7 +32,7 @@ extension FoodCartDataservice on FoodCartController {
   }
 
   Future<void> addToFoodCart(
-      {required int dishId, required int quantity}) async {
+      {required String dishId, required int quantity}) async {
     loading = true;
     FoodCartPayload payload = new FoodCartPayload();
     payload.dishId = dishId;
@@ -59,7 +59,7 @@ extension FoodCartDataservice on FoodCartController {
   }
 
   Future<void> removeOneFromCart(
-      {required int cartItemId}) async {
+      {required String cartItemId}) async {
     loading = true;
     await repository.removeQuantityFromCart(cartItemId,(result, response, message) {
       switch (result) {

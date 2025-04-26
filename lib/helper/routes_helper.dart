@@ -78,7 +78,7 @@ class RoutesHelper {
   static String getGuide() => _guides;
   static String getGuidesDetails() => _guidesDetails;
   static String getRestaurent() => _restaurent;
-  static String getRestaurentDetails({required int id}) =>"$_restaurentDetails?id=$id";
+  static String getRestaurentDetails({required String id}) =>"$_restaurentDetails?id=$id";
   static String getLiveDarshan({required TempleData temple}) {
     String encodeTemple = base64Url.encode(utf8.encode(jsonEncode(temple.toJson())));
     return "$_liveDarshan?temple=$encodeTemple";
@@ -88,7 +88,7 @@ class RoutesHelper {
   static String getProfile() => _profile;
   static String getSplash() => _splash;
   static String getRestaurentProfile() => _restaurentProfile;
-  static String getVerifyOtp({required String email, required int userId}) =>"$_verifyOtp?id=$userId&email=$email";
+  static String getVerifyOtp({required String email, required String userId}) =>"$_verifyOtp?id=$userId&email=$email";
   
   static String getChangedPassword() => _changedPassword;
   static String getAdminProfile() => _adminProfile;

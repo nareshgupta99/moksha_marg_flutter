@@ -18,7 +18,7 @@ class AuthenticationController extends GetxController implements GetxService {
   AuthenticationController(
       {required this.sharedPreferences, required this.repository});
 
-  bool loading = true;
+  bool loading = false;
 
   bool registerPasswordObsecure = true;
   bool loginPasswordObsecure = true;
@@ -89,7 +89,7 @@ class AuthenticationController extends GetxController implements GetxService {
   late Timer timer;
 
   void startTimer() {
-    countDown = 10.obs;
+    countDown = 120.obs;
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (countDown.value == 0) {
         timer.cancel();
@@ -142,6 +142,7 @@ class AuthenticationController extends GetxController implements GetxService {
     } else if (loginPasswordController.text.trim().isEmpty) {
       Get.snackbar('Error', 'Password is required');
     } else {
+      loading = true;
       login();
     }
   }
@@ -164,6 +165,7 @@ class AuthenticationController extends GetxController implements GetxService {
         selecedRole.trim() == "SELECT ROLE") {
       Get.snackbar('Error', 'Role is required');
     } else {
+      loading = true;
       register();
     }
   }
@@ -177,13 +179,14 @@ class AuthenticationController extends GetxController implements GetxService {
         (email == null || !email.isValidEmail())) {
       Get.snackbar('Error', 'Enter valid email');
     } else {
+      loading = true;
       sendOtp(email: email);
     }
   }
 
   String otp = "";
 
-  void verifyOtpWithValidation({required int userId}) {
+  void verifyOtpWithValidation({required String userId}) {
     otp = "";
     for (var val in verifyOtpControler) {
       otp = otp + val.text.trim();
@@ -196,6 +199,7 @@ class AuthenticationController extends GetxController implements GetxService {
           'Error', 'Entered password must be at least 6 characters long');
     } else {
       // debugConsole(otp);
+      loading = true;
       verifyOtp(userId: userId, otp: otp);
     }
   }
@@ -211,6 +215,7 @@ class AuthenticationController extends GetxController implements GetxService {
         resetConfirmPasswordController.text.trim()) {
       Get.snackbar('Error', 'Password and Confirm password must be same');
     } else {
+      loading = true;
       resetPassword(userId: userId);
     }
   }

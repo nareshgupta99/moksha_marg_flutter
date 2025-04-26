@@ -79,8 +79,11 @@ class _RestaurentViewState extends State<RestaurentView> {
                             Images.temple1,
                         restaurentName: controller.restaurants[index].name,
                         type: foodType,
-                        onPressed: () =>
-                            Get.toNamed(RoutesHelper.getRestaurentDetails(id: controller.restaurants[index].restaurantId ??0 )),
+                        onPressed: () => Get.toNamed(
+                            RoutesHelper.getRestaurentDetails(
+                                id: controller
+                                        .restaurants[index].restaurantId ??
+                                    "")),
                         rating: 4.3,
                         priceWithUnit:
                             controller.restaurants[index].startingPrice ?? ""),

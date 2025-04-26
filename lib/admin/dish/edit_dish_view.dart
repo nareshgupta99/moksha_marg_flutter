@@ -71,7 +71,7 @@ class _EditDishState extends State<EditDishView> {
                     textFieldLabel: "Select Type"),
                 // customFileUpload(),
                 customButton(
-                    onPressed: () => controller.addDish(restaurentId: 1), text: "Add Dish")
+                    onPressed: () => controller.addDish(restaurentId: ""), text: "Add Dish")
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'dart:core';
 
 class LoginData {
-  int? userId;
+  String? userId;
   String? name;
   String? email;
   String? type;
@@ -9,21 +9,20 @@ class LoginData {
   String? roles;
   bool? isGuideAdded;
   bool? isRestaurentAdded;
-  int? restaurantId;
+  String? restaurantId;
   String? image;
 
-  LoginData({
-    this.userId,
-    this.name,
-    this.email,
-    this.type,
-    this.token,
-    this.roles,
-    this.isGuideAdded,
-    this.isRestaurentAdded,
-    this.restaurantId,
-    this.image
-  });
+  LoginData(
+      {this.userId,
+      this.name,
+      this.email,
+      this.type,
+      this.token,
+      this.roles,
+      this.isGuideAdded,
+      this.isRestaurentAdded,
+      this.restaurantId,
+      this.image});
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
       userId: json["userId"],
@@ -35,8 +34,7 @@ class LoginData {
       isGuideAdded: json['isGuideAdded'],
       isRestaurentAdded: json['isRestaurentAdded'],
       restaurantId: json["restaurantId"],
-      image:json["image"]
-      );
+      image: json["image"]);
 
   Map<String, dynamic> toJson() => {
         "userId": userId,
@@ -48,6 +46,6 @@ class LoginData {
         "isGuideAdded": isGuideAdded,
         "isRestaurentAdded": isRestaurentAdded,
         "restaurantId": restaurantId,
-        "image":image
+        "image": image
       };
 }

@@ -7,6 +7,7 @@ import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 
 class UpdatePasswordView extends StatefulWidget {
   UpdatePasswordView({super.key});
@@ -40,7 +41,8 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
           children: [
             heading(text: "Update Password"),
             Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 16),
+              padding: EdgeInsets.only(
+                  top: Dimensions.padding32, bottom: Dimensions.padding16),
               child: customObsecureTextField(
                   textFieldLabel: "Old Password",
                   controller: controller.oldPasswordController,
@@ -48,12 +50,15 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                   isObsecure: controller.oldPasswordObsecure,
                   onTap: () => controller.setOldPasswordObsecure()),
             ),
-            customObsecureTextField(
-                textFieldLabel: "New Password",
-                controller: controller.newPasswordController,
-                hintText: "Enter new password",
-                isObsecure: controller.newPasswordObsecure,
-                onTap: () => controller.setNewPasswordObsecure()),
+            Padding(
+              padding: EdgeInsets.only(bottom: Dimensions.padding16),
+              child: customObsecureTextField(
+                  textFieldLabel: "New Password",
+                  controller: controller.newPasswordController,
+                  hintText: "Enter new password",
+                  isObsecure: controller.newPasswordObsecure,
+                  onTap: () => controller.setNewPasswordObsecure()),
+            ),
             customObsecureTextField(
                 textFieldLabel: "Confirm Password",
                 controller: controller.confirmPasswordController,

@@ -84,7 +84,10 @@ class _LoginViewState extends State<LoginView> {
                 text1: "Don't have an account?",
                 text2: "Sign up",
                 onTap: () {
-                  Get.toNamed(RoutesHelper.getRegistration());
+                  if (controller.loading) {
+              Center(child: CircularProgressIndicator());
+          }
+                 Get.toNamed(RoutesHelper.getRegistration());
                 })
           ],
         ),

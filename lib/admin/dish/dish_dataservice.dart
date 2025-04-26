@@ -5,7 +5,7 @@ import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
 extension DishDataservice on DishController {
-  Future<void> createDish(int id) async {
+  Future<void> createDish(String id) async {
     // loading = true;
     DishPayload dishPayload = DishPayload();
     dishPayload.dishName = addDishNameController.text.trim();
@@ -14,7 +14,6 @@ extension DishDataservice on DishController {
     dishPayload.price = priceControllerController.text.trim();
     dishPayload.foodTypes = selecedFoodTypes;
     dishPayload.image = Get.find<FilePickerController>().multipartFiles;
-    id = 1;
     update();
     await repository.addDish(id, dishPayload, (result, response, message) {
       switch (result) {
@@ -39,7 +38,7 @@ extension DishDataservice on DishController {
     });
   }
 
-  Future<void> getAllDishDataByRestaurant({required int id}) async {
+  Future<void> getAllDishDataByRestaurant({required String id}) async {
     // loading = true;
 
     await repository.getAllDishByRestaurant(id, (result, response, message) {
@@ -64,7 +63,7 @@ extension DishDataservice on DishController {
     });
   }
 
-  Future<void> getDish({required int id}) async {
+  Future<void> getDish({required String id}) async {
     // loading = true;
 
     await repository.getDishById(id, (result, response, message) {
@@ -90,7 +89,7 @@ extension DishDataservice on DishController {
     });
   }
 
-  Future<void> deleteDishById({required int id}) async {
+  Future<void> deleteDishById({required String id}) async {
     // loading = true;
 
     await repository.deleteDishById(id, (result, response, message) {

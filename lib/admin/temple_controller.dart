@@ -31,6 +31,8 @@ class TempleController extends GetxController implements GetxService {
     streetAddressController = TextEditingController();
     cityController = TextEditingController();
     linkController = TextEditingController();
+    Get.find<FilePickerController>().multipartFiles = [];
+    Get.find<FilePickerController>().fileName = "";
   }
 
   void addTempleWithValidation() async {
@@ -54,11 +56,11 @@ class TempleController extends GetxController implements GetxService {
     getAllTemples();
   }
 
-  void getTempleById({required int id}) {
+  void getTempleById({required String id}) {
     getTempleById(id: id);
   }
 
-  void deletTemple({required int id}) {
+  void deletTemple({required String id}) {
     print("temple");
     deleteTempleById(id: id);
   }

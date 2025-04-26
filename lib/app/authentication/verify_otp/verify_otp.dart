@@ -6,6 +6,7 @@ import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/otp_field.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
+import 'package:moksha_marg/util/dimensions.dart';
 
 class VerifyOtpView extends StatefulWidget {
   String email;
@@ -67,11 +68,35 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    controller.verifyOtpWithValidation(
-                        userId: int.parse(widget.userId));
+                    controller.verifyOtpWithValidation(userId: widget.userId);
                   },
                   text: "Submit",
                   width: Get.width),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Request a new verification code:",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: Dimensions.font14)),
+                Obx(() => (controller.countDown.value != 0
+                    ? Text(
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: Dimensions.font14),
+                        "0${controller.countDown.value ~/ 60}: ${controller.countDown.value % 60}")
+                    : GestureDetector(
+                        onTap: () {
+                          controller.sendOtpWithValidation(email: widget.email);
+                          Get.find<AuthenticationController>().startTimer();
+                        },
+                        child: Text("resend",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w700,
+                                fontSize: Dimensions.font14))))),
+              ],
             ),
           ],
         ),

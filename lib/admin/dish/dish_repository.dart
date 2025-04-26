@@ -14,7 +14,7 @@ class DishRepository extends GetxController implements GetxService {
   final NetworkManager network;
   DishRepository({required this.network});
 
-  Future<void> addDish(int id,DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+  Future<void> addDish(String id,DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.addDish, method: HTTPMethod.multipartPOST,slashedQuery:"/$id", payload: NetworkPayload.dishPayload(payload: payload),multipartFiles: payload.image,multipartPayload: {"dish": jsonEncode(NetworkPayload.dishPayload(payload: payload))}  );
@@ -32,7 +32,7 @@ class DishRepository extends GetxController implements GetxService {
   
 
   
-     Future<void> getAllDishByRestaurant(int id, Function(Result result, NetworkResponse0<DishData>? response, String? message) completion) async {
+     Future<void> getAllDishByRestaurant(String id, Function(Result result, NetworkResponse0<DishData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.getAllDishByRestaurant, method: HTTPMethod.get,slashedQuery:"/$id");
@@ -50,7 +50,7 @@ class DishRepository extends GetxController implements GetxService {
   }
 
   
-    Future<void> getDishById(int id, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+    Future<void> getDishById(String id, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.getRestaurantById, method: HTTPMethod.get,slashedQuery:"/$id" );
@@ -67,7 +67,7 @@ class DishRepository extends GetxController implements GetxService {
     }
   }
 
-   Future<void> deleteDishById(int id, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+   Future<void> deleteDishById(String id, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
     try {
       
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.deleteDish, method: HTTPMethod.delete,slashedQuery:"/$id" );

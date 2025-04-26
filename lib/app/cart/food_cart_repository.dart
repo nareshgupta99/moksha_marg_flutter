@@ -45,7 +45,7 @@ class FoodCartRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> removeQuantityFromCart( int cartItemId,Function(Result result, NetworkResponse<FoodCartData>? response, String? message) completion) async {
+  Future<void> removeQuantityFromCart( String cartItemId,Function(Result result, NetworkResponse<FoodCartData>? response, String? message) completion) async {
     try {
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.removeOneQuantityFromFoodCart, method: HTTPMethod.delete,slashedQuery: "/$cartItemId");
       try {
@@ -78,7 +78,7 @@ class FoodCartRepository extends GetxController implements GetxService {
   }
 
 
-  Future<void> removeItemFromCartById(int cartItemId, Function(Result result, NetworkResponse<FoodCartData>? response, String? message) completion) async {
+  Future<void> removeItemFromCartById(String cartItemId, Function(Result result, NetworkResponse<FoodCartData>? response, String? message) completion) async {
     try {
       final networkResponse = await network.loadHTTP(endpoint: Endpoints.forgetPassword, method: HTTPMethod.delete,slashedQuery: "/$cartItemId");
       try {

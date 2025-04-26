@@ -136,7 +136,7 @@ class _DishListingState extends State<DishListing> {
                     GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () =>
-                            controller.deleteDish(id: dish.dishId ?? 0),
+                            controller.deleteDish(id: dish.dishId ?? ""),
                         child: Icon(
                           Icons.delete,
                           color: Colors.red,

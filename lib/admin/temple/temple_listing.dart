@@ -63,7 +63,7 @@ class _TempleListingViewState extends State<TempleListingView> {
                             child: livedarhanCardAdmin(
                                 edit: () {},
                                 delete: () => controller.deletTemple(
-                                    id: controller.temples[index].id ?? 0),
+                                    id: controller.temples[index].id ?? ""),
                                 templeName:
                                     controller.temples[index].name ?? "",
                                 city: controller.temples[index].city ?? "",

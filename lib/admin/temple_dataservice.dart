@@ -21,6 +21,7 @@ extension TempleDataservice on TempleController {
           // loading = false;
           final data = response?.data;
           templeData = data;
+          Get.find<TempleController>().init();
           update();
           Get.snackbar("success", response?.message ?? "");
           break;
@@ -64,7 +65,7 @@ extension TempleDataservice on TempleController {
     });
   }
 
-  Future<void> getTempleById({required int id}) async {
+  Future<void> getTempleById({required String id}) async {
     // loading = true;
 
     await repository.getTempelById(id, (result, response, message) {
@@ -90,7 +91,7 @@ extension TempleDataservice on TempleController {
     });
   }
 
-  Future<void> deleteTempleById({required int id}) async {
+  Future<void> deleteTempleById({required String id}) async {
     // loading = true;
 
     await repository.deleteTempelById(id, (result, response, message) {

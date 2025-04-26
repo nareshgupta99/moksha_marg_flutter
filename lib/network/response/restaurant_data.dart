@@ -1,5 +1,5 @@
 class RestaurantData {
-  int? restaurantId;
+  String? restaurantId;
   String? name;
   String? address;
   bool? open;

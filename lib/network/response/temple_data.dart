@@ -1,5 +1,5 @@
 class TempleData {
-  int? id;
+  String? id;
   String? name;
   String? streetAddress;
   String? city;

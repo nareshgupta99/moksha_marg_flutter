@@ -18,7 +18,7 @@ class _AddTempleState extends State<AddTempleView> {
   @override
   void initState() {
     super.initState();
-    
+    Get.find<TempleController>().init();
   }
 
   @override
@@ -46,12 +46,14 @@ class _AddTempleState extends State<AddTempleView> {
                         controller: controller.cityController)),
                 customTextField(
                     textFieldLabel: "Street Address",
-                    controller:controller.streetAddressController),
+                    controller: controller.streetAddressController),
                 customTextField(
                     textFieldLabel: "Live Link",
                     controller: controller.linkController),
                 customFileUpload(),
-                customButton(onPressed: () =>controller.addTempleWithValidation(), text: "Add Temple")
+                customButton(
+                    onPressed: () => controller.addTempleWithValidation(),
+                    text: "Add Temple")
               ],
             ),
           ),

@@ -60,21 +60,21 @@ class DishController extends GetxController implements GetxService {
     update();
   }
 
-  void addDish({required int restaurentId}) {
+  void addDish({required String restaurentId}) {
     createDish(restaurentId);
     Get.snackbar('Success', 'Dish Added');
   }
 
   void getAllDishByRestaurant() {
     String id = sharedPrefrence.getString(Keys.restaurentId) ?? "0";
-    getAllDishDataByRestaurant(id: int.parse(id));
+    getAllDishDataByRestaurant(id: id);
   }
 
-  void getDishById({required int id}) {
+  void getDishById({required String id}) {
     getDishById(id: id);
   }
 
-  void deleteDish({required int id}) {
+  void deleteDish({required String id}) {
     deleteDishById(id: id);
   }
 }
