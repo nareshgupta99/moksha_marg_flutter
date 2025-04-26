@@ -14,10 +14,10 @@ class DishRepository extends GetxController implements GetxService {
   final NetworkManager network;
   DishRepository({required this.network});
 
-  Future<void> addDish(String id,DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
+  Future<void> addDish(DishPayload payload, Function(Result result, NetworkResponse<DishData>? response, String? message) completion) async {
     try {
       
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.addDish, method: HTTPMethod.multipartPOST,slashedQuery:"/$id", payload: NetworkPayload.dishPayload(payload: payload),multipartFiles: payload.image,multipartPayload: {"dish": jsonEncode(NetworkPayload.dishPayload(payload: payload))}  );
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.addDish, method: HTTPMethod.multipartPOST, payload: NetworkPayload.dishPayload(payload: payload),multipartFiles: payload.image,multipartPayload: {"dish": jsonEncode(NetworkPayload.dishPayload(payload: payload))}  );
       try {
         final response = NetworkResponse.fromJson(networkResponse, (json) => DishData.fromJson(json));
         completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
@@ -25,6 +25,7 @@ class DishRepository extends GetxController implements GetxService {
         throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
+      print(exception);
       completion(Result.onException, null, exception.toString());
       rethrow;
     }

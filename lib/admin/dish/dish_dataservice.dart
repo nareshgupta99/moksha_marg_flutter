@@ -5,7 +5,7 @@ import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
 extension DishDataservice on DishController {
-  Future<void> createDish(String id) async {
+  Future<void> createDish() async {
     // loading = true;
     DishPayload dishPayload = DishPayload();
     dishPayload.dishName = addDishNameController.text.trim();
@@ -15,10 +15,11 @@ extension DishDataservice on DishController {
     dishPayload.foodTypes = selecedFoodTypes;
     dishPayload.image = Get.find<FilePickerController>().multipartFiles;
     update();
-    await repository.addDish(id, dishPayload, (result, response, message) {
+    await repository.addDish(dishPayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           // loading = false;
+          Get.snackbar('Success', 'Dish Added');
           final data = response?.data;
           init();
           //  = data!;
@@ -47,6 +48,7 @@ extension DishDataservice on DishController {
           // loading = false;
           final data = response?.dataList;
           dishList = response?.dataList ?? [];
+
           update();
           break;
         case Result.onFailed:

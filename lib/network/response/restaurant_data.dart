@@ -64,7 +64,7 @@ class RestaurantData {
 }
 
 class FoodType {
-  int? foodTypeId;
+  String? foodTypeId;
   String? name;
 
   FoodType({

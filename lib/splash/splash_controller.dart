@@ -18,6 +18,7 @@ class SplashController extends GetxController implements GetxService {
       Timer(const Duration(seconds: 2), () {
         String? loginData = sharedPreferences.getString(Keys.authData);
         String? restaurentId = sharedPreferences.getString(Keys.restaurentId);
+        print(loginData);
         if (loginData != null) {
           var data = jsonDecode(loginData);
           LoginData decodeLoginData = LoginData.fromJson(data);

@@ -51,8 +51,9 @@ class _FoodCartViewState extends State<FoodCartView> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return dishMenuItemsCard(
+                        foodType: Controller.cartItems[index].foodType,
                         addButton: () => Controller.addItemToFoodCart(
-                            dishId: Controller.cartItems[index].dishId ??""),
+                            dishId: Controller.cartItems[index].dishId ?? ""),
                         subButton: () => Controller.removeOneFromCart(
                             cartItemId:
                                 Controller.cartItems[index].cartItemId ?? ""),
@@ -138,9 +139,6 @@ Widget _paymentSummaryCard(List<FoodCartData> cartItems) {
             itemCount: cartItems.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              total = ((cartItems[index].price ?? 1) *
-                      (cartItems[index].quantity ?? 1)) +
-                  total;
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

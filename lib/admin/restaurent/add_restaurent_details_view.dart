@@ -46,22 +46,33 @@ class _AddRestaurentDetailsState extends State<AddRestaurentDetailsView> {
                         textFieldLabel: "Address",
                         controller: controller.addressController)),
                 customTextField(
-                    textFieldLabel: "Opening Time",
-                    controller:controller.openingTimeController),
+                  readOnly: true,
+                  textFieldLabel: "Opening Time",
+                  onClick: () => {controller.selectOpeningTime(context)},
+                  controller: controller.openingTimeController,
+                ),
                 customTextField(
-                    textFieldLabel: "Closing Time",
-                    controller: controller.clossingTimeController),
+                  readOnly: true,
+                  textFieldLabel: "Closing Time",
+                  onClick: () => controller.selectClosingTime(context),
+                  controller: controller.clossingTimeController,
+                ),
                 customTextField(
                     textFieldLabel: "Starting Price",
                     controller: controller.startingPriceController),
                 Row(
                   children: [
                     customCheckBox(
-                        isChecked: controller.restaurentFoodTypeChecked, onChanged: (v)=>controller.setRestaurantFoodType(value: v, foodType: "VEG"), label: "Veg")
+                        isChecked: controller.restaurentFoodTypeChecked,
+                        onChanged: (v) => controller.setRestaurantFoodType(
+                            value: v, foodType: "VEG"),
+                        label: "Veg")
                   ],
                 ),
                 customFileUpload(),
-                customButton(onPressed: () =>controller.registerWithValidation(), text: "Add Dish")
+                customButton(
+                    onPressed: () => controller.registerWithValidation(),
+                    text: "Add Restaurent")
               ],
             ),
           ),

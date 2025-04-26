@@ -6,10 +6,13 @@ import 'package:moksha_marg/util/typography_resources.dart';
 
 Widget customTextField(
     {String? hintText,
+    bool readOnly = false,
     int? maxLine,
     int? maxLength,
     required String textFieldLabel,
     required TextEditingController controller,
+    VoidCallback? onClick,
+    bool isEnabled = true,
     Widget? prefix}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,6 +23,9 @@ Widget customTextField(
               fontSize: 16,
               fontWeight: FontWeight.w700)),
       TextField(
+        readOnly: readOnly,
+        enabled: isEnabled,
+        onTap: onClick,
         autocorrect: false,
         controller: controller,
         inputFormatters: [LengthLimitingTextInputFormatter(maxLength)],
@@ -45,8 +51,6 @@ Widget customTextField(
     ],
   );
 }
-
-
 
 Widget customObsecureTextField(
     {String? hintText,
@@ -99,7 +103,7 @@ Widget customObsecureTextField(
 Widget customDropDown(
     {required List<String> items,
     required ValueChanged onChanged,
-     String? selected,
+    String? selected,
     required String textFieldLabel}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,14 +172,14 @@ Widget searchBar({required String text}) {
   );
 }
 
-
-Widget customDescriptionField(
-    {String? hintText,
-    VoidCallback? onTap,
-    int? maxLine,
-    int? maxLength,
-    required String textFieldLabel,
-    required TextEditingController controller,}) {
+Widget customDescriptionField({
+  String? hintText,
+  VoidCallback? onTap,
+  int? maxLine,
+  int? maxLength,
+  required String textFieldLabel,
+  required TextEditingController controller,
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

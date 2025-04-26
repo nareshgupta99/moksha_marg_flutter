@@ -60,8 +60,8 @@ class DishController extends GetxController implements GetxService {
     update();
   }
 
-  void addDish({required String restaurentId}) {
-    createDish(restaurentId);
+  void addDish() {
+    createDish();
     Get.snackbar('Success', 'Dish Added');
   }
 

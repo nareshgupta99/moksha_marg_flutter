@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_controller.dart';
@@ -21,6 +22,8 @@ class RestarantController extends GetxController implements GetxService {
   var openingTimeController = TextEditingController();
   var clossingTimeController = TextEditingController();
   var startingPriceController = TextEditingController();
+  String openingTime = "";
+  String clossingTime = "";
   List<String> foodTypes = List.empty(growable: true);
   bool restaurentFoodTypeChecked = false;
   RestaurantData? restaurantData = null;
@@ -34,6 +37,8 @@ class RestarantController extends GetxController implements GetxService {
     addressController = TextEditingController();
     openingTimeController = TextEditingController();
     clossingTimeController = TextEditingController();
+    //  openingTimeController = "";
+    // clossingTimeController = "";
     startingPriceController = TextEditingController();
     restaurentFoodTypeChecked = false;
     // foodTypes = List.empty(growable: true);
@@ -74,12 +79,60 @@ class RestarantController extends GetxController implements GetxService {
   }
 
   void getRestaurantById({required String id}) {
-    getRestaurantDataById(id: int.parse(id));
+    getRestaurantDataById(id: id);
   }
 
   void setRestaurantFoodType({required String foodType, required bool value}) {
     if (!foodTypes.contains(foodType)) foodTypes.add(foodType);
     restaurentFoodTypeChecked = !value;
     update();
+  }
+
+  void selectOpeningTime(BuildContext context) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+          child: child!,
+        );
+      },
+    );
+
+    if (pickedTime != null) {
+      final hour = pickedTime.hourOfPeriod == 0 ? 12 : pickedTime.hourOfPeriod;
+      final minute = pickedTime.minute.toString().padLeft(2, '0');
+      final period = pickedTime.period == DayPeriod.am ? "AM" : "PM";
+
+      openingTime = "$hour:$minute $period"; // 📅 12-hour time with AM/PM
+      print("Openning time :: $openingTime");
+      openingTimeController.text = openingTime;
+      update();
+    }
+  }
+
+  void selectClosingTime(BuildContext context) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+          child: child!,
+        );
+      },
+    );
+
+    if (pickedTime != null) {
+      final hour = pickedTime.hourOfPeriod == 0 ? 12 : pickedTime.hourOfPeriod;
+      final minute = pickedTime.minute.toString().padLeft(2, '0');
+      final period = pickedTime.period == DayPeriod.am ? "AM" : "PM";
+
+      clossingTime = "$hour:$minute $period"; // 📅 12-hour time with AM/PM
+      print("closing time :: $clossingTime");
+      clossingTimeController.text = clossingTime;
+      update();
+    }
   }
 }

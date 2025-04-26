@@ -69,7 +69,7 @@ extension RestaurantDataservice on RestarantController {
     });
   }
 
-  Future<void> getRestaurantDataById({required int id}) async {
+  Future<void> getRestaurantDataById({required String id}) async {
     // loading = true;
 
     await repository.getRestaurantDataById(id, (result, response, message) {

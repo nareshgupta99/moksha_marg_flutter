@@ -139,6 +139,16 @@ class NetworkManager extends GetxService {
     print('Status code for $endpoint :: ${httpResponse.statusCode}');
     switch (httpResponse.statusCode) {
       case (201):
+        try {
+          final responseJson = json.decode(httpResponse.body.toString());
+          final responseTree =
+              const JsonEncoder.withIndent('  ').convert(responseJson);
+          print('Response for $endpoint :: $responseTree');
+          return responseJson;
+        } catch (_) {
+          throw FetchNetworkException(
+              exceptionRawValues[Exceptions.unPreocessableResponse]);
+        }
       case (200):
         try {
           final responseJson = json.decode(httpResponse.body.toString());
@@ -161,7 +171,7 @@ class NetworkManager extends GetxService {
         final message = decoded['message'] ?? 'Unauthorized access';
         Get.snackbar("error", message);
       case (403):
-        Get.find<ProfileController>().deleteAuth();
+      // Get.find<ProfileController>().deleteAuth();
       // throw FetchNetworkException(
       //     exceptionRawValues[Exceptions.forbidden403]);
       case (404):
