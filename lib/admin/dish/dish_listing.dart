@@ -23,7 +23,7 @@ class _DishListingState extends State<DishListing> {
   void initState() {
     super.initState();
     Get.find<DishController>().init();
-    Get.find<DishController>().getAllDishByRestaurant(id: 1);
+    Get.find<DishController>().getAllDishByRestaurant();
   }
 
   @override

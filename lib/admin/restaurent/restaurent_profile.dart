@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
             child: Container(
               decoration: BoxDecoration(
                   color: const Color.fromRGBO(255, 255, 255, 1),
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8.r)),
               child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.padding16,
@@ -57,14 +58,16 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                           child: heading(text: "Settings")),
                       Expanded(
                         child: ListView.builder(
-                            itemCount: controller.userSettingItems.length,
+                            itemCount: controller.restauentSettingItems.length,
                             shrinkWrap: true,
                             itemBuilder: (element, index) {
                               return GestureDetector(
                                 onTap: () => onTap(index),
                                 child: _settingCardItem(
-                                  name: controller.userSettingItems[index].name,
-                                  icon: controller.userSettingItems[index].icon,
+                                  name: controller
+                                      .restauentSettingItems[index].name,
+                                  icon: controller
+                                      .restauentSettingItems[index].icon,
                                 ),
                               );
                             }),
@@ -82,7 +85,8 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
         Stack(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(Images.temple1),
+              backgroundImage:
+                  CachedNetworkImageProvider(controller.user?.image ?? ""),
               radius: 60.r,
             ),
             Positioned(
@@ -101,7 +105,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => () {},
+                  onTap: () => controller.updateImage(),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,
@@ -173,12 +177,8 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
         break;
       case 1:
         Get.toNamed(RoutesHelper.getFoodCart());
-
         break;
       case 2:
-        // logout(context);
-        break;
-      case 3:
         logout(context);
         break;
     }

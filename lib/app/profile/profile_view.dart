@@ -100,7 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () =>controller.updateImage(),
+                  onTap: () => controller.updateImage(),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,
@@ -179,7 +179,7 @@ class _ProfileViewState extends State<ProfileView> {
       case 3:
         // logout(context);
         break;
-      case 5:
+      case 4:
         logout(context);
         break;
     }

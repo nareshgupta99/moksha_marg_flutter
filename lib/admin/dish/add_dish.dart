@@ -66,7 +66,7 @@ class _AddDishState extends State<AddDish> {
                       : null,
                   textFieldLabel: "Select Type"),
                 customFileUpload(),
-                customButton(onPressed: ()=> controller.addDish() , text: "Add Dish")
+                customButton(onPressed: ()=> controller.addDish(restaurentId: 1) , text: "Add Dish")
               ],
             ),
           ),

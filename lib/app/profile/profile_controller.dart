@@ -50,7 +50,7 @@ class ProfileController extends GetxController implements GetxService {
     Setting(name: "Change Password", icon: Icons.arrow_forward_ios),
     // Setting(name: "Help & Support", icon: Icons.arrow_forward_ios),
     Setting(name: "Language", icon: Icons.arrow_forward_ios),
-    Setting(name: "Order", icon: Icons.arrow_forward_ios),
+    // Setting(name: "Orders", icon: Icons.arrow_forward_ios),
     Setting(name: "Logout", icon: Icons.logout_outlined),
   ];
   void init() {

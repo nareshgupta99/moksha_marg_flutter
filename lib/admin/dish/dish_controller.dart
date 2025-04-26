@@ -7,10 +7,13 @@ import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_resources.dart';
 import 'package:moksha_marg/network/response/add_dish.dart';
 import 'package:moksha_marg/util/food_type_enum.dart';
+import 'package:moksha_marg/util/local_keys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DishController extends GetxController implements GetxService {
   final DishRepository repository;
-  DishController({required this.repository});
+  final SharedPreferences sharedPrefrence;
+  DishController({required this.repository, required this.sharedPrefrence});
   String fileName = "";
   PlatformFile? Singlefile = null;
   late MultipartFiles multipartFile;
@@ -37,10 +40,12 @@ class DishController extends GetxController implements GetxService {
   ];
 
   void init() {
-    editDishNameController = TextEditingController();
-    editPriceController = TextEditingController();
-    editShortDescriptionController = TextEditingController();
-    editdescriptionController = TextEditingController();
+    addDishNameController = TextEditingController();
+    priceControllerController = TextEditingController();
+    shortDescriptionController = TextEditingController();
+    descriptionController = TextEditingController();
+    Get.find<FilePickerController>().multipartFiles = [];
+    Get.find<FilePickerController>().fileName = "";
   }
 
   void editDishintilize({required DishData dish}) {
@@ -55,13 +60,14 @@ class DishController extends GetxController implements GetxService {
     update();
   }
 
-  void addDish() {
-    createDish(1);
+  void addDish({required int restaurentId}) {
+    createDish(restaurentId);
     Get.snackbar('Success', 'Dish Added');
   }
 
-  void getAllDishByRestaurant({required int id}) {
-    getAllDishDataByRestaurant(id: id);
+  void getAllDishByRestaurant() {
+    String id = sharedPrefrence.getString(Keys.restaurentId) ?? "0";
+    getAllDishDataByRestaurant(id: int.parse(id));
   }
 
   void getDishById({required int id}) {

@@ -13,6 +13,18 @@ class FetchNetworkException extends NetworkException {
   FetchNetworkException([String? message]) : super(message, '');
 }
 
+class ForbiddenException extends NetworkException {
+ ForbiddenException ([String? message]) : super(message, '');
+}
+
+class UnauthorizedException extends NetworkException {
+  UnauthorizedException([String? message]) : super(message, '');
+}
+
+class BadRequest400Exception extends NetworkException {
+  BadRequest400Exception([String? message]) : super(message, '');
+}
+
 enum Exceptions {
   handShakeError,
   timedOutOrNoInternet,

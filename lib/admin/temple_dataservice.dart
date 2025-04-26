@@ -105,12 +105,12 @@ extension TempleDataservice on TempleController {
         case Result.onFailed:
           // loading = false;
           update();
-          Get.snackbar('Error', message?.tr ?? "error");
+          // Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
           // loading = false;
           update();
-          Get.snackbar('Error', message?.tr ?? "error");
+          // Get.snackbar('Error', message?.tr ?? "error");
           break;
       }
     });

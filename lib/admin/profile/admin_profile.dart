@@ -62,8 +62,10 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                               return GestureDetector(
                                 onTap: () => onTap(index),
                                 child: _settingCardItem(
-                                  name: controller.adminSettingItems[index].name,
-                                  icon: controller.adminSettingItems[index].icon,
+                                  name:
+                                      controller.adminSettingItems[index].name,
+                                  icon:
+                                      controller.adminSettingItems[index].icon,
                                 ),
                               );
                             }),
@@ -175,10 +177,9 @@ class _AdminProfileViewState extends State<AdminProfileView> {
         // changeLanguageView(context: context);
         break;
       case 2:
-        
+        logout(context);
         break;
       case 3:
-        logout(context);
         break;
     }
   }

@@ -9,7 +9,7 @@ class LoginData {
   String? roles;
   bool? isGuideAdded;
   bool? isRestaurentAdded;
-  String? restaurantId;
+  int? restaurantId;
   String? image;
 
   LoginData({

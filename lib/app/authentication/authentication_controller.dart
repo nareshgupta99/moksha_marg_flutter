@@ -232,9 +232,10 @@ class AuthenticationController extends GetxController implements GetxService {
           Keys.bearerToken, jsonEncode(data!.token));
       await sharedPreferences.setString(
           Keys.authData, jsonEncode(data.toJson()));
-
-      await sharedPreferences.setString(
-          Keys.restaurentId, data.restaurantId ?? "");
+      if (data.restaurantId != null) {
+        await sharedPreferences.setString(
+            Keys.restaurentId, data.restaurantId.toString());
+      }
     } catch (e) {
       rethrow;
     }

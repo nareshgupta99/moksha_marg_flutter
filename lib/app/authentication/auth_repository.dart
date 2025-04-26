@@ -19,9 +19,9 @@ class AuthenticationRepository extends GetxController implements GetxService {
       try {
         final response = NetworkResponse.fromJson(networkResponse, (json) => LoginData.fromJson(json));
         completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
-      } catch (e) {
+      }  catch ( e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+        // throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());

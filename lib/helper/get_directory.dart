@@ -40,7 +40,7 @@ Future<void> init() async {
   Get.lazyPut(() => ProfileController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => RestarantController(repository: Get.find()));
   Get.lazyPut(() => FilePickerController());
-  Get.lazyPut(() => DishController(repository: Get.find()));
+  Get.lazyPut(() => DishController(repository: Get.find(),sharedPrefrence: sharedPreference));
   Get.lazyPut(() => FoodCartController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => OrderCartController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => TempleController(repository: Get.find()));
