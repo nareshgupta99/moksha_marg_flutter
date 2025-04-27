@@ -11,5 +11,5 @@ class Images {
   static const String food = '$_basePathImages/food.jpg';
   static const String hotel = '$_basePathImages/hotel.jpeg';
   static const String guide = '$_basePathImages/gide.jpg';
-
+  static const String appIcon = '$_basePathImages/app_icon.png';
 }

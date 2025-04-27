@@ -15,7 +15,7 @@ class SplashController extends GetxController implements GetxService {
   void init() {
     // sharedPreferences.clear();
     Future.delayed(Duration.zero, () {
-      Timer(const Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 6), () {
         String? loginData = sharedPreferences.getString(Keys.authData);
         String? restaurentId = sharedPreferences.getString(Keys.restaurentId);
         print(loginData);

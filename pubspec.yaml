@@ -37,6 +37,7 @@ dependencies:
   mapbox_maps_flutter: ^2.7.0
   shimmer: ^3.0.0
   loader_overlay: ^5.0.0
+  # flutter_mapbox_navigation: ^0.2.2
 
 
 dev_dependencies:
