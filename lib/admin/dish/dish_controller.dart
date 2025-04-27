@@ -20,7 +20,7 @@ class DishController extends GetxController implements GetxService {
   String selecedFoodTypes = "";
   List<DishData> dishList = [];
   DishData? dish;
-
+  bool loading = false;
   var addDishNameController = TextEditingController();
   var priceControllerController = TextEditingController();
   var shortDescriptionController = TextEditingController();

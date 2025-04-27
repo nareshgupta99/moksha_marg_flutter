@@ -15,6 +15,7 @@ class TempleController extends GetxController implements GetxService {
   String fileName = "";
   PlatformFile? Singlefile = null;
   late MultipartFiles multipartFile;
+  bool loading = false;
 
   var nameController = TextEditingController();
   var streetAddressController = TextEditingController();
@@ -53,6 +54,7 @@ class TempleController extends GetxController implements GetxService {
   }
 
   void getAllTemple() {
+
     getAllTemples();
   }
 

@@ -166,6 +166,7 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Role is required');
     } else {
       loading = true;
+      update();
       register();
     }
   }

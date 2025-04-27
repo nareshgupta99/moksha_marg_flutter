@@ -40,24 +40,23 @@ extension TempleDataservice on TempleController {
   }
 
   Future<void> getAllTemples() async {
-    // loading = true;
+    loading = true;
 
     await repository.getAllTemple((result, response, message) {
       switch (result) {
         case Result.onSuccess:
-          // loading = false;
+          loading = false;
           final data = response?.dataList;
           temples = response?.dataList ?? [];
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;

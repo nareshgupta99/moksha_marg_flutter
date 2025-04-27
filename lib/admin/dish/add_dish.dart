@@ -44,7 +44,7 @@ class _AddDishState extends State<AddDish> {
                         controller: controller.priceControllerController)),
                 customTextField(
                     textFieldLabel: "Short Description",
-                    controller:controller.shortDescriptionController,
+                    controller: controller.shortDescriptionController,
                     maxLength: 150,
                     maxLine: 2),
                 Padding(
@@ -52,21 +52,22 @@ class _AddDishState extends State<AddDish> {
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
                         textFieldLabel: "Description",
-                        controller:controller.descriptionController,
+                        controller: controller.descriptionController,
                         maxLine: 4,
                         maxLength: 300)),
-
-                        customDropDown(
-                  items: controller.foodTypesList,
-                  onChanged: (newValue) {
-                    controller.setSelectedRole(value: newValue);
-                  },
-                  selected: controller.foodTypesList.contains(controller.selecedFoodTypes)
-                      ? controller.selecedFoodTypes
-                      : null,
-                  textFieldLabel: "Select Type"),
+                customDropDown(
+                    items: controller.foodTypesList,
+                    onChanged: (newValue) {
+                      controller.setSelectedRole(value: newValue);
+                    },
+                    selected: controller.foodTypesList
+                            .contains(controller.selecedFoodTypes)
+                        ? controller.selecedFoodTypes
+                        : null,
+                    textFieldLabel: "Select Type"),
                 customFileUpload(),
-                customButton(onPressed: ()=> controller.addDish() , text: "Add Dish")
+                customButton(
+                    onPressed: () => controller.addDish(), text: "Add Dish")
               ],
             ),
           ),
