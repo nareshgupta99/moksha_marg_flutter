@@ -7,6 +7,7 @@ import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
+import 'package:moksha_marg/shimer/profile_shimmer.dart';
 import 'package:moksha_marg/util/alert.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
@@ -32,9 +33,9 @@ class _GuideProfileViewState extends State<GuideProfileView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (controller) {
-      return Scaffold(
+      return (controller.loading) ? ProfileShimmer() : Scaffold(
           appBar: topNavigaton(isLeading: false),
-          bottomNavigationBar: bottomNavigatonRestaurent(),
+          bottomNavigationBar: bottomNavigatonGuide(),
           backgroundColor: ColorsResources.backgroundColor,
           body: Padding(
             padding: EdgeInsets.symmetric(

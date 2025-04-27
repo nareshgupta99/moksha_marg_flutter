@@ -27,7 +27,7 @@ class BootomNavigationController extends GetxController implements GetxService {
     RoutesHelper.getRestaurentProfile(),
   ];
 
-   final List<String> _admin = [
+  final List<String> _admin = [
     RoutesHelper.getTempleListing(),
     RoutesHelper.getTempleListing(),
     RoutesHelper.getAddTemple(),
@@ -63,9 +63,14 @@ class BootomNavigationController extends GetxController implements GetxService {
     update();
   }
 
-  void setAdminIndex(int index){
+  void setAdminIndex(int index) {
     selectedIndex = index;
     Get.offNamed(_admin[index]);
     update();
+  }
+
+  void setGuideIndex(int index) {
+    selectedIndex = index;
+    Get.offNamed(_guides[index]);
   }
 }

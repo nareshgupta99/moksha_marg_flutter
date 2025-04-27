@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moksha_marg/admin/guides/guide_repository.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_resources.dart';
+import 'package:moksha_marg/network/response/language_data.dart';
 import 'package:moksha_marg/network/response/restaurant_data.dart';
 
 class GuidesController extends GetxController implements GetxService {
@@ -25,6 +26,19 @@ class GuidesController extends GetxController implements GetxService {
   RestaurantData? restaurantData = null;
   List<RestaurantData> restaurants = [];
   bool loading = false;
+  List<String> languages = ["select language", "English", "Hindi", "Chinese"];
+
+  List<String> selectedLanguage = [];
+
+  void SelectLanguage(String value) {
+    selectedLanguage.add(value);
+    update();
+  }
+
+  void removeSelected(String value) {
+    selectedLanguage.removeWhere((item) => item == value);
+    update();
+  }
 
   void init() {
     fileName = "";
@@ -49,7 +63,7 @@ class GuidesController extends GetxController implements GetxService {
 
   void registerWithValidation() async {
     FocusManager.instance.primaryFocus?.unfocus();
-      if (addressController.text.trim().isEmpty) {
+    if (addressController.text.trim().isEmpty) {
       Get.snackbar("Error", "Restaurant Address is Required");
     } else if (openingTimeController.text.trim().isEmpty) {
       Get.snackbar("Error", "openingTime  is Required");
@@ -61,9 +75,7 @@ class GuidesController extends GetxController implements GetxService {
       Get.snackbar("Error", "food Type is Required");
     } else if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
       Get.snackbar("Error", "Image is Required");
-    } else {
-      
-    }
+    } else {}
   }
 
   void getAllRestaurant() {

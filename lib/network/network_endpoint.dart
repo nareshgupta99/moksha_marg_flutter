@@ -31,6 +31,11 @@ enum Endpoints {
   updateProfilePictuce,
   updateUserProfile,
   updatePassword,
+  addGuide,
+  getGuideById,
+  updateGuide,
+  getAllGuide,
+  deleteGuide
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -63,4 +68,9 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.updateProfilePictuce: "/api/v1/user/edit/image",
   Endpoints.updateUserProfile: "/api/v1/user/edit",
   Endpoints.updatePassword: "/api/v1/user/edit/password",
+  Endpoints.addGuide: "/api/v1/guide/register",
+  Endpoints.getAllGuide: "/api/v1/guide/all",
+  Endpoints.getGuideById: "/api/v1/guide",
+  Endpoints.deleteGuide: "/api/v1/guide",
+  Endpoints.updateGuide: "/api/v1/guide",
 };

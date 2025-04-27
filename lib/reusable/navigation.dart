@@ -130,7 +130,7 @@ Widget bottomNavigatonGuide() {
     return BottomNavigationBar(
         currentIndex: controller.selectedIndex,
         onTap: (value) {
-          controller.setAdminIndex(value);
+          controller.setGuideIndex(value);
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: ColorsResources.greyColor,

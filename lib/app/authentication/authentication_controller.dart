@@ -143,7 +143,7 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Password is required');
     } else {
       loading = true;
-      login(context:context);
+      login(context: context);
     }
   }
 
@@ -181,13 +181,14 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Enter valid email');
     } else {
       loading = true;
-      sendOtp(email: email,context:context);
+      sendOtp(email: email, context: context);
     }
   }
 
   String otp = "";
 
-  void verifyOtpWithValidation({required BuildContext context,required String userId}) {
+  void verifyOtpWithValidation(
+      {required BuildContext context, required String userId}) {
     otp = "";
     for (var val in verifyOtpControler) {
       otp = otp + val.text.trim();
@@ -201,11 +202,12 @@ class AuthenticationController extends GetxController implements GetxService {
     } else {
       // debugConsole(otp);
       loading = true;
-      verifyOtp(userId: userId, otp: otp,context:context);
+      verifyOtp(userId: userId, otp: otp, context: context);
     }
   }
 
-  void resetPasswordWithValidation({required BuildContext context,required String userId}) {
+  void resetPasswordWithValidation(
+      {required BuildContext context, required String userId}) {
     FocusManager.instance.primaryFocus?.unfocus();
     // debugConsole("pass: ${resetPasswordController.text} confirm: ${resetConfirmPasswordController.text}");
     if (resetPasswordController.text.trim().isEmpty) {
@@ -217,7 +219,7 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Password and Confirm password must be same');
     } else {
       loading = true;
-      resetPassword(userId: userId,context:context);
+      resetPassword(userId: userId, context: context);
     }
   }
 
@@ -266,6 +268,8 @@ class AuthenticationController extends GetxController implements GetxService {
       }
     } else if (decodeLoginData.roles == Role.ADMIN.name) {
       Get.offAllNamed(RoutesHelper.getAddTemple());
+    } else if (decodeLoginData.roles == Role.GUIDE.name) {
+      Get.offAllNamed(RoutesHelper.getAddGuide());
     } else {
       Get.offAndToNamed(RoutesHelper.getLogin());
     }

@@ -23,19 +23,19 @@ extension RestaurantDataservice on RestarantController {
         (result, response, message) {
       switch (result) {
         case Result.onSuccess:
-          // loading = false;
+          loading = false;
           final data = response?.data;
           restaurantData = data!;
           update();
           Get.offAllNamed(RoutesHelper.getAddDish());
           break;
         case Result.onFailed:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
@@ -44,24 +44,23 @@ extension RestaurantDataservice on RestarantController {
   }
 
   Future<void> getAllRestaurantData() async {
-    // loading = true;
+    loading = true;
 
     await repository.getAllRestaurant((result, response, message) {
       switch (result) {
         case Result.onSuccess:
-          // loading = false;
+          loading = false;
           final data = response?.dataList;
           restaurants = response?.dataList ?? [];
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
@@ -70,24 +69,23 @@ extension RestaurantDataservice on RestarantController {
   }
 
   Future<void> getRestaurantDataById({required String id}) async {
-    // loading = true;
+    loading = true;
 
     await repository.getRestaurantDataById(id, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
-          // loading = false;
+          loading = false;
           final data = response?.data;
           restaurantData = data!;
           update();
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;

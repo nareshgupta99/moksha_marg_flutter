@@ -7,6 +7,7 @@ import 'package:moksha_marg/reusable/card.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_field.dart';
+import 'package:moksha_marg/shimer/Restaurant_shimmer.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
@@ -30,7 +31,7 @@ class _RestaurentViewState extends State<RestaurentView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestarantController>(builder: (controller) {
-      return Scaffold(
+      return(controller.loading) ? RestaurantShimmer() : Scaffold(
         appBar: topNavigaton(text: "Restaurent", isLeading: true),
         bottomNavigationBar: bottomNavigaton(),
         body: _body(controller),

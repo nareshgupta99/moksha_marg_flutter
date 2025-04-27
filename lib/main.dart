@@ -7,6 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:moksha_marg/helper/get_directory.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
+import 'package:moksha_marg/shimer/Restaurant_shimmer.dart';
 import 'package:moksha_marg/shimer/profile_shimmer.dart';
 
 void main() async {
@@ -34,7 +35,7 @@ class MokshaMarg extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          // home: ProfileShimmer(),
+          // home: RestaurantShimmer(),
           initialRoute: RoutesHelper.getSplash(),
           getPages: RoutesHelper.routes,
           builder: (context, child) {
