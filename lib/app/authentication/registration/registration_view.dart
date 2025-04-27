@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/dividers.dart';
@@ -30,35 +31,7 @@ class _RegistrationViewState extends State<RegistrationView> {
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
       body: GetBuilder<AuthenticationController>(builder: (controler) {
-        return Stack(
-          children: [
-            (controler.loading)
-                ? Container(
-                    color: Colors.black.withOpacity(0.04), // fade effect
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 10,
-                            )
-                          ],
-                        ),
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.black.withOpacity(0.3),
-                          color: Colors.black, // customize the color if needed
-                          strokeWidth: 3,
-                        ),
-                      ),
-                    ),
-                  )
-                : Text(""),
-            SingleChildScrollView(child: _body(controler)),
-          ],
-        );
+        return SingleChildScrollView(child: _body(controler));
       }),
     );
   }
@@ -108,7 +81,8 @@ class _RegistrationViewState extends State<RegistrationView> {
             padding: EdgeInsets.only(top: 16, bottom: 32),
             child: customButton(
                 onPressed: () {
-                  controler.registerWithValidation();
+                  controler.registerWithValidation(context:context);
+                  context.loaderOverlay.show();
                 },
                 text: "Signup",
                 width: Get.width),

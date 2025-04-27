@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
 extension AuthenticationDataService on AuthenticationController {
-  Future<void> login() async {
+  Future<void> login({required BuildContext context}) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.email = loginEmailController.text.trim();
@@ -18,24 +20,26 @@ extension AuthenticationDataService on AuthenticationController {
           final loginData = response?.data;
           setAuthData(loginData);
           update();
+          context.loaderOverlay.hide();
           secureRoutes(loginData!);
-          // Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           loading = false;
           update();
-          Get.snackbar('Error', message?.tr ?? "error");
+          context.loaderOverlay.hide();
+          Get.snackbar('Error', message ?? "error");
           break;
         case Result.onException:
           loading = false;
           update();
-          Get.snackbar('Error', message?.tr ?? "error");
+          context.loaderOverlay.hide();
+          Get.snackbar('Error', "error");
           break;
       }
     });
   }
 
-  Future<void> register() async {
+  Future<void> register(BuildContext context) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.countryCode = dialCode;
@@ -49,24 +53,31 @@ extension AuthenticationDataService on AuthenticationController {
       switch (result) {
         case Result.onSuccess:
           loading = false;
-          update();
-          Get.offAndToNamed(RoutesHelper.getLogin());
+          // update();
+          context.loaderOverlay.hide();
+          // Get.offAndToNamed(RoutesHelper.getLogin());
+          print("success :: 1");
           break;
         case Result.onFailed:
           loading = false;
           update();
+          context.loaderOverlay.hide();
+
           Get.snackbar('Error', message?.tr ?? "error");
+          print("Error :: 2");
           break;
         case Result.onException:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
+          print("Error :: 3");
           break;
       }
     });
   }
 
-  Future<void> sendOtp({String? email}) async {
+  Future<void> sendOtp({String? email, required BuildContext context}) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.email = email ?? forgotEmailController.text.trim();
@@ -77,6 +88,7 @@ extension AuthenticationDataService on AuthenticationController {
           loading = false;
           authData = response?.data;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Success', response?.message ?? "");
 
           Get.toNamed(RoutesHelper.getVerifyOtp(
@@ -86,18 +98,23 @@ extension AuthenticationDataService on AuthenticationController {
         case Result.onFailed:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
       }
     });
   }
 
-  Future<void> verifyOtp({required String userId, required String otp}) async {
+  Future<void> verifyOtp(
+      {required String userId,
+      required String otp,
+      required BuildContext context}) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.userId = userId;
@@ -108,23 +125,27 @@ extension AuthenticationDataService on AuthenticationController {
         case Result.onSuccess:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.toNamed(RoutesHelper.getResetPassword(userId: "$userId"));
           break;
         case Result.onFailed:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
       }
     });
   }
 
-  Future<void> resetPassword({required String userId}) async {
+  Future<void> resetPassword(
+      {required String userId, required BuildContext context}) async {
     loading = true;
     var authPayload = AuthPayload();
     authPayload.userId = userId;
@@ -134,17 +155,20 @@ extension AuthenticationDataService on AuthenticationController {
       switch (result) {
         case Result.onSuccess:
           loading = false;
+          context.loaderOverlay.hide();
           update();
           Get.offAllNamed(RoutesHelper.getLogin());
           break;
         case Result.onFailed:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
           loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
       }

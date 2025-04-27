@@ -13,13 +13,25 @@ class AuthenticationRepository extends GetxController implements GetxService {
   final NetworkManager network;
   AuthenticationRepository({required this.network});
 
-  Future<void> login(AuthPayload payload, Function(Result result, NetworkResponse<LoginData>? response, String? message) completion) async {
+  Future<void> login(
+      AuthPayload payload,
+      Function(Result result, NetworkResponse<LoginData>? response,
+              String? message)
+          completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.login, method: HTTPMethod.post, payload: NetworkPayload.loginPaylod(payload: payload));
+      final networkResponse = await network.loadHTTP(
+          endpoint: Endpoints.login,
+          method: HTTPMethod.post,
+          payload: NetworkPayload.loginPaylod(payload: payload));
       try {
-        final response = NetworkResponse.fromJson(networkResponse, (json) => LoginData.fromJson(json));
-        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
-      }  catch ( e) {
+        final response = NetworkResponse.fromJson(
+            networkResponse, (json) => LoginData.fromJson(json));
+
+        completion(
+            (response.status == true) ? Result.onSuccess : Result.onFailed,
+            response,
+            response.message);
+      } catch (e) {
         print("Exception :: ${e.toString()}");
         // throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
       }
@@ -29,15 +41,30 @@ class AuthenticationRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> register(AuthPayload payload, Function(Result result, NetworkResponse? response, String? message) completion) async {
+  Future<void> register(
+      AuthPayload payload,
+      Function(Result result, NetworkResponse? response, String? message)
+          completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.register, method: HTTPMethod.post, payload: NetworkPayload.registerPaylod(payload: payload));
+
+      final networkResponse = await network.loadHTTP(
+          endpoint: Endpoints.register,
+          method: HTTPMethod.post,
+          payload: NetworkPayload.registerPaylod(payload: payload));
       try {
+        print("i am in response :: 1");
         final response = NetworkResponse.fromJson(networkResponse, (json) {});
-        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
+        print("i am in response :: 2");
+        completion(
+            (response.status == true) ? Result.onSuccess : Result.onFailed,
+            response,
+            response.message);
+        print("i am in response :: 3");
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+
+        throw FetchNetworkException(
+            exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());
@@ -45,15 +72,27 @@ class AuthenticationRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> sendOtp(AuthPayload payload, Function(Result result, NetworkResponse<AuthData>? response, String? message) completion) async {
+  Future<void> sendOtp(
+      AuthPayload payload,
+      Function(Result result, NetworkResponse<AuthData>? response,
+              String? message)
+          completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.sendOtp, method: HTTPMethod.post, payload: NetworkPayload.sendOtpPaylod(payload: payload));
+      final networkResponse = await network.loadHTTP(
+          endpoint: Endpoints.sendOtp,
+          method: HTTPMethod.post,
+          payload: NetworkPayload.sendOtpPaylod(payload: payload));
       try {
-        final response = NetworkResponse.fromJson(networkResponse, (json) => AuthData.fromJson(json));
-        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
+        final response = NetworkResponse.fromJson(
+            networkResponse, (json) => AuthData.fromJson(json));
+        completion(
+            (response.status == true) ? Result.onSuccess : Result.onFailed,
+            response,
+            response.message);
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException(
+            exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());
@@ -61,15 +100,27 @@ class AuthenticationRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> verifyOtp(AuthPayload payload, Function(Result result, NetworkResponse<LoginData>? response, String? message) completion) async {
+  Future<void> verifyOtp(
+      AuthPayload payload,
+      Function(Result result, NetworkResponse<LoginData>? response,
+              String? message)
+          completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.verifyOtp, method: HTTPMethod.post, payload: NetworkPayload.verifyOtpPaylod(payload: payload));
+      final networkResponse = await network.loadHTTP(
+          endpoint: Endpoints.verifyOtp,
+          method: HTTPMethod.post,
+          payload: NetworkPayload.verifyOtpPaylod(payload: payload));
       try {
-        final response = NetworkResponse.fromJson(networkResponse, (json) => LoginData.fromJson(json));
-        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
+        final response = NetworkResponse.fromJson(
+            networkResponse, (json) => LoginData.fromJson(json));
+        completion(
+            (response.status == true) ? Result.onSuccess : Result.onFailed,
+            response,
+            response.message);
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException(
+            exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());
@@ -77,16 +128,27 @@ class AuthenticationRepository extends GetxController implements GetxService {
     }
   }
 
-
-  Future<void> resetPassword(AuthPayload payload, Function(Result result, NetworkResponse<LoginData>? response, String? message) completion) async {
+  Future<void> resetPassword(
+      AuthPayload payload,
+      Function(Result result, NetworkResponse<LoginData>? response,
+              String? message)
+          completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.forgetPassword, method: HTTPMethod.post, payload: NetworkPayload.forgetPasswordPaylod(payload: payload));
+      final networkResponse = await network.loadHTTP(
+          endpoint: Endpoints.forgetPassword,
+          method: HTTPMethod.post,
+          payload: NetworkPayload.forgetPasswordPaylod(payload: payload));
       try {
-        final response = NetworkResponse.fromJson(networkResponse, (json) => LoginData.fromJson(json));
-        completion((response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
+        final response = NetworkResponse.fromJson(
+            networkResponse, (json) => LoginData.fromJson(json));
+        completion(
+            (response.status == true) ? Result.onSuccess : Result.onFailed,
+            response,
+            response.message);
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException(
+            exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());

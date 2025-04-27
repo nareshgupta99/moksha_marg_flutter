@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -103,7 +104,9 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => controller.updateImage(),
+                  onTap: () => {
+                    controller.updateImage(context: context)
+                  },
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,

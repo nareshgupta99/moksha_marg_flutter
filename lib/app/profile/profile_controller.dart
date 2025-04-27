@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/profile/profile_dataservice.dart';
 import 'package:moksha_marg/app/profile/profile_repository.dart';
 import 'package:moksha_marg/app/profile/setting_model.dart';
@@ -83,7 +84,7 @@ class ProfileController extends GetxController implements GetxService {
     update();
   }
 
-  void updatePassword() {
+  void updatePassword({required BuildContext context}) {
     if (oldPasswordController.text.trim().isEmpty) {
       Get.snackbar('Error', 'Old Password is required');
     } else if (newPasswordController.text.trim().isEmpty) {
@@ -94,7 +95,7 @@ class ProfileController extends GetxController implements GetxService {
         confirmPasswordController.text.trim()) {
       Get.snackbar('Error', 'New Password and Confirm password must be same');
     } else {
-      updateUserPassword();
+      updateUserPassword(context: context);
     }
   }
 
@@ -102,13 +103,14 @@ class ProfileController extends GetxController implements GetxService {
     getUserProfile();
   }
 
-  void updateImage() async {
+  void updateImage({required BuildContext context}) async {
     Get.find<FilePickerController>().init();
     await Get.find<FilePickerController>().pickImage();
     if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
       Get.snackbar("Error", "Image is Required");
     } else {
-      updateUserImage();
+      context.loaderOverlay.show();
+      updateUserImage(context: context);
     }
   }
 }

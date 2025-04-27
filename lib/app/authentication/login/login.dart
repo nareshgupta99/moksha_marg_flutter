@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
@@ -28,11 +29,13 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: topNavigaton(isLeading: false),
-      backgroundColor: ColorsResources.backgroundColor,
-      body: Center(child: SingleChildScrollView(child: _body())),
+    return LoaderOverlay(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: topNavigaton(isLeading: false),
+        backgroundColor: ColorsResources.backgroundColor,
+        body: Center(child: SingleChildScrollView(child: _body())),
+      ),
     );
   }
 
@@ -74,8 +77,9 @@ class _LoginViewState extends State<LoginView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    // Get.offAllNamed(RoutesHelper.getHome());
-                    controller.loginWithValidaion();
+                    context.loaderOverlay.show();
+
+                    controller.loginWithValidaion(context: context);
                   },
                   text: "Login",
                   width: double.infinity),
@@ -84,10 +88,7 @@ class _LoginViewState extends State<LoginView> {
                 text1: "Don't have an account?",
                 text2: "Sign up",
                 onTap: () {
-                  if (controller.loading) {
-              Center(child: CircularProgressIndicator());
-          }
-                 Get.toNamed(RoutesHelper.getRegistration());
+                  Get.toNamed(RoutesHelper.getRegistration());
                 })
           ],
         ),

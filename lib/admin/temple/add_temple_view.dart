@@ -52,7 +52,7 @@ class _AddTempleState extends State<AddTempleView> {
                     controller: controller.linkController),
                 customFileUpload(),
                 customButton(
-                    onPressed: () => controller.addTempleWithValidation(),
+                    onPressed: () => controller.addTempleWithValidation(context:context),
                     text: "Add Temple")
               ],
             ),

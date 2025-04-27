@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/admin/temple_dataservice.dart';
 import 'package:moksha_marg/admin/temple_repository.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
@@ -36,7 +37,7 @@ class TempleController extends GetxController implements GetxService {
     Get.find<FilePickerController>().fileName = "";
   }
 
-  void addTempleWithValidation() async {
+  void addTempleWithValidation({required BuildContext context}) async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (nameController.text.trim().isEmpty) {
       Get.snackbar("Error", "Temple Name is Required");
@@ -49,12 +50,12 @@ class TempleController extends GetxController implements GetxService {
     } else if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
       Get.snackbar("Error", "Image is Required");
     } else {
-      addTemple();
+      context.loaderOverlay.show();
+      addTemple(context: context);
     }
   }
 
   void getAllTemple() {
-
     getAllTemples();
   }
 

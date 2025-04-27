@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -69,7 +70,8 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    controller.updatePassword();
+                    context.loaderOverlay.show();
+                    controller.updatePassword(context: context);
                   },
                   text: "Submit",
                   width: double.infinity),

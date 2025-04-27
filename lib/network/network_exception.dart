@@ -25,6 +25,10 @@ class BadRequest400Exception extends NetworkException {
   BadRequest400Exception([String? message]) : super(message, '');
 }
 
+class ResourceNotFoundException extends NetworkException {
+  ResourceNotFoundException([String? message]) : super(message, '');
+}
+
 enum Exceptions {
   handShakeError,
   timedOutOrNoInternet,

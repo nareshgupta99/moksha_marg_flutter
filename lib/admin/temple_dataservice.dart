@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/admin/temple_controller.dart';
 import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
 extension TempleDataservice on TempleController {
-  Future<void> addTemple() async {
+  Future<void> addTemple({required BuildContext context}) async {
     // loading = true;
     TemplePayload payload = TemplePayload();
     payload.city = cityController.text.trim();
@@ -22,17 +24,20 @@ extension TempleDataservice on TempleController {
           final data = response?.data;
           templeData = data;
           Get.find<TempleController>().init();
+          context.loaderOverlay.hide();
           update();
           Get.snackbar("success", response?.message ?? "");
           break;
         case Result.onFailed:
           // loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
           // loading = false;
           update();
+          context.loaderOverlay.hide();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
       }

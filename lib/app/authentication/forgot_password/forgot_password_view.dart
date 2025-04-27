@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -19,11 +20,11 @@ class ForgotPasswordView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: topNavigaton(isLeading: true),
       backgroundColor: ColorsResources.backgroundColor,
-      body: Center(child: SingleChildScrollView(child: _body())),
+      body: Center(child: SingleChildScrollView(child: _body(context))),
     );
   }
 
-  Widget _body() {
+  Widget _body(BuildContext context) {
     return GetBuilder<AuthenticationController>(builder: (controller) {
       return Padding(
         padding: EdgeInsets.symmetric(
@@ -45,7 +46,8 @@ class ForgotPasswordView extends StatelessWidget {
                   top: Dimensions.padding16, bottom: Dimensions.padding32),
               child: customButton(
                   onPressed: () {
-                    controller.sendOtpWithValidation();
+                  context.loaderOverlay.show();
+                    controller.sendOtpWithValidation(context: context);
                   },
                   text: "Submit",
                   width: Get.width),

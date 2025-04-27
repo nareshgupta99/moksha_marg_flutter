@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/network/network_endpoint.dart';
 import 'package:moksha_marg/network/network_exception.dart';
 import 'package:moksha_marg/network/network_resources.dart';
@@ -151,10 +150,14 @@ class NetworkManager extends GetxService {
         }
       case (200):
         try {
+          print("i am in 200");
           final responseJson = json.decode(httpResponse.body.toString());
+          print("i am in 200 1");
           final responseTree =
               const JsonEncoder.withIndent('  ').convert(responseJson);
-          print('Response for $endpoint :: $responseTree');
+          print("i am in 200 2");
+
+          // print('Response for $endpoint :: $responseTree');
           return responseJson;
         } catch (_) {
           throw FetchNetworkException(
@@ -172,15 +175,15 @@ class NetworkManager extends GetxService {
         Get.snackbar("error", message);
       case (403):
       // Get.find<ProfileController>().deleteAuth();
-      // throw FetchNetworkException(
-      //     exceptionRawValues[Exceptions.forbidden403]);
+      throw FetchNetworkException(
+          exceptionRawValues[Exceptions.forbidden403]);
       case (404):
         final body = httpResponse.body;
         final decoded = jsonDecode(body);
         final message = decoded['message'] ?? 'Unauthorized access';
         Get.snackbar("error", message);
-      // throw FetchNetworkException(
-      //     exceptionRawValues[Exceptions.requestNotFound404]);
+      throw FetchNetworkException(
+          exceptionRawValues[Exceptions.requestNotFound404]);
       case (405):
         throw FetchNetworkException(
             exceptionRawValues[Exceptions.methodNotAllowd405]);

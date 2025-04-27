@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -61,8 +62,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
+                    context.loaderOverlay.show();
                     controller.resetPasswordWithValidation(
-                        userId: widget.userId);
+                        userId: widget.userId, context: context);
                   },
                   text: "Submit",
                   width: double.infinity),

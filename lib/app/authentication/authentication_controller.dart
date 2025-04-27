@@ -133,7 +133,7 @@ class AuthenticationController extends GetxController implements GetxService {
     update();
   }
 
-  void loginWithValidaion() {
+  void loginWithValidaion({required BuildContext context}) {
     FocusManager.instance.primaryFocus?.unfocus();
     if (loginEmailController.text.trim().isEmpty) {
       Get.snackbar('Error', 'Email is required');
@@ -143,11 +143,11 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Password is required');
     } else {
       loading = true;
-      login();
+      login(context:context);
     }
   }
 
-  void registerWithValidation() {
+  void registerWithValidation({required BuildContext context}) {
     FocusManager.instance.primaryFocus?.unfocus();
 
     if (registerNameController.text.trim().isEmpty) {
@@ -166,12 +166,12 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Role is required');
     } else {
       loading = true;
-      update();
-      register();
+      // update();
+      register(context);
     }
   }
 
-  void sendOtpWithValidation({String? email}) {
+  void sendOtpWithValidation({required BuildContext context, String? email}) {
     FocusManager.instance.primaryFocus?.unfocus();
     if (forgotEmailController.text.trim().isEmpty &&
         (email == null || email.trim().isEmpty)) {
@@ -181,13 +181,13 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Enter valid email');
     } else {
       loading = true;
-      sendOtp(email: email);
+      sendOtp(email: email,context:context);
     }
   }
 
   String otp = "";
 
-  void verifyOtpWithValidation({required String userId}) {
+  void verifyOtpWithValidation({required BuildContext context,required String userId}) {
     otp = "";
     for (var val in verifyOtpControler) {
       otp = otp + val.text.trim();
@@ -201,11 +201,11 @@ class AuthenticationController extends GetxController implements GetxService {
     } else {
       // debugConsole(otp);
       loading = true;
-      verifyOtp(userId: userId, otp: otp);
+      verifyOtp(userId: userId, otp: otp,context:context);
     }
   }
 
-  void resetPasswordWithValidation({required String userId}) {
+  void resetPasswordWithValidation({required BuildContext context,required String userId}) {
     FocusManager.instance.primaryFocus?.unfocus();
     // debugConsole("pass: ${resetPasswordController.text} confirm: ${resetConfirmPasswordController.text}");
     if (resetPasswordController.text.trim().isEmpty) {
@@ -217,7 +217,7 @@ class AuthenticationController extends GetxController implements GetxService {
       Get.snackbar('Error', 'Password and Confirm password must be same');
     } else {
       loading = true;
-      resetPassword(userId: userId);
+      resetPassword(userId: userId,context:context);
     }
   }
 

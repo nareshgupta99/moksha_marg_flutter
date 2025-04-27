@@ -105,7 +105,7 @@ class _RestaurentProfileViewState extends State<RestaurentProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => controller.updateImage(),
+                  onTap: () => controller.updateImage(context: context),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,

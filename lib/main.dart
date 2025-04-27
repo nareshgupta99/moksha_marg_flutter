@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:moksha_marg/helper/get_directory.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
+import 'package:moksha_marg/shimer/temple_listing_shimmer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +34,15 @@ class MokshaMarg extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          // home: TempleListingShimmer(),
           initialRoute: RoutesHelper.getSplash(),
           getPages: RoutesHelper.routes,
+          builder: (context, child) {
+            return GlobalLoaderOverlay(
+              useDefaultLoading: true,
+              child: child!,
+            );
+          },
         );
       },
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/authentication_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
@@ -68,7 +69,8 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
               padding: EdgeInsets.only(top: 16, bottom: 32),
               child: customButton(
                   onPressed: () {
-                    controller.verifyOtpWithValidation(userId: widget.userId);
+                  context.loaderOverlay.show();
+                    controller.verifyOtpWithValidation(userId: widget.userId,context: context);
                   },
                   text: "Submit",
                   width: Get.width),
@@ -88,7 +90,8 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                         "0${controller.countDown.value ~/ 60}: ${controller.countDown.value % 60}")
                     : GestureDetector(
                         onTap: () {
-                          controller.sendOtpWithValidation(email: widget.email);
+                          context.loaderOverlay.show();
+                          controller.sendOtpWithValidation(email: widget.email,context: context);
                           Get.find<AuthenticationController>().startTimer();
                         },
                         child: Text("resend",
