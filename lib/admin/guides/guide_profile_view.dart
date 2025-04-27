@@ -2,29 +2,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/text_view.dart';
-import 'package:moksha_marg/shimer/profile_shimmer.dart';
 import 'package:moksha_marg/util/alert.dart';
 import 'package:moksha_marg/util/colors_resources.dart';
 import 'package:moksha_marg/util/dimensions.dart';
-import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/local_keys.dart';
 import 'package:moksha_marg/util/local_storage.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class AdminProfileView extends StatefulWidget {
-  const AdminProfileView({super.key});
+class GuideProfileView extends StatefulWidget {
+  const GuideProfileView({super.key});
 
   @override
-  State<AdminProfileView> createState() => _AdminProfileViewState();
+  State<GuideProfileView> createState() => _GuideProfileViewState();
 }
 
-class _AdminProfileViewState extends State<AdminProfileView> {
+class _GuideProfileViewState extends State<GuideProfileView> {
   @override
   void initState() {
     super.initState();
@@ -35,10 +32,9 @@ class _AdminProfileViewState extends State<AdminProfileView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (controller) {
-
-      return(controller.loading)? ProfileShimmer() : Scaffold(
+      return Scaffold(
           appBar: topNavigaton(isLeading: false),
-          bottomNavigationBar: bottomNavigatonAdmin(),
+          bottomNavigationBar: bottomNavigatonRestaurent(),
           backgroundColor: ColorsResources.backgroundColor,
           body: Padding(
             padding: EdgeInsets.symmetric(
@@ -47,7 +43,7 @@ class _AdminProfileViewState extends State<AdminProfileView> {
             child: Container(
               decoration: BoxDecoration(
                   color: const Color.fromRGBO(255, 255, 255, 1),
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8.r)),
               child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Dimensions.padding16,
@@ -60,15 +56,16 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                           child: heading(text: "Settings")),
                       Expanded(
                         child: ListView.builder(
-                            itemCount: controller.adminSettingItems.length,
+                            itemCount: controller.guideSettingItems.length,
+                            shrinkWrap: true,
                             itemBuilder: (element, index) {
                               return GestureDetector(
                                 onTap: () => onTap(index),
                                 child: _settingCardItem(
-                                  name:
-                                      controller.adminSettingItems[index].name,
-                                  icon:
-                                      controller.adminSettingItems[index].icon,
+                                  name: controller
+                                      .guideSettingItems[index].name,
+                                  icon: controller
+                                      .guideSettingItems[index].icon,
                                 ),
                               );
                             }),
@@ -106,9 +103,7 @@ class _AdminProfileViewState extends State<AdminProfileView> {
                 width: Get.width,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => {
-                    controller.updateImage(context: context)
-                  },
+                  onTap: () => controller.updateImage(context: context),
                   child: Text(
                     'Update',
                     textAlign: TextAlign.center,
@@ -166,8 +161,8 @@ class _AdminProfileViewState extends State<AdminProfileView> {
 
   void logout(BuildContext context) async {
     String? loginData = await LocalStorage.getStringData(key: Keys.authData);
-    String? bearer = await LocalStorage.getStringData(key: Keys.bearerToken);
-    if (loginData != null || bearer != null) {
+    String? guestData = await LocalStorage.getStringData(key: Keys.guestUuid);
+    if (loginData != null || guestData != null) {
       showLogoutDialog(
           context, () => Get.find<ProfileController>().deleteAuth());
     }
@@ -179,12 +174,10 @@ class _AdminProfileViewState extends State<AdminProfileView> {
         Get.toNamed(RoutesHelper.getChangedPassword());
         break;
       case 1:
-        // changeLanguageView(context: context);
+        Get.toNamed(RoutesHelper.getFoodCart());
         break;
       case 2:
         logout(context);
-        break;
-      case 3:
         break;
     }
   }

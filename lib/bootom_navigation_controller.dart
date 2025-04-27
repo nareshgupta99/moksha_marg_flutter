@@ -34,6 +34,13 @@ class BootomNavigationController extends GetxController implements GetxService {
     RoutesHelper.getAdminProfile(),
   ];
 
+  final List<String> _guides = [
+    RoutesHelper.getAddGuide(),
+    RoutesHelper.getGuideProfile(),
+    RoutesHelper.getGuideProfile(),
+    RoutesHelper.getGuideProfile(),
+  ];
+
   void init() {
     // selectedIndex = 0;
     _routes = [

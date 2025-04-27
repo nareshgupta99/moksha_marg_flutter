@@ -58,3 +58,7 @@ class TemplePayload {
   String? liveLink;
   List<MultipartFiles>? image;
 }
+
+class BannerPayload {
+  List<MultipartFiles>? image;
+}

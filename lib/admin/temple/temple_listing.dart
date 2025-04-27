@@ -32,13 +32,15 @@ class _TempleListingViewState extends State<TempleListingView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TempleController>(builder: (controller) {
-      return (controller.loading)?TempleListingShimmer(): Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: topNavigaton(text: "Temples", isLeading: true),
-        bottomNavigationBar: bottomNavigatonAdmin(),
-        body: _body(controller),
-        backgroundColor: ColorsResources.backgroundColor,
-      );
+      return (controller.loading)
+          ? TempleListingShimmer()
+          : Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: topNavigaton(text: "Temples", isLeading: true),
+              bottomNavigationBar: bottomNavigatonAdmin(),
+              body: _body(controller),
+              backgroundColor: ColorsResources.backgroundColor,
+            );
     });
   }
 
@@ -124,13 +126,7 @@ Widget livedarhanCardAdmin(
               child: Row(
                 spacing: Dimensions.mainAxisSpacing16,
                 children: [
-                  GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: edit,
-                      child: Icon(
-                        Icons.edit_square,
-                        color: Colors.blue,
-                      )),
+                  Text(""),
                   GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: delete,

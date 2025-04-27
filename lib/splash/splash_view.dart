@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/splash/splash_controller.dart';
 import 'package:moksha_marg/util/images.dart';
+import 'package:moksha_marg/util/typography_resources.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -22,7 +23,6 @@ class _SplashScreenState extends State<SplashView>
   void initState() {
     super.initState();
     Get.find<SplashController>().init();
-
 
     // Animation for logo zoom-out effect
     _logoController = AnimationController(
@@ -72,9 +72,9 @@ class _SplashScreenState extends State<SplashView>
                 return Text(
                   text,
                   style: TextStyle(
-                    fontSize: 26.r,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 32.r,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: TypographyResources.roboto),
                 );
               },
             ),

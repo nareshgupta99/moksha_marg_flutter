@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/dish_controller.dart';
 import 'package:moksha_marg/admin/dish/dish_repository.dart';
+import 'package:moksha_marg/admin/guides/guide_repository.dart';
+import 'package:moksha_marg/admin/guides/guides_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restarant_controller.dart';
 import 'package:moksha_marg/admin/restaurent/restaurent_repository.dart';
 import 'package:moksha_marg/admin/temple_controller.dart';
@@ -31,6 +33,7 @@ Future<void> init() async {
   Get.lazyPut(() => OrderCartRepository(network: Get.find()));
   Get.lazyPut(() => TempleRepository(network: Get.find()));
   Get.lazyPut(() => ProfileRepository(network: Get.find()));
+  Get.lazyPut(() => GuideRepository(network: Get.find()));
 
 
 
@@ -45,6 +48,7 @@ Future<void> init() async {
   Get.lazyPut(() => FoodCartController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => OrderCartController(sharedPreferences: sharedPreference,repository: Get.find()));
   Get.lazyPut(() => TempleController(repository: Get.find()));
+  Get.lazyPut(() => GuidesController(repository: Get.find()));
   Get.lazyPut(() => MapController());
 
 

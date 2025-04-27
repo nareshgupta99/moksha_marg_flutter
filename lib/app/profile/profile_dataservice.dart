@@ -99,22 +99,22 @@ extension ProfileDataservice on ProfileController {
   }
 
   Future<void> getUserProfile({String? email}) async {
-    // loading = true;
+    loading = true;
     update();
     await repository.getProfile((result, response, message) {
       switch (result) {
         case Result.onSuccess:
-          // loading = false;
+          loading = false;
           user = response?.data;
           update();
           break;
         case Result.onFailed:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;
         case Result.onException:
-          // loading = false;
+          loading = false;
           update();
           Get.snackbar('Error', message?.tr ?? "error");
           break;

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/dish/add_dish.dart';
 import 'package:moksha_marg/admin/dish/edit_dish_view.dart';
+import 'package:moksha_marg/admin/guides/guide_profile_view.dart';
+import 'package:moksha_marg/admin/guides/guides_register_view.dart';
 import 'package:moksha_marg/admin/profile/admin_profile.dart';
 import 'package:moksha_marg/admin/restaurent/add_restaurent_details_view.dart';
 import 'package:moksha_marg/admin/dish/dish_listing.dart';
@@ -48,6 +50,9 @@ class RoutesHelper {
   static const String _verifyOtp = "/verify_otp";
   static const String _changedPassword = "/changed_password";
   static const String _addTemple = "/add_temple";
+  static const String _addGuide = "/add_guide";
+  static const String _guideProfile = "/guide_profile";
+
 
 
 
@@ -63,6 +68,7 @@ class RoutesHelper {
   static const String _restaurentProfile = "/restaurent_profile";
   static const String _adminProfile = "/admin_profile";
   static const String _templeListing = "/temple_listing";
+  
 
 
   
@@ -93,6 +99,8 @@ class RoutesHelper {
   
   static String getChangedPassword() => _changedPassword;
   static String getAdminProfile() => _adminProfile;
+  static String getAddGuide() => _addGuide;
+  static String getGuideProfile() => _guideProfile;
 
   
 
@@ -142,6 +150,8 @@ class RoutesHelper {
     GetPage(name: _dishListing, page: () => DishListing()),
     GetPage(name: _restaurentProfile, page: () => RestaurentProfileView()),
     GetPage(name: _addRestaurant, page: () => AddRestaurentDetailsView()),
+    GetPage(name: _guideProfile, page: () => GuideProfileView()),
+    GetPage(name: _addGuide, page: () => GuidesRegisterView()),
     GetPage(name: _updateDish, page: () => UpdateDish(id:Get.parameters['id']!)),
     GetPage(name: _editDish, page: () => EditDishView(dish:DishData.fromJson(jsonDecode(utf8.decode(base64Url.decode(Get.parameters['dish']!)))))),
   ];

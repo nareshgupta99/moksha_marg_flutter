@@ -7,8 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:moksha_marg/helper/get_directory.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
-import 'package:moksha_marg/shimer/temple_listing_shimmer.dart';
-import 'package:moksha_marg/splash/splash_view.dart';
+import 'package:moksha_marg/shimer/profile_shimmer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +34,7 @@ class MokshaMarg extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          // home: ProfileShimmer(),
           initialRoute: RoutesHelper.getSplash(),
           getPages: RoutesHelper.routes,
           builder: (context, child) {
