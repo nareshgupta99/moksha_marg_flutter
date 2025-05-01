@@ -7,21 +7,22 @@ import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/network/request/network_request_body.dart';
 import 'package:moksha_marg/util/custom_enum.dart';
 
-extension RestaurantDataservice on GuidesController {
+extension GuidesDataservice on GuidesController {
   Future<void> createGuide({required BuildContext context}) async {
     loading = true;
-    RestaurantPayload restaurantPayload = RestaurantPayload();
-    restaurantPayload.foodType = foodTypes;
-    restaurantPayload.image = Get.find<FilePickerController>().multipartFiles;
+    GuidePayload guidePayload = GuidePayload();
+    guidePayload.contactNumber = contactNumberController.text.trim();
+    guidePayload.price = double.parse(priceController.text.trim());
+    guidePayload.languages = selectedLanguage;
+    guidePayload.image = Get.find<FilePickerController>().multipartFiles;
 
     update();
-    await repository.registerGuide(restaurantPayload,
-        (result, response, message) {
+    await repository.registerGuide(guidePayload, (result, response, message) {
       switch (result) {
         case Result.onSuccess:
           loading = false;
           final data = response?.data;
-          restaurantData = data!;
+          guideData = data!;
           context.loaderOverlay.hide();
           update();
           break;
@@ -49,7 +50,7 @@ extension RestaurantDataservice on GuidesController {
         case Result.onSuccess:
           loading = false;
           final data = response?.dataList;
-          restaurants = response?.dataList ?? [];
+          
           update();
           break;
         case Result.onFailed:
@@ -75,9 +76,37 @@ extension RestaurantDataservice on GuidesController {
         case Result.onSuccess:
           loading = false;
           final data = response?.data;
-          restaurantData = data!;
+          // restaurantData = data!;
           update();
           Get.offAllNamed(RoutesHelper.getHome());
+          break;
+        case Result.onFailed:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+        case Result.onException:
+          loading = false;
+          update();
+          Get.snackbar('Error', message?.tr ?? "error");
+          break;
+      }
+    });
+  }
+
+  Future<void> getAllLanguage() async {
+    loading = true;
+
+    await repository.getAllLanguage((result, response, message) {
+      switch (result) {
+        case Result.onSuccess:
+          loading = false;
+          final data = response?.dataList;
+          languagesData = data!;
+          languagesData.forEach((ele) {
+            languages.add(ele.languageName ?? "");
+          });
+          update();
           break;
         case Result.onFailed:
           loading = false;

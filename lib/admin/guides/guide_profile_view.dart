@@ -59,7 +59,7 @@ class _GuideProfileViewState extends State<GuideProfileView> {
                         child: ListView.builder(
                             itemCount: controller.guideSettingItems.length,
                             shrinkWrap: true,
-                            itemBuilder: (element, index) {
+                            itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () => onTap(index),
                                 child: _settingCardItem(

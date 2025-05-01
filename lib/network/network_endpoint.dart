@@ -35,7 +35,8 @@ enum Endpoints {
   getGuideById,
   updateGuide,
   getAllGuide,
-  deleteGuide
+  deleteGuide,
+  getAllLanguage
 }
 
 const Map<Endpoints, String> endpointRawValues = {
@@ -73,4 +74,5 @@ const Map<Endpoints, String> endpointRawValues = {
   Endpoints.getGuideById: "/api/v1/guide",
   Endpoints.deleteGuide: "/api/v1/guide",
   Endpoints.updateGuide: "/api/v1/guide",
+  Endpoints.getAllLanguage: "/api/v1/language/all"
 };

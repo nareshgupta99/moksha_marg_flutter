@@ -6,4 +6,5 @@ class Keys {
   static String authData = "auth_data";
   static String guestUuid = "guest_uuid";
   static String restaurentId = "restaurent_id";
+  static String guideId = "guide_id";
 }

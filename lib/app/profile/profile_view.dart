@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -34,45 +33,50 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (controller) {
-      return(controller.loading) ? ProfileShimmer() : Scaffold(
-          appBar: topNavigaton(isLeading: false),
-          bottomNavigationBar: bottomNavigaton(),
-          backgroundColor: ColorsResources.backgroundColor,
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.padding16,
-                vertical: Dimensions.padding16),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(255, 255, 255, 1),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.padding16,
-                      vertical: Dimensions.padding16),
-                  child: Column(
-                    children: [
-                      _header(controller),
-                      Padding(
-                          padding: EdgeInsets.only(top: Dimensions.padding32),
-                          child: heading(text: "Settings")),
-                      Expanded(
-                        child: ListView.builder(
-                            itemCount: controller.userSettingItems.length,
-                            itemBuilder: (element, index) {
-                              return GestureDetector(
-                                onTap: () => onTap(index),
-                                child: _settingCardItem(
-                                  name: controller.userSettingItems[index].name,
-                                  icon: controller.userSettingItems[index].icon,
-                                ),
-                              );
-                            }),
-                      )
-                    ],
-                  )),
-            ),
-          ));
+      return (controller.loading)
+          ? ProfileShimmer()
+          : Scaffold(
+              appBar: topNavigaton(isLeading: false),
+              bottomNavigationBar: bottomNavigaton(),
+              backgroundColor: ColorsResources.backgroundColor,
+              body: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.padding16,
+                    vertical: Dimensions.padding16),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.padding16,
+                          vertical: Dimensions.padding16),
+                      child: Column(
+                        children: [
+                          _header(controller),
+                          Padding(
+                              padding:
+                                  EdgeInsets.only(top: Dimensions.padding32),
+                              child: heading(text: "Settings")),
+                          Expanded(
+                            child: ListView.builder(
+                                itemCount: controller.userSettingItems.length,
+                                itemBuilder: (element, index) {
+                                  return GestureDetector(
+                                    onTap: () => onTap(index),
+                                    child: _settingCardItem(
+                                      name: controller
+                                          .userSettingItems[index].name,
+                                      icon: controller
+                                          .userSettingItems[index].icon,
+                                    ),
+                                  );
+                                }),
+                          )
+                        ],
+                      )),
+                ),
+              ));
     });
   }
 

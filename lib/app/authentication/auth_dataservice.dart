@@ -20,6 +20,7 @@ extension AuthenticationDataService on AuthenticationController {
           final loginData = response?.data;
           setAuthData(loginData);
           update();
+          
           context.loaderOverlay.hide();
           secureRoutes(loginData!);
           break;
@@ -53,7 +54,9 @@ extension AuthenticationDataService on AuthenticationController {
       switch (result) {
         case Result.onSuccess:
           loading = false;
-          // update();
+          initRegister();
+          Get.snackbar("success", response?.message ?? "user Registered");
+          update();
           context.loaderOverlay.hide();
           // Get.offAndToNamed(RoutesHelper.getLogin());
           print("success :: 1");

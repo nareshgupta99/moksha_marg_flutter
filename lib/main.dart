@@ -7,8 +7,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:moksha_marg/helper/get_directory.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
-import 'package:moksha_marg/shimer/Restaurant_shimmer.dart';
-import 'package:moksha_marg/shimer/profile_shimmer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

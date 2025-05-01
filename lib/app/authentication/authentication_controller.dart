@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:moksha_marg/app/authentication/auth_dataservice.dart';
 import 'package:moksha_marg/app/authentication/auth_repository.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
@@ -165,8 +166,7 @@ class AuthenticationController extends GetxController implements GetxService {
         selecedRole.trim() == "SELECT ROLE") {
       Get.snackbar('Error', 'Role is required');
     } else {
-      loading = true;
-      // update();
+      context.loaderOverlay.hide();
       register(context);
     }
   }
@@ -236,13 +236,12 @@ class AuthenticationController extends GetxController implements GetxService {
 
   Future<void> setAuthData(LoginData? data) async {
     try {
-      await sharedPreferences.setString(
-          Keys.bearerToken, jsonEncode(data!.token));
-      await sharedPreferences.setString(
-          Keys.authData, jsonEncode(data.toJson()));
+      await sharedPreferences.setString( Keys.bearerToken, jsonEncode(data!.token));
+      await sharedPreferences.setString(Keys.authData, jsonEncode(data.toJson()));
       if (data.restaurantId != null) {
-        await sharedPreferences.setString(
-            Keys.restaurentId, data.restaurantId.toString());
+        await sharedPreferences.setString(Keys.restaurentId, data.restaurantId.toString());
+      }if(data.guideId != null){
+        await sharedPreferences.setString(Keys.guideId,data.guideId.toString() );
       }
     } catch (e) {
       rethrow;
@@ -269,8 +268,12 @@ class AuthenticationController extends GetxController implements GetxService {
     } else if (decodeLoginData.roles == Role.ADMIN.name) {
       Get.offAllNamed(RoutesHelper.getAddTemple());
     } else if (decodeLoginData.roles == Role.GUIDE.name) {
-      Get.offAllNamed(RoutesHelper.getAddGuide());
-    } else {
+            if (decodeLoginData.guideId == null) {
+            Get.offAllNamed(RoutesHelper.getAddGuide());
+            } else {
+              Get.offAllNamed(RoutesHelper.getGuide());
+            }
+          } else {
       Get.offAndToNamed(RoutesHelper.getLogin());
     }
   }

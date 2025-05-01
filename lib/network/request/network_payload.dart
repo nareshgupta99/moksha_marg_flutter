@@ -92,18 +92,26 @@ class NetworkPayload {
     };
   }
 
-  static Map<String, dynamic>? updatePasswordPayload({required AuthPayload payload}) {
+  static Map<String, dynamic>? updatePasswordPayload(
+      {required AuthPayload payload}) {
     return {
       "oldPassword": payload.oldPassword,
       "password": payload.password,
     };
   }
 
-  static Map<String, dynamic>? updateProfilePayload({required AuthPayload payload}) {
+  static Map<String, dynamic>? updateProfilePayload(
+      {required AuthPayload payload}) {
     return {
       "name": payload.name,
     };
-  }  
+  }
 
-
+  static Map<String, dynamic>? guidePayload({required GuidePayload payload}) {
+    return {
+      "contactNumber": payload.contactNumber,
+      "price": payload.price,
+      "languages": payload.languages
+    };
+  }
 }

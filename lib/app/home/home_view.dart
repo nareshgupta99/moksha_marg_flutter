@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moksha_marg/admin/temple_controller.dart';
+import 'package:moksha_marg/app/home/temple_model.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
 import 'package:moksha_marg/helper/routes_helper.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
@@ -34,15 +37,15 @@ class _HomeViewState extends State<HomeView> {
     Images.food,
     Images.temple2,
     Images.guide,
-    Images.hotel,
+    Images.maps,
     Images.temple5,
   ];
 
-  List<String> title = [
-    "Food Ordering",
-    "Live Darshan",
-    "Gide Booking",
-    "Hotel Booking"
+  List<TempleModel> title = [
+    TempleModel(heading: "Food Ordering", subHeading: "Satvik Meal"),
+    TempleModel(heading: "Live Darshan", subHeading: "Virtual Worship"),
+    TempleModel(heading: "Guide Booking", subHeading: "Expert Guidance"),
+    TempleModel(heading: "Temple Navigation", subHeading: "Route Assistance"),
   ];
 
   @override
@@ -94,8 +97,8 @@ class _HomeViewState extends State<HomeView> {
                   },
                   child: _serviceCard(
                       url: images[index],
-                      heading: title[index],
-                      desc: "Satvik Meal"),
+                      heading: title[index].heading,
+                      desc: title[index].subHeading),
                 );
               }),
 

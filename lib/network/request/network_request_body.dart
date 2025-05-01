@@ -62,3 +62,10 @@ class TemplePayload {
 class BannerPayload {
   List<MultipartFiles>? image;
 }
+
+class GuidePayload {
+  String? contactNumber;
+  double? price;
+  List<MultipartFiles>? image;
+  List<String>? languages;
+}

@@ -18,6 +18,7 @@ class SplashController extends GetxController implements GetxService {
       Timer(const Duration(seconds: 5), () {
         String? loginData = sharedPreferences.getString(Keys.authData);
         String? restaurentId = sharedPreferences.getString(Keys.restaurentId);
+        String? guideId = sharedPreferences.getString(Keys.guideId);
         print(loginData);
         if (loginData != null) {
           var data = jsonDecode(loginData);
@@ -33,7 +34,11 @@ class SplashController extends GetxController implements GetxService {
           } else if (decodeLoginData.roles == Role.ADMIN.name) {
             Get.offAllNamed(RoutesHelper.getTempleListing());
           } else if (decodeLoginData.roles == Role.GUIDE.name) {
+            if (guideId == null || guideId.isEmpty) {
             Get.offAllNamed(RoutesHelper.getAddGuide());
+            } else {
+              Get.offAllNamed(RoutesHelper.getGuide());
+            }
           }
         } else {
           Get.offAndToNamed(RoutesHelper.getLogin());

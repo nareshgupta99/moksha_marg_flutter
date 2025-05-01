@@ -21,6 +21,7 @@ class _GuidesRegisterViewState extends State<GuidesRegisterView> {
   void initState() {
     super.initState();
     Get.find<GuidesController>().init();
+    Get.find<GuidesController>().getAllLanguages();
   }
 
   @override
@@ -37,22 +38,12 @@ class _GuidesRegisterViewState extends State<GuidesRegisterView> {
                 vertical: Dimensions.padding16),
             child: Column(
               children: [
-                customTextField(
-                  textFieldLabel: "Restaurent Name",
-                  controller: controller.addressController,
-                ),
                 Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: Dimensions.padding16),
                     child: customTextField(
                         textFieldLabel: "Contact Number",
-                        controller: controller.addressController)),
-                customTextField(
-                  readOnly: true,
-                  textFieldLabel: "Opening Time",
-                  onClick: () => {controller.selectOpeningTime(context)},
-                  controller: controller.openingTimeController,
-                ),
+                        controller: controller.contactNumberController)),
                 customDropDown(
                     items: controller.languages,
                     onChanged: (newValue) {
@@ -71,31 +62,30 @@ class _GuidesRegisterViewState extends State<GuidesRegisterView> {
                           width: 3,
                         ),
                         borderRadius: BorderRadius.circular(8.r)),
-                    child: Expanded(
-                      child: ListView.builder(
-                          itemCount: controller.selectedLanguage.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 6.r, vertical: 6.r),
-                                child: GestureDetector(
-                                  onTap: () => controller.removeSelected(controller.selectedLanguage[index]),
-                                  child: Text(
-                                      "${controller.selectedLanguage[index]} ✖️"),
-                                ));
-                          }),
-                    ),
+                    child: ListView.builder(
+                        itemCount: controller.selectedLanguage.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6.r, vertical: 6.r),
+                              child: GestureDetector(
+                                onTap: () => controller.removeSelected(
+                                    controller.selectedLanguage[index]),
+                                child: Text(
+                                    "${controller.selectedLanguage[index]} ✖️"),
+                              ));
+                        }),
                   ),
                 ),
                 customTextField(
                     textFieldLabel: "Price / Hour",
-                    controller: controller.startingPriceController),
+                    controller: controller.priceController),
                 Padding(
                     padding: EdgeInsets.only(top: 16.r),
                     child: customFileUpload()),
                 customButton(
-                    onPressed: () => controller.registerWithValidation(),
+                    onPressed: () => controller.registerWithValidation(context: context),
                     text: "Add Guides")
               ],
             ),

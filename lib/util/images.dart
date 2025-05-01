@@ -6,6 +6,7 @@ class Images {
   static const String temple3 = '$_basePathImages/temple3.png';
   static const String temple4 = '$_basePathImages/temple4.png';
   static const String temple5 = '$_basePathImages/temple5.png';
+  static const String maps = '$_basePathImages/maps.png';
   static const String google = '$_basePathImages/google.png';
   static const String facebook = '$_basePathImages/facebook.png';
   static const String food = '$_basePathImages/food.jpg';
