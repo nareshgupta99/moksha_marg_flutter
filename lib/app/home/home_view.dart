@@ -305,7 +305,7 @@ void onTap(int index) {
       Get.toNamed(RoutesHelper.getGuide());
       break;
     case 3:
-      Get.toNamed(RoutesHelper.getRestaurent());
+      Get.toNamed(RoutesHelper.getTempleNavigationListingCard());
       break;
   }
 }
