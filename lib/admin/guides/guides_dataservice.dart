@@ -50,7 +50,7 @@ extension GuidesDataservice on GuidesController {
         case Result.onSuccess:
           loading = false;
           final data = response?.dataList;
-          
+          guides = data!;
           update();
           break;
         case Result.onFailed:
@@ -67,8 +67,7 @@ extension GuidesDataservice on GuidesController {
     });
   }
 
-  Future<void> getGuideById(
-      {required String id, required BuildContext context}) async {
+  Future<void> getGuideById({required String id}) async {
     loading = true;
 
     await repository.getGuideById(id, (result, response, message) {
@@ -76,9 +75,8 @@ extension GuidesDataservice on GuidesController {
         case Result.onSuccess:
           loading = false;
           final data = response?.data;
-          // restaurantData = data!;
+          guideData = data;
           update();
-          Get.offAllNamed(RoutesHelper.getHome());
           break;
         case Result.onFailed:
           loading = false;

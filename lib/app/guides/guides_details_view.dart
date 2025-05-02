@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:moksha_marg/admin/guides/guides_controller.dart';
 import 'package:moksha_marg/reusable/buttons.dart';
 import 'package:moksha_marg/reusable/navigation.dart';
 import 'package:moksha_marg/reusable/star_rating.dart';
@@ -9,28 +11,44 @@ import 'package:moksha_marg/util/dimensions.dart';
 import 'package:moksha_marg/util/images.dart';
 import 'package:moksha_marg/util/typography_resources.dart';
 
-class GuidesDetailsView extends StatelessWidget {
-  const GuidesDetailsView({super.key});
+class GuidesDetailsView extends StatefulWidget {
+  String guideId;
+  GuidesDetailsView({super.key, required this.guideId});
+
+  @override
+  State<GuidesDetailsView> createState() => _GuidesDetailsViewState();
+}
+
+class _GuidesDetailsViewState extends State<GuidesDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<GuidesController>().getGuide(id: widget.guideId);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
-      body: SingleChildScrollView(child: _body()),
-    );
+    return GetBuilder<GuidesController>(builder: (controller) {
+      return Scaffold(
+        appBar: topNavigaton(text: "Tourist Guides", isLeading: true),
+        body: SingleChildScrollView(child: _body(controller)),
+      );
+    });
   }
 
-  Widget _body() {
+  Widget _body(GuidesController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.padding16, vertical: Dimensions.padding16),
       child: Column(
         // spacing: 2,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(Images.temple2, height: Get.width / 2, width: Get.width),
           Padding(
-            padding:  EdgeInsets.only(top:  Dimensions.padding16),
-            child: heading(text: "Tomb", fontSize: 32),
+            padding: EdgeInsets.only(top: Dimensions.padding16),
+            child:
+                heading(text: controller.guideData?.name ?? "", fontSize: 32.r),
           ),
           Row(
             children: [
@@ -52,34 +70,49 @@ class GuidesDetailsView extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: ColorsResources.textGreyColor),
-              "Explore the city's hidden gems with our expert local guides. Discover historical landmarks, secret spots, and fascinating stories about the city's culture and heritage."),
+              // "Explore the city's hidden gems with our expert local guides. Discover historical landmarks, secret spots, and fascinating stories about the city's culture and heritage.",
+              controller.guideData?.discription ?? ""),
           Padding(
             padding: const EdgeInsets.only(top: 16),
             child: heading(text: "Languages Spoken"),
           ),
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: ColorsResources.textFieldBorderColor,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-            ),
-            child: Text(
-              "English",
-              style: TextStyle(
-                fontFamily: TypographyResources.roboto,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          SizedBox(
+            height: 35.r,
+            child: ListView.builder(
+                itemCount: controller.guideData?.languages?.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: Dimensions.padding6),
+                    child: Container(
+                      padding: EdgeInsets.all(8.r),
+                      decoration: BoxDecoration(
+                        color: ColorsResources.textFieldBorderColor,
+                        borderRadius: BorderRadius.all(Radius.circular(30.r)),
+                      ),
+                      child: Text(
+                        controller.guideData?.languages?[index].languageName ??
+                            "",
+                        style: TextStyle(
+                          fontFamily: TypographyResources.roboto,
+                          fontSize: 14.r,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: heading(text: "Price"),
-          ),
+              padding: EdgeInsets.only(top: 16.r),
+              child: heading(text: "Price")),
           Row(
             children: [
-              Icon(Icons.currency_rupee, size: 32),
-              heading(text: "1999", fontSize: 32),
+              Icon(Icons.currency_rupee, size: 32.r),
+              heading(
+                  text: "${controller.guideData?.price ?? 0}", fontSize: 32.r),
               Text(
                 "/person",
                 style: TextStyle(
@@ -91,12 +124,12 @@ class GuidesDetailsView extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 16),
+            padding: EdgeInsets.only(top: 16.r),
             child: heading(text: "Duration"),
           ),
-          Text("3 Hour"),
+          Text("Per Hour"),
           Padding(
-            padding: const EdgeInsets.only(top: 32),
+            padding: EdgeInsets.only(top: 32.r),
             child: customButton(
                 onPressed: () {}, text: "Book Now", width: Get.width),
           )

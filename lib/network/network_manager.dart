@@ -155,7 +155,7 @@ class NetworkManager extends GetxService {
           print("i am in 200 1");
           final responseTree =
               const JsonEncoder.withIndent('  ').convert(responseJson);
-          print("i am in 200 2");
+          print(responseTree);
 
           // print('Response for $endpoint :: $responseTree');
           return responseJson;

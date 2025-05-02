@@ -81,9 +81,9 @@ class RoutesHelper {
   static String getRegistration() => _registration;
   static String getLogin() => _login;
   static String getForgotPassword() => _forgotPassword;
-  static String getResetPassword({required String userId}) => "${_resetPassword}?id=$userId";
+  static String getResetPassword({required String userId}) => "$_resetPassword?id=$userId";
   static String getGuide() => _guides;
-  static String getGuidesDetails() => _guidesDetails;
+  static String getGuidesDetails({required String guideId}) => "$_guidesDetails?id=$guideId";
   static String getRestaurent() => _restaurent;
   static String getRestaurentDetails({required String id}) =>"$_restaurentDetails?id=$id";
   static String getLiveDarshan({required TempleData temple}) {
@@ -129,7 +129,7 @@ class RoutesHelper {
     GetPage(name: _forgotPassword, page: () => ForgotPasswordView()),
     GetPage(name: _resetPassword, page: () => ResetPasswordView(userId: "${Get.parameters['id']}",)),
     GetPage(name: _guides, page: () => GuidesView()),
-    GetPage(name: _guidesDetails, page: () => GuidesDetailsView()),
+    GetPage(name: _guidesDetails, page: () => GuidesDetailsView(guideId:Get.parameters['id']!)),
     GetPage(name: _restaurent, page: () => RestaurentView()),
     GetPage(name: _restaurentDetails, page: () => RestaurentDetailsView(id:"${Get.parameters['id']}")),
     GetPage(name: _temple, page: () => TempleView()),

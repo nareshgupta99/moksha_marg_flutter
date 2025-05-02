@@ -33,19 +33,15 @@ class GuideRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> getAllGuide(  Function(Result result, NetworkResponse0<RestaurantData>? response, String? message) completion) async {
+  Future<void> getAllGuide(  Function(Result result, NetworkResponse0<GuideData>? response, String? message) completion) async {
     try {
-      final networkResponse = await network.loadHTTP(endpoint: Endpoints.getAllRestaurant, method: HTTPMethod.get);
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.getAllGuide, method: HTTPMethod.get);
       try {
-        final response = NetworkResponse0.fromJson(networkResponse, (json) => RestaurantData.fromJson(json));
-        completion(
-            (response.status == true) ? Result.onSuccess : Result.onFailed,
-            response,
-            response.message);
+        final response = NetworkResponse0.fromJson(networkResponse, (json) => GuideData.fromJson(json));
+        completion(  (response.status == true) ? Result.onSuccess : Result.onFailed, response, response.message);
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(
-            exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException( exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());
@@ -53,27 +49,15 @@ class GuideRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> getGuideById(
-      String id,
-      Function(Result result, NetworkResponse<RestaurantData>? response,
-              String? message)
-          completion) async {
+  Future<void> getGuideById( String id,Function(Result result, NetworkResponse<GuideData>? response, String? message) completion) async {
     try {
-      final networkResponse = await network.loadHTTP(
-          endpoint: Endpoints.getRestaurantById,
-          method: HTTPMethod.get,
-          slashedQuery: "/$id");
+      final networkResponse = await network.loadHTTP(endpoint: Endpoints.getGuideById, method: HTTPMethod.get, slashedQuery: "/$id");
       try {
-        final response = NetworkResponse.fromJson(
-            networkResponse, (json) => RestaurantData.fromJson(json));
-        completion(
-            (response.status == true) ? Result.onSuccess : Result.onFailed,
-            response,
-            response.message);
+        final response = NetworkResponse.fromJson(networkResponse, (json) => GuideData.fromJson(json));
+        completion((response.status == true) ? Result.onSuccess : Result.onFailed,response,response.message);
       } catch (e) {
         print("Exception :: ${e.toString()}");
-        throw FetchNetworkException(
-            exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException( exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());
@@ -81,24 +65,15 @@ class GuideRepository extends GetxController implements GetxService {
     }
   }
 
-  Future<void> getAllLanguage(
-      Function(Result result, NetworkResponse0<LanguageData>? response,
-              String? message)
-          completion) async {
+  Future<void> getAllLanguage(Function(Result result, NetworkResponse0<LanguageData>? response,String? message) completion) async {
     try {
-      final networkResponse = await network.loadHTTP(
-          endpoint: Endpoints.getAllLanguage, method: HTTPMethod.get);
+      final networkResponse = await network.loadHTTP( endpoint: Endpoints.getAllLanguage, method: HTTPMethod.get);
       try {
-        final response = NetworkResponse0.fromJson(
-            networkResponse, (json) => LanguageData.fromJson(json));
-        completion(
-            (response.status == true) ? Result.onSuccess : Result.onFailed,
-            response,
-            response.message);
+        final response = NetworkResponse0.fromJson( networkResponse, (json) => LanguageData.fromJson(json));
+        completion((response.status == true) ? Result.onSuccess : Result.onFailed,response, response.message);
       } catch (e) {
         print("Exception :: ${e}");
-        throw FetchNetworkException(
-            exceptionRawValues[Exceptions.handShakeError]);
+        throw FetchNetworkException(exceptionRawValues[Exceptions.handShakeError]);
       }
     } catch (exception) {
       completion(Result.onException, null, exception.toString());

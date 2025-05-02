@@ -8,7 +8,6 @@ import 'package:moksha_marg/file_picker_controller.dart';
 import 'package:moksha_marg/network/network_resources.dart';
 import 'package:moksha_marg/network/response/guide_data.dart';
 import 'package:moksha_marg/network/response/language_data.dart';
-import 'package:moksha_marg/network/response/restaurant_data.dart';
 import 'package:moksha_marg/util/extensions.dart';
 
 class GuidesController extends GetxController implements GetxService {
@@ -80,11 +79,11 @@ class GuidesController extends GetxController implements GetxService {
   }
 
   void getAllGuides() {
-    // getAllGuidesData();
+    getAllGuide();
   }
 
-  void getRestaurantById({required String id}) {
-    // getRestaurantDataById(id: id);
+  void getGuide({required String id }) {
+    getGuideById( id: id);
   }
 
   void setRestaurantFoodType({required String foodType, required bool value}) {
