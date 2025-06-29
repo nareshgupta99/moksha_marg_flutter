@@ -56,7 +56,10 @@ class TemplePayload {
   String? streetAddress;
   String? city;
   String? liveLink;
+  String? longitude;
+  String? latitude;
   List<MultipartFiles>? image;
+
 }
 
 class BannerPayload {

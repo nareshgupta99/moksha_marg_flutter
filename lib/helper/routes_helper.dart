@@ -23,6 +23,7 @@ import 'package:moksha_marg/app/guides/guides_view.dart';
 import 'package:moksha_marg/app/home/home_view.dart';
 import 'package:moksha_marg/app/live_darshan/live_darshan_view.dart';
 import 'package:moksha_marg/app/live_darshan/temple_view.dart';
+import 'package:moksha_marg/app/navigation/navigation.dart';
 import 'package:moksha_marg/app/navigation/temples_navigation_listing.dart';
 import 'package:moksha_marg/app/profile/profile_view.dart';
 import 'package:moksha_marg/app/profile/update_password.dart';
@@ -52,7 +53,7 @@ class RoutesHelper {
   static const String _addTemple = "/add_temple";
   static const String _addGuide = "/add_guide";
   static const String _guideProfile = "/guide_profile";
-
+  static const String _navigation = "/navigation";
   //Restaurent Admin Routes
   static const String _addRestaurant = "/add_restaurant";
   static const String _editRestaurant = "/edit_restaurant";
@@ -85,6 +86,7 @@ class RoutesHelper {
   }
 
   static String getTemple() => _temple;
+  static String getNavigationScreen({required String longitude, required String latitude}) => "$_navigation?longitude=$longitude&latitude=$latitude";
   static String getFoodCart() => _foodCart;
   static String getProfile() => _profile;
   static String getSplash() => _splash;
@@ -151,8 +153,11 @@ class RoutesHelper {
     //Restaurent Admin Routes
 
     GetPage(name: _addDish, page: () => AddDish()),
-    GetPage(name: _templeNavigationListing, page: () => TemplesNavigationListing()),
+    GetPage(
+        name: _templeNavigationListing, page: () => TemplesNavigationListing()),
     GetPage(name: _templeListing, page: () => TempleListingView()),
+    GetPage(name: _navigation, page: () => NavigationScreen(longitude: Get.parameters['longitude']!,latitude: Get.parameters['latitude']!)),
+
     GetPage(name: _adminProfile, page: () => AdminProfileView()),
     GetPage(name: _addTemple, page: () => AddTempleView()),
     GetPage(name: _dishListing, page: () => DishListing()),

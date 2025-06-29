@@ -14,6 +14,9 @@ extension TempleDataservice on TempleController {
     payload.liveLink = linkController.text.trim();
     payload.name = nameController.text.trim();
     payload.streetAddress = streetAddressController.text.trim();
+    payload.latitude = latitudeController.text.trim();
+    payload.longitude = longitudeController.text.trim();
+
     payload.image = Get.find<FilePickerController>().multipartFiles;
 
     update();

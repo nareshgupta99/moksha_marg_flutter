@@ -13,6 +13,7 @@ import 'package:moksha_marg/app/cart/food_cart_controller.dart';
 import 'package:moksha_marg/app/cart/food_cart_repository.dart';
 import 'package:moksha_marg/app/cart/order_cart_controller.dart';
 import 'package:moksha_marg/app/cart/order_cart_repository.dart';
+import 'package:moksha_marg/app/navigation/navigation_controller.dart';
 import 'package:moksha_marg/app/profile/profile_controller.dart';
 import 'package:moksha_marg/app/profile/profile_repository.dart';
 import 'package:moksha_marg/bootom_navigation_controller.dart';
@@ -50,6 +51,10 @@ Future<void> init() async {
   Get.lazyPut(() => TempleController(repository: Get.find()));
   Get.lazyPut(() => GuidesController(repository: Get.find()));
   Get.lazyPut(() => MapController());
+  Get.lazyPut(() => NavigationController());
+
+
+
 
 
 

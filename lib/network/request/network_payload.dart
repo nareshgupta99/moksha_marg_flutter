@@ -88,7 +88,9 @@ class NetworkPayload {
       "name": payload.name,
       "streetAddress": payload.streetAddress,
       "city": payload.city,
-      "liveLink": payload.liveLink
+      "liveLink": payload.liveLink,
+      "longitude":payload.longitude,
+      "latitude":payload.latitude,
     };
   }
 

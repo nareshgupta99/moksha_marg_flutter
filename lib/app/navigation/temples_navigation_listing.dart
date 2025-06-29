@@ -60,7 +60,8 @@ class _TemplesNavigationListingState extends State<TemplesNavigationListing> {
                     return Padding(
                         padding: EdgeInsets.only(bottom: Dimensions.padding16),
                         child: GestureDetector(
-                          onTap: () => {},
+                          onTap: () =>
+                              Get.toNamed(RoutesHelper.getNavigationScreen(longitude: controller.temples[index].longitude??"77.69467120810941",latitude:controller.temples[index].latitude??"28.957938774409847" )),
                           child: _templeNavigationCard(
                               templeName: controller.temples[index].name ?? "",
                               city: controller.temples[index].city ?? "",

@@ -50,6 +50,12 @@ class _AddTempleState extends State<AddTempleView> {
                 customTextField(
                     textFieldLabel: "Live Link",
                     controller: controller.linkController),
+                      customTextField(
+                    textFieldLabel: "Longitude",
+                    controller: controller.longitudeController),
+                      customTextField(
+                    textFieldLabel: "Latitude",
+                    controller: controller.latitudeController),
                 customFileUpload(),
                 customButton(
                     onPressed: () => controller.addTempleWithValidation(context:context),

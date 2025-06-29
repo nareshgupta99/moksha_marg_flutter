@@ -5,15 +5,18 @@ class TempleData {
   String? city;
   String? image;
   String? livelink;
+  String? longitude;
+  String? latitude;
 
-  TempleData({
-    this.id,
-    this.name,
-    this.streetAddress,
-    this.city,
-    this.image,
-    this.livelink,
-  });
+  TempleData(
+      {this.id,
+      this.name,
+      this.streetAddress,
+      this.city,
+      this.image,
+      this.livelink,
+      this.latitude,
+      this.longitude});
 
   factory TempleData.fromJson(Map<String, dynamic> json) => TempleData(
         id: json["id"],
@@ -22,6 +25,8 @@ class TempleData {
         city: json["city"],
         image: json["image"],
         livelink: json["livelink"],
+        latitude: json["latitude"],
+        longitude: json["longitude"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -30,6 +35,8 @@ class TempleData {
         "streetAddress": streetAddress,
         "city": city,
         "image": image,
-        "livelink": livelink,
+        "latitude": livelink,
+        "livelink": latitude,
+        "longitude": longitude,
       };
 }

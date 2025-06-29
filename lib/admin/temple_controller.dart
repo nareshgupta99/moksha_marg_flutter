@@ -22,6 +22,8 @@ class TempleController extends GetxController implements GetxService {
   var streetAddressController = TextEditingController();
   var cityController = TextEditingController();
   var linkController = TextEditingController();
+  var longitudeController = TextEditingController();
+  var latitudeController = TextEditingController();
 
   TempleData? templeData;
   List<TempleData> temples = [];
@@ -33,6 +35,9 @@ class TempleController extends GetxController implements GetxService {
     streetAddressController = TextEditingController();
     cityController = TextEditingController();
     linkController = TextEditingController();
+    longitudeController = TextEditingController();
+    latitudeController = TextEditingController();
+
     Get.find<FilePickerController>().multipartFiles = [];
     Get.find<FilePickerController>().fileName = "";
   }
@@ -47,6 +52,10 @@ class TempleController extends GetxController implements GetxService {
       Get.snackbar("Error", "city  is Required");
     } else if (linkController.text.trim().isEmpty) {
       Get.snackbar("Error", "Live link is Required");
+    } else if (longitudeController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Longitude is Required");
+    } else if (latitudeController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Latitude is Required");
     } else if (Get.find<FilePickerController>().fileName.trim().isEmpty) {
       Get.snackbar("Error", "Image is Required");
     } else {
@@ -64,7 +73,6 @@ class TempleController extends GetxController implements GetxService {
   }
 
   void deletTemple({required String id}) {
-    print("temple");
     deleteTempleById(id: id);
   }
 
